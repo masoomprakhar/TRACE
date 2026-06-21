@@ -100,6 +100,8 @@ class Settings:
     device: str = "cpu"
     storage_dir: str = "data/output"
     db_url: str = "sqlite:///data/trace.db"
+    preprocess: bool = True
+    max_plate_ocr: int = 3
     thresholds: Thresholds = field(default_factory=Thresholds)
     scene: SceneConfig = field(default_factory=SceneConfig)
     models: ModelPaths = field(default_factory=ModelPaths)
@@ -137,6 +139,8 @@ def load_settings(path: Optional[str | Path] = None) -> Settings:
         device=raw.get("device", "cpu"),
         storage_dir=raw.get("storage_dir", "data/output"),
         db_url=raw.get("db_url", "sqlite:///data/trace.db"),
+        preprocess=raw.get("preprocess", True),
+        max_plate_ocr=int(raw.get("max_plate_ocr", 3)),
         thresholds=_build(Thresholds, raw.get("thresholds")),
         models=_build(ModelPaths, raw.get("models")),
         scene=_build_scene(raw.get("scene")),

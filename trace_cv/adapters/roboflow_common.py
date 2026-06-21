@@ -14,6 +14,21 @@ from trace_cv.core.logging import get_logger
 
 log = get_logger("roboflow")
 
+_shared_client: Optional["RoboflowClient"] = None
+
+
+def get_roboflow_client() -> "RoboflowClient":
+    """Process-wide Roboflow client (reuses HTTP connection + frame cache)."""
+    global _shared_client
+    if _shared_client is None:
+        _shared_client = RoboflowClient()
+    return _shared_client
+
+
+def clear_roboflow_frame_cache() -> None:
+    """Call once per incoming frame before Roboflow workflow/infer requests."""
+    get_roboflow_client().clear_frame_cache()
+
 
 def norm_class(name: str) -> str:
     return name.strip().lower().replace(" ", "_").replace("-", "_")
@@ -32,6 +47,11 @@ class RoboflowClient:
         self.api_key = api_key or os.environ.get("ROBOFLOW_API_KEY", "")
         self._client = None
         self._tried = False
+        # Dedupe identical workflow/infer calls within one frame.
+        self._frame_cache: dict[tuple, Any] = {}
+
+    def clear_frame_cache(self) -> None:
+        self._frame_cache.clear()
 
     def _ensure(self) -> None:
         if self._client is not None or self._tried:
@@ -63,7 +83,7 @@ class RoboflowClient:
             return {}
         tmp = tempfile.NamedTemporaryFile(suffix=".jpg", delete=False)
         try:
-            cv2.imwrite(tmp.name, img)
+            cv2.imwrite(tmp.name, img, [cv2.IMWRITE_JPEG_QUALITY, 85])
             return self._client.infer(tmp.name, model_id=model_id)
         finally:
             Path(tmp.name).unlink(missing_ok=True)
@@ -98,15 +118,21 @@ class RoboflowClient:
         self._ensure()
         if self._client is None or img is None or img.size == 0:
             return {}
+        params = parameters or {}
+        key = ("workflow", workspace, workflow_id, tuple(sorted(params.items())), img.shape)
+        if key in self._frame_cache:
+            return self._frame_cache[key]
         tmp = tempfile.NamedTemporaryFile(suffix=".jpg", delete=False)
         try:
-            cv2.imwrite(tmp.name, img)
-            return self.run_workflow(
+            cv2.imwrite(tmp.name, img, [cv2.IMWRITE_JPEG_QUALITY, 85])
+            result = self.run_workflow(
                 tmp.name,
                 workspace=workspace,
                 workflow_id=workflow_id,
-                parameters=parameters,
+                parameters=params,
             )
+            self._frame_cache[key] = result
+            return result
         finally:
             Path(tmp.name).unlink(missing_ok=True)
 

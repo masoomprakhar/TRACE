@@ -12,8 +12,8 @@ from typing import Optional
 import numpy as np
 
 from trace_cv.adapters.roboflow_common import (
-    RoboflowClient,
     collect_predictions,
+    get_roboflow_client,
     norm_class,
 )
 from trace_cv.core.logging import get_logger
@@ -41,7 +41,7 @@ class RoboflowHelmetModel:
         self.workflow_classes = workflow_classes
         self.model_id = model_id
         self.conf = conf
-        self._client = RoboflowClient()
+        self._client = get_roboflow_client()
 
     @property
     def available(self) -> bool:

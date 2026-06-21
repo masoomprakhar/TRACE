@@ -1,10 +1,15 @@
-# TRACE with Roboflow-hosted helmet + plate + OCR models.
-#   cp .env.example .env && set ROBOFLOW_API_KEY
-#   export TRACE_CONFIG=config/roboflow.yaml
-#   python -m trace_cv.cli serve
+# TRACE — low-latency profile (CPU / demo / Render).
+#   export TRACE_CONFIG=config/roboflow-fast.yaml
+#
+# Changes vs config/roboflow.yaml:
+#   - Smaller YOLO input (480)
+#   - No per-crop Roboflow plate workflow (uses VioVision plate boxes + ROI OCR)
+#   - EasyOCR locally (no hosted OCR round-trip per plate)
+#   - Preprocessing off (saves ~50–150 ms on clean daylight frames)
+#   - Caps OCR to 3 plate reads per frame
 
 device: cpu
-preprocess: true
+preprocess: false
 max_plate_ocr: 3
 storage_dir: data/output
 db_url: sqlite:///data/trace.db
@@ -24,10 +29,9 @@ models:
   roboflow_workspace: prakhar-parkar
   roboflow_workflow_id: general-segmentation-api-4
   roboflow_plate_classes: license_plate
-  ocr_backend: roboflow
+  ocr_backend: easyocr
   roboflow_ocr_model_id: ocr-character-cgtzm/4
   roboflow_ocr_workflow_id: null
-  roboflow_ocr_workflow_classes: "-, 0, 1"
   trocr_model_path: models/weights/trocr_plate
   ocr_langs: [en]
   detector_imgsz: 480

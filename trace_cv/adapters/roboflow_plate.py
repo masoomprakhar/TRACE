@@ -9,6 +9,7 @@ from trace_cv.adapters.roboflow_common import (
     bbox_from_prediction,
     class_matches,
     collect_predictions,
+    get_roboflow_client,
     parse_class_filter,
 )
 from trace_cv.core.logging import get_logger
@@ -31,7 +32,7 @@ class RoboflowPlateDetector:
         self.workflow_id = workflow_id
         self.workflow_classes = workflow_classes
         self._allowed = parse_class_filter(workflow_classes)
-        self._client = RoboflowClient()
+        self._client = get_roboflow_client()
 
     @property
     def available(self) -> bool:

@@ -3,7 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-export TRACE_CONFIG="${TRACE_CONFIG:-config/roboflow.yaml}"
+export TRACE_CONFIG="${TRACE_CONFIG:-config/roboflow-fast.yaml}"
 
 if [[ -f .env ]]; then
   set -a

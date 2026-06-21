@@ -13,6 +13,7 @@ from typing import Optional
 import numpy as np
 
 from trace_cv.adapters.roboflow_plate import RoboflowPlateDetector
+from trace_cv.adapters.roboflow_common import clear_roboflow_frame_cache
 from trace_cv.core.config import Settings, load_settings
 from trace_cv.core.logging import get_logger
 from trace_cv.core.types import Detection, Violation
@@ -37,6 +38,7 @@ class TracePipeline:
         t = self.settings.thresholds
 
         self.pre = AdaptivePreprocessor(
+            enabled=self.settings.preprocess,
             blur_thresh=100.0, dark_thresh=70.0, haze_thresh=0.5, contrast_thresh=0.22
         )
         self.detector = Detector(
@@ -110,26 +112,78 @@ class TracePipeline:
         }
 
     # -- plate OCR ----------------------------------------------------------
-    def _attach_plates(self, frame: np.ndarray, violations: list[Violation]) -> None:
-        if not self.ocr.available:
+    @staticmethod
+    def _plate_detections(detections: list[Detection]) -> list[Detection]:
+        return [d for d in detections if d.cls in ("license_plate", "plate")]
+
+    @staticmethod
+    def _best_plate_in_roi(plates: list[Detection], roi) -> Detection | None:
+        if not plates:
+            return None
+        rx1, ry1, rx2, ry2 = roi
+        best: Detection | None = None
+        best_score = 0.0
+        for d in plates:
+            ix1 = max(rx1, d.bbox[0])
+            iy1 = max(ry1, d.bbox[1])
+            ix2 = min(rx2, d.bbox[2])
+            iy2 = min(ry2, d.bbox[3])
+            if ix2 <= ix1 or iy2 <= iy1:
+                continue
+            inter = (ix2 - ix1) * (iy2 - iy1)
+            score = inter * float(d.confidence)
+            if score > best_score:
+                best_score = score
+                best = d
+        return best
+
+    def _attach_plates(
+        self,
+        frame: np.ndarray,
+        violations: list[Violation],
+        detections: list[Detection],
+    ) -> None:
+        if not self.ocr.available or not violations:
             return
+
+        yolo_plates = self._plate_detections(detections)
+        rf_plates: list[Detection] = []
+        if (
+            self.plate_backend == "roboflow"
+            and self.plate_detector
+            and self.plate_detector.available
+        ):
+            # One hosted workflow call per frame (cached in RoboflowClient).
+            rf_plates = self.plate_detector.detect(frame)
+
+        all_plates = yolo_plates + rf_plates
         cache: dict = {}
+        ocr_budget = max(0, int(self.settings.max_plate_ocr))
+        ocr_used = 0
+
         for v in violations:
             key = v.track_id if v.track_id is not None else tuple(round(c) for c in v.bbox)
             if key in cache:
                 v.plate = cache[key]
                 continue
+            if ocr_used >= ocr_budget:
+                cache[key] = None
+                v.plate = None
+                continue
+
             two_wheeler = (v.vehicle_class or "") in ("motorcycle", "bicycle")
             roi = plate_search_roi(v.bbox, two_wheeler=two_wheeler)
             region = crop(frame, roi)
-            if self.plate_detector and self.plate_detector.available and region.size:
-                dets = self.plate_detector.detect(region)
-                if dets:
-                    best = max(dets, key=lambda d: d.confidence)
-                    region = crop(region, best.bbox)
+
+            best = self._best_plate_in_roi(all_plates, roi)
+            if best is not None:
+                region = crop(frame, best.bbox)
+
             plate = self.ocr.read(region, bbox=roi) if region.size else None
             cache[key] = plate
             v.plate = plate
+            if plate and plate.text:
+                ocr_used += 1
 
     # -- single image -------------------------------------------------------
     def process_image(
@@ -144,6 +198,7 @@ class TracePipeline:
         t0 = time.perf_counter()
         fi = frame_index if frame_index is not None else self.frame_index
 
+        clear_roboflow_frame_cache()
         enhanced, quality = self.pre.process(image)
 
         if use_tracking and self.detector.available:
@@ -156,7 +211,7 @@ class TracePipeline:
         violations = self.engine.run(
             enhanced, detections, frame_index=fi, fps=self.settings.scene.fps
         )
-        self._attach_plates(enhanced, violations)
+        self._attach_plates(enhanced, violations, detections)
 
         processing_ms = (time.perf_counter() - t0) * 1000.0
         evidence = self.builder.build(
