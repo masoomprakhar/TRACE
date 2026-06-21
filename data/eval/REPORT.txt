@@ -1,66 +1,86 @@
+============================================================
+TRACE EVALUATION REPORT  (canonical, honest scope)
+============================================================
+  This is the single source of truth. The previous 11 conflicting
+  report files were removed; regenerate this one with:
+
+      pip install -r requirements-ml.txt
+      export ROBOFLOW_API_KEY=...            # for config/roboflow.yaml
+      python scripts/run_full_eval.py --config config/roboflow.yaml
+
+  Holdout : data/eval/manifest.json  (63 images)
+            13 helmet samples + 50 license-plate samples
+  Provenance & methodology : data/eval/README.md
 
 ============================================================
-TRACE EVALUATION REPORT
+1. DETECTION — vehicle / road-user mAP
 ============================================================
-  Config         : config/roboflow.yaml
-  Samples        : 63
-  GT detections  : False
-  Model status   : {"detector": true, "ocr": true, "helmet": true, "seatbelt": true, "plate": true}
+  mAP@0.5      : n/a (no full per-image detection ground truth)
+  mAP@0.5:0.95 : n/a
+
+  NOTE: The prior 0.8333 was NOT a real detection score. The old metric
+  awarded AP = 1.0 to any class absent from BOTH ground truth and
+  predictions, so classes that simply do not appear in the helmet crops
+  (car/bus/truck/plate) each contributed a free 1.0. This is fixed in
+  trace_cv/evaluation/metrics.py (absent classes are now EXCLUDED; a class
+  predicted but never in GT scores 0.0 as a false positive). A credible
+  vehicle mAP requires a holdout with every vehicle/person box labeled —
+  see data/eval/README.md for the labeling protocol.
 
 ============================================================
-1. DETECTION — mAP (object localization)
+2. LICENSE-PLATE DETECTION  (validly measured)
 ============================================================
-  mAP@0.5      : 0.8333
-  mAP@0.5:0.95 : 0.8333
+  Holdout      : 50 plate images with ground-truth plate boxes
+  mAP@0.5      : 0.8578
+  mAP@0.5:0.95 : 0.6364
   Per-class AP@0.5:
-    car              1.0000
-    motorcycle       0.0000
-    person           1.0000
-    bus              1.0000
-    truck            1.0000
-    license_plate    1.0000
+    license_plate    0.8578
+
+  This is a real, single-class detection result and is unaffected by the
+  metric fix (the class has ground truth on every sample).
 
 ============================================================
-2. VIOLATION CLASSIFICATION — P / R / F1 / Accuracy
+3. VIOLATION CLASSIFICATION
 ============================================================
-  Exact-set accuracy : 0.6508
-  Macro averages:
-    Precision : 0.0000
-    Recall    : 0.0000
-    F1-score  : 0.0000
-  Micro averages:
-    Precision : 0.0000
-    Recall    : 0.0000
-    F1-score  : 0.0000
-    Accuracy  : 0.0000
-  Per violation type:
-    no_helmet          P=0.000  R=0.000  F1=0.000  Acc=0.936
-    no_seatbelt        P=0.000  R=0.000  F1=0.000  Acc=0.746
-    triple_riding      P=0.000  R=0.000  F1=0.000  Acc=1.000
-    wrong_side         P=0.000  R=0.000  F1=0.000  Acc=1.000
-    stop_line          P=0.000  R=0.000  F1=0.000  Acc=0.905
-    red_light          P=0.000  R=0.000  F1=0.000  Acc=1.000
-    illegal_parking    P=0.000  R=0.000  F1=0.000  Acc=1.000
+  Only "no_helmet" has ground-truth labels in the current holdout (n=4),
+  so it is the only violation with a measured score:
+
+    no_helmet    P=1.000  R=1.000  F1=1.000   (n=4 — small sample)
+
+  The other six violation types have NO labeled samples yet, so no honest
+  P/R/F1 can be reported here. Their rule logic IS verified deterministically
+  in tests/test_violation_rules.py (positive + negative case each for
+  triple-riding, stop-line, red-light, wrong-side, illegal-parking, plus the
+  seatbelt classifier path). Field accuracy requires labeled stills/clips —
+  see data/eval/README.md.
 
 ============================================================
-3. LICENSE PLATE OCR
+4. LICENSE-PLATE OCR
 ============================================================
-  (OCR metrics require plate ground truth in manifest)
+  Pending re-measure. The earlier CER (1.67) was inflated by a metric bug
+  (CER did not normalize spacing/case while exact-match did) — now fixed in
+  trace_cv/evaluation/metrics.py::ocr_cer. Re-run with plate-text GT (41
+  samples already carry plate_text) and live OCR to populate exact-match/CER.
 
 ============================================================
-PLATE DETECTION (Roboflow workflow)
+5. COMPUTATIONAL EFFICIENCY
 ============================================================
-  mAP@0.5      : 0.0000
-  mAP@0.5:0.95 : 0.0000
-  Per-class AP@0.5:
-    license_plate    0.0000
+  Mean latency : 2440.89 ms/frame   (full pipeline, CPU, hosted-API path)
+  P95 latency  : 5428.75 ms
+  Throughput   : 0.41 FPS
+  (Latency is dominated by hosted Roboflow round-trips; local-weights mode
+   is substantially faster. Re-benchmark per deployment.)
 
 ============================================================
-CONCEPT NOTE — copy these numbers
+HONEST CONCEPT-NOTE TABLE
 ============================================================
-| Detection mAP@0.5 | 0.8333 |
-| Detection mAP@0.5:0.95 | 0.8333 |
-| Violation macro-F1 | 0.0 |
-| Violation macro-Precision | 0.0 |
-| Violation macro-Recall | 0.0 |
-| End-to-end latency | n/a ms |
+| Metric                          | Value | Basis                          |
+|---------------------------------|-------|--------------------------------|
+| License-plate mAP@0.5           | 0.8578| 50-image plate holdout         |
+| License-plate mAP@0.5:0.95      | 0.6364| 50-image plate holdout         |
+| Helmet (no_helmet) F1           | 1.00  | n=4 (small sample)             |
+| Vehicle/road-user mAP           | n/a   | needs full detection GT        |
+| Cross-violation F1              | n/a   | 6/7 types unlabeled            |
+| OCR exact-match / CER           | n/a   | re-measure after CER fix       |
+| End-to-end latency (CPU)        | 2.44s | hosted-API full pipeline       |
+| Violation rule logic            | PASS  | tests/test_violation_rules.py  |

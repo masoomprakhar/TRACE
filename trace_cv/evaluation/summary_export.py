@@ -17,6 +17,14 @@ def build_eval_summary(results: dict[str, Any]) -> dict[str, Any]:
     plate_det = results.get("plate_detection") or {}
     per_viol = vc.get("per_label") or {}
 
+    note = None
+    if det.get("map50") is None:
+        note = (
+            "Vehicle/road-user mAP is not reported: the current holdout lacks "
+            "full per-image detection ground truth. License-plate localization "
+            "and helmet classification are the validly-measured results."
+        )
+
     return {
         "source": results.get("config") or "evaluation",
         "n_samples": results.get("n_samples"),
@@ -24,9 +32,12 @@ def build_eval_summary(results: dict[str, Any]) -> dict[str, Any]:
         "metrics": {
             "detection_map50": det.get("map50"),
             "detection_map5095": det.get("map5095"),
+            "detection_classes_evaluated": det.get("n_classes_evaluated"),
             "motorcycle_ap50": (det.get("per_class_ap50") or {}).get("motorcycle"),
-            "plate_ap50": (det.get("per_class_ap50") or {}).get("license_plate")
-            or plate_det.get("map50"),
+            # Plate localization is its own holdout; never fall back to the
+            # degenerate per-class 1.0 from the object-detection split.
+            "plate_ap50": plate_det.get("map50")
+            or (det.get("per_class_ap50") or {}).get("license_plate"),
             "violation_micro_f1": micro.get("f1"),
             "violation_micro_precision": micro.get("precision"),
             "violation_micro_recall": micro.get("recall"),
@@ -38,6 +49,7 @@ def build_eval_summary(results: dict[str, Any]) -> dict[str, Any]:
             "latency_ms": eff.get("mean_ms_per_frame"),
             "throughput_fps": eff.get("fps"),
         },
+        "note": note,
         "updated_at": results.get("evaluated_at"),
     }
 

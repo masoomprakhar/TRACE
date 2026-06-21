@@ -32,14 +32,26 @@ def _metrics(tp: int, fp: int, fn: int) -> dict:
     return {"precision": p, "recall": r, "f1": f1, "accuracy": acc, "tp": tp, "fp": fp, "fn": fn}
 
 
-def run_seatbelt_eval(config: str | None, use_gt: bool) -> dict:
+def run_seatbelt_eval(config: str | None, via_pipeline: bool) -> dict:
+    """Evaluate the seatbelt classifier on the cropped driver dataset.
+
+    The Karan seat-belt dataset is *cropped driver/windshield images*, so the
+    correct, isolating evaluation runs the seatbelt model directly on each
+    whole image. (Running the full detection pipeline on these crops finds no
+    "car" box, so the four-wheeler gate filters everything out and the model
+    never runs — that is exactly the 0/0/4 result the old default produced.)
+    Pass ``--via-pipeline`` to instead test end-to-end on full street scenes.
+
+    A sample is a positive if its GT contains ``no_seatbelt``; an empty GT is a
+    negative (belt worn / not applicable) and feeds the false-positive rate.
+    """
     import os
 
     import cv2
 
     from trace_cv.core.config import load_settings
-    from trace_cv.core.types import Detection
     from trace_cv.pipeline import TracePipeline
+    from trace_cv.violation.seatbelt import SeatbeltDetector
 
     settings = load_settings(config or os.environ.get("TRACE_CONFIG"))
     pipe = TracePipeline(settings)
@@ -50,6 +62,29 @@ def run_seatbelt_eval(config: str | None, use_gt: bool) -> dict:
     data = json.loads(MANIFEST.read_text())
     samples = data.get("samples", [])
 
+    seat_mod = next(
+        (m for m in pipe.engine.modules if isinstance(m, SeatbeltDetector)), None
+    )
+    model = getattr(seat_mod, "model", None)
+    model_ready = model is not None and getattr(model, "available", False)
+    if not model_ready and not via_pipeline:
+        # Be honest rather than silently scoring 0/0/N against a missing model.
+        return {
+            "config": config,
+            "n_samples": len(samples),
+            "mode": "classifier-direct",
+            "model_status": pipe.model_status(),
+            "error": (
+                "Seatbelt model not loaded (no weights). Provide a seatbelt "
+                "checkpoint in the config to populate real numbers."
+            ),
+            "no_seatbelt": _metrics(0, 0, 0),
+            "negative_fp_rate": 0.0,
+            "negative_fp": 0,
+            "negative_total": 0,
+        }
+
+    thr = settings.thresholds.seatbelt_conf
     tp = fp = fn = 0
     neg_fp = 0
     neg_total = 0
@@ -66,41 +101,17 @@ def run_seatbelt_eval(config: str | None, use_gt: bool) -> dict:
             continue
 
         gt = set(s.get("violations") or [])
-        is_negative = len(gt) == 0 and "negative" in str(s.get("detail", {})).lower()
+        gt_no = "no_seatbelt" in gt
+        is_negative = len(gt) == 0
 
-        if use_gt:
-            h, w = frame.shape[:2]
-            dets = [
-                Detection(
-                    cls="car",
-                    confidence=0.99,
-                    bbox=(0.0, 0.0, float(w), float(h)),
-                )
-            ]
-            from trace_cv.violation.base import ViolationContext
-            from trace_cv.violation.seatbelt import SeatbeltDetector
-
-            seat_mod = next(
-                (m for m in pipe.engine.modules if m.__class__.__name__ == "SeatbeltDetector"),
-                None,
-            )
-            if seat_mod is None:
-                pred = set()
-            else:
-                ctx = ViolationContext(
-                    frame=frame,
-                    detections=dets,
-                    thresholds=settings.thresholds,
-                    scene=settings.scene,
-                    frame_index=0,
-                )
-                pred = {v.type.value for v in seat_mod.check(ctx)}
-        else:
+        if via_pipeline:
             result = pipe.process_image(frame, location="seatbelt-eval", persist=False)
             pred = {v.get("type") for v in result.get("violations", [])}
-
-        pred_no = "no_seatbelt" in pred
-        gt_no = "no_seatbelt" in gt
+            pred_no = "no_seatbelt" in pred
+        else:
+            # Classifier-direct: the cropped image IS the driver region.
+            label, conf = model.predict(frame)
+            pred_no = label == "no_belt" and conf >= thr
 
         if is_negative:
             neg_total += 1
@@ -120,7 +131,7 @@ def run_seatbelt_eval(config: str | None, use_gt: bool) -> dict:
     return {
         "config": config,
         "n_samples": len(samples),
-        "use_gt_detections": use_gt,
+        "mode": "pipeline" if via_pipeline else "classifier-direct",
         "model_status": pipe.model_status(),
         "no_seatbelt": m,
         "negative_fp_rate": fp_rate,
@@ -136,8 +147,12 @@ def print_report(results: dict) -> str:
         "=" * 60,
         f"  Config         : {results.get('config')}",
         f"  Samples        : {results.get('n_samples')}",
-        f"  GT detections  : {results.get('use_gt_detections')}",
+        f"  Mode           : {results.get('mode')}",
         f"  Model status   : {json.dumps(results.get('model_status', {}))}",
+    ]
+    if results.get("error"):
+        lines += ["", f"  NOTE: {results['error']}"]
+    lines += [
         "",
         "no_seatbelt metrics:",
     ]
@@ -157,13 +172,18 @@ def print_report(results: dict) -> str:
 def main() -> int:
     p = argparse.ArgumentParser(description="Seatbelt eval report")
     p.add_argument("--config", default="config/viovision.yaml")
-    p.add_argument("--gt-detections", action="store_true")
+    p.add_argument(
+        "--via-pipeline",
+        action="store_true",
+        help="Run end-to-end on full scenes instead of the classifier-direct "
+        "default (the dataset is cropped driver images, so direct is correct).",
+    )
     p.add_argument("--out", default=str(ROOT / "data" / "eval" / "seatbelt_results.json"))
     p.add_argument("--report", default=str(REPORT))
     args = p.parse_args()
 
     try:
-        results = run_seatbelt_eval(args.config, args.gt_detections)
+        results = run_seatbelt_eval(args.config, args.via_pipeline)
     except Exception as exc:
         print(f"eval failed: {exc}", file=sys.stderr)
         return 1

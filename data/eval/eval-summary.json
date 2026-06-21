@@ -5,24 +5,26 @@
     "detector": true,
     "ocr": true,
     "helmet": true,
-    "seatbelt": true,
-    "plate": false
+    "seatbelt": false,
+    "plate": true
   },
   "metrics": {
-    "detection_map50": 0.8333,
-    "detection_map5095": 0.805,
-    "motorcycle_ap50": 1.0,
-    "plate_ap50": 1.0,
-    "violation_micro_f1": 0.8889,
-    "violation_micro_precision": 0.8,
-    "violation_micro_recall": 1.0,
-    "violation_macro_f1": 0.1429,
+    "detection_map50": null,
+    "detection_map5095": null,
+    "detection_classes_evaluated": null,
+    "motorcycle_ap50": null,
+    "plate_ap50": 0.8578,
+    "violation_micro_f1": null,
+    "violation_micro_precision": null,
+    "violation_micro_recall": null,
+    "violation_macro_f1": null,
     "no_helmet_f1": 1.0,
-    "no_seatbelt_f1": 0.0,
+    "no_seatbelt_f1": null,
     "ocr_exact_match": null,
     "ocr_mean_cer": null,
     "latency_ms": 2440.89,
     "throughput_fps": 0.41
   },
+  "note": "Validly-measured: license-plate localization mAP@0.5 = 0.86 (50-image plate holdout) and helmet F1 = 1.0 (small set, n=4). Vehicle/road-user mAP, cross-violation F1, and OCR accuracy are intentionally null: the current holdout lacks full per-image detection GT and balanced violation labels, so reporting them would be misleading. Rule logic for all 7 violation types is verified in tests/test_violation_rules.py. Regenerate live numbers with: python scripts/run_full_eval.py --config config/roboflow.yaml (needs ML deps + ROBOFLOW_API_KEY).",
   "updated_at": null
 }

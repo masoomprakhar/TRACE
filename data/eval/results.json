@@ -100,16 +100,10 @@
     }
   },
   "detection": {
-    "map50": 0.8333,
-    "map5095": 0.805,
-    "per_class_ap50": {
-      "car": 1.0,
-      "motorcycle": 1.0,
-      "person": 0.0,
-      "bus": 1.0,
-      "truck": 1.0,
-      "license_plate": 1.0
-    }
+    "map50": null,
+    "map5095": null,
+    "per_class_ap50": {},
+    "note": "Not validly measured: holdout lacks full per-image detection GT, and the previous 0.8333 was an artifact of the old metric scoring absent classes 1.0 (now fixed in evaluation/metrics.py). Regenerate with full GT via scripts/run_full_eval.py."
   },
   "plate_detection": {
     "map50": 0.8578,
@@ -652,5 +646,6 @@
       "processing_ms": 120.35,
       "n_detections": 1
     }
-  ]
+  ],
+  "_honesty_note": "Canonical machine-readable eval output. Validly-measured: plate_detection.map50 = 0.8578 and no_helmet F1 = 1.0 (n=4). Vehicle mAP / cross-violation F1 / OCR are pending a fuller labeled set + live models. See data/eval/README.md."
 }

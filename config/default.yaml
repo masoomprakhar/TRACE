@@ -12,6 +12,13 @@ models:
   helmet: null                   # path to helmet classifier/detector (optional)
   seatbelt: null                 # path to seatbelt classifier (optional)
   plate: null                    # path to license-plate detector (optional)
+  # Zero-key defaults: no Roboflow API needed. OCR uses local EasyOCR; plate
+  # localization falls back to a geometric ROI when no detector weights exist.
+  # (config/roboflow.yaml swaps in hosted models when a key is available.)
+  ocr_backend: easyocr
+  plate_backend: yolo
+  helmet_backend: local
+  rider_backend: cnn
   ocr_langs: [en]
 
 thresholds:

@@ -162,14 +162,14 @@ def train_trocr(device: str, epochs: int) -> bool:
 
 
 def run_eval() -> bool:
+    # Write to the single canonical report (data/eval/REPORT.txt) so there is
+    # exactly one source of truth regardless of which pipeline produced it.
     return run(
         [
             sys.executable,
             str(ROOT / "scripts" / "run_full_eval.py"),
             "--config",
             "config/roboflow.yaml",
-            "--report",
-            "data/eval/REPORT-quick-train.txt",
         ],
         "Full evaluation",
     )
@@ -213,7 +213,7 @@ def main() -> int:
     if not args.skip_eval:
         run_eval()
 
-    report = ROOT / "data" / "eval" / "REPORT-quick-train.txt"
+    report = ROOT / "data" / "eval" / "REPORT.txt"
     results = ROOT / "data" / "eval" / "results.json"
     if results.exists():
         from trace_cv.evaluation.summary_export import write_eval_summary

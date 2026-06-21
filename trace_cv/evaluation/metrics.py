@@ -114,17 +114,25 @@ def _ap_at_iou(
     gts: list[tuple[str, BBox]],
     cls: str,
     iou_thr: float,
-) -> float:
+) -> float | None:
     """AP for one class at one IoU threshold. `preds` is flattened across
     images but each prediction/gt is tagged with an image id via closure;
-    here we assume single-image matching is pre-grouped by the caller."""
+    here we assume single-image matching is pre-grouped by the caller.
+
+    Returns ``None`` when the class is absent from BOTH ground truth and
+    predictions — such a class carries no signal and must be *excluded* from
+    the mean rather than scored a free 1.0 (which silently inflates mAP).
+    A class that has predictions but no ground truth scores 0.0, because every
+    one of those predictions is a false positive (hallucinated detection)."""
     cls_preds = sorted(
         [p for p in preds if p[0] == cls], key=lambda x: -x[2]
     )
     cls_gts = [g for g in gts if g[0] == cls]
     n_gt = len(cls_gts)
     if n_gt == 0:
-        return 0.0 if cls_preds else 1.0
+        # No GT, no preds -> class not present in this split: exclude it.
+        # No GT but preds exist -> all preds are false positives: AP = 0.
+        return 0.0 if cls_preds else None
 
     matched = [False] * n_gt
     tp = [0] * len(cls_preds)
@@ -180,23 +188,40 @@ def detection_map(
         for c, b in gts:
             flat_gts.append((c, (b[0] + shift, b[1], b[2] + shift, b[3])))
 
-    per_thr: dict[float, float] = {}
+    # Per-class support (image-level counts) for transparency in reports. A
+    # class that never appears in GT cannot legitimately contribute to mAP.
+    per_class_support: dict[str, dict] = {}
+    for cls in labels:
+        n_gt = sum(1 for c, _ in flat_gts if c == cls)
+        n_pred = sum(1 for c, _, _ in flat_preds if c == cls)
+        per_class_support[cls] = {"n_gt": n_gt, "n_pred": n_pred}
+
+    per_thr: dict[float, float | None] = {}
     per_class_50: dict[str, float] = {}
     for thr in iou_thresholds:
         aps = []
         for cls in labels:
             ap = _ap_at_iou(flat_preds, flat_gts, cls, thr)
+            if ap is None:
+                continue  # class absent from GT and preds -> excluded
             aps.append(ap)
             if abs(thr - 0.5) < 1e-9:
                 per_class_50[cls] = round(ap, 4)
-        per_thr[thr] = sum(aps) / len(aps) if aps else 0.0
+        per_thr[thr] = sum(aps) / len(aps) if aps else None
 
-    map50 = per_thr.get(0.5, 0.0)
-    map5095 = sum(per_thr.values()) / len(per_thr) if per_thr else 0.0
+    map50 = per_thr.get(0.5)
+    valid = [v for v in per_thr.values() if v is not None]
+    map5095 = sum(valid) / len(valid) if valid else None
+    classes_evaluated = sorted(per_class_50.keys())
     return {
-        "map50": round(map50, 4),
-        "map5095": round(map5095, 4),
+        # None (not 0.0) signals "no evaluable class" so it can never be
+        # mistaken for a measured-but-poor detector.
+        "map50": round(map50, 4) if map50 is not None else None,
+        "map5095": round(map5095, 4) if map5095 is not None else None,
         "per_class_ap50": per_class_50,
+        "per_class_support": per_class_support,
+        "classes_evaluated": classes_evaluated,
+        "n_classes_evaluated": len(classes_evaluated),
     }
 
 
@@ -215,10 +240,17 @@ def _edit_distance(a: str, b: str) -> int:
 
 
 def ocr_cer(pred: str, gt: str) -> float:
-    """Character Error Rate."""
-    if not gt:
-        return 0.0 if not pred else 1.0
-    return _edit_distance(pred or "", gt) / len(gt)
+    """Character Error Rate on the normalized plate strings.
+
+    Plate CER must ignore spacing/case — otherwise a perfectly read plate
+    ``"MH 01 AB 1234"`` scores errors against an unspaced ground truth
+    ``"MH01AB1234"``. This normalization mirrors :func:`ocr_exact_match`
+    (previously CER did NOT normalize, which silently inflated the metric)."""
+    p = normalize_plate(pred)
+    g = normalize_plate(gt)
+    if not g:
+        return 0.0 if not p else 1.0
+    return _edit_distance(p, g) / len(g)
 
 
 def ocr_exact_match(preds: list[str], gts: list[str]) -> float:

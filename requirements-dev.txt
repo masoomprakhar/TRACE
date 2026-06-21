@@ -1,0 +1,11 @@
+# TRACE — development / CI dependencies.
+# Install on top of the core runtime:
+#   pip install -r requirements.txt -r requirements-dev.txt
+#
+# The lightweight test suite (metrics, geometry, violation rules, OCR
+# correction, storage, API, preprocessing) runs on just requirements.txt +
+# these — no torch/ultralytics/easyocr needed. The heavy ML deps in
+# requirements-ml.txt are only required for live model inference.
+
+pytest>=8.0
+pytest-cov>=5.0

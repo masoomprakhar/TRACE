@@ -6,7 +6,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)]()
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)]()
-[![Tests](https://img.shields.io/badge/tests-41%20passing-brightgreen)]()
+[![Tests](https://img.shields.io/badge/tests-60%20passing-brightgreen)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)]()
 
 **Repository:** [github.com/masoomprakhar/TRACE](https://github.com/masoomprakhar/TRACE)
@@ -68,18 +68,26 @@ When a model weight is missing in the field, the pipeline **degrades honestly** 
 
 ## Numbers that back the story
 
-Evaluated on **63 labeled traffic frames** (`scripts/run_full_eval.py`):
+We report **only what we can defend.** Evaluated with `scripts/run_full_eval.py`
+on a labeled holdout; full provenance and methodology in `data/eval/README.md`.
 
-| Metric | Score |
-|--------|------:|
-| Detection mAP@0.5 | **0.83** |
-| Motorcycle AP@0.5 | **1.00** |
-| No-helmet F1 | **1.00** |
-| Violation micro-F1 | **0.89** |
-| Plate detection mAP (Roboflow) | **0.86** |
-| End-to-end latency (CPU) | ~2.4 s/frame |
+| Metric | Score | Basis |
+|--------|------:|-------|
+| License-plate detection mAP@0.5 | **0.86** | 50-image plate holdout (GT boxes) |
+| License-plate detection mAP@0.5:0.95 | **0.64** | same holdout |
+| Helmet (no-helmet) F1 | **1.00** | small set — n=4 |
+| Violation rule logic | **17/17 tests** | `tests/test_violation_rules.py` |
+| End-to-end latency (CPU) | ~2.4 s/frame | hosted-API full pipeline |
 
-Full report: `data/eval/REPORT-quick-train.txt` · Live in dashboard: **Settings → Performance**
+**Honesty note.** Vehicle/road-user mAP, cross-violation F1, and OCR accuracy
+are *not* headlined: the current holdout lacks full per-image detection ground
+truth and balanced labels for 6 of 7 violation types. We fixed a metric bug
+that had inflated detection mAP to 0.83 (it scored classes *absent from both
+GT and predictions* a free 1.0), collapsed 11 conflicting report files into one,
+and documented the path to a complete eval set. The seven violation rules are
+verified deterministically in tests instead.
+
+Full report: `data/eval/REPORT.txt` · Live in dashboard: **Settings → Performance**
 
 ---
 
@@ -91,8 +99,13 @@ cd TRACE
 pip install -r requirements.txt -r requirements-ml.txt
 pip install -e .
 
-cp .env.example .env          # add ROBOFLOW_API_KEY
-export TRACE_CONFIG=config/roboflow.yaml
+# Option A — zero-key local mode (no account needed):
+#   YOLO weights auto-download; OCR uses local EasyOCR.
+export TRACE_CONFIG=config/default.yaml
+
+# Option B — hosted models (best accuracy):
+#   cp .env.example .env && add ROBOFLOW_API_KEY
+#   export TRACE_CONFIG=config/roboflow.yaml
 
 ./scripts/judge_demo.sh         # seeds DB + starts server
 ```
@@ -194,8 +207,14 @@ For production demos with GPU weights, mount `models/weights/` or use Roboflow-o
 ## Quality bar
 
 ```bash
-PYTHONPATH=$PWD pytest -q     # 41 tests
+pip install -r requirements.txt -r requirements-dev.txt
+pip install -e .
+pytest -q     # 60 tests, no GPU / API key / model weights required
 ```
+
+The suite runs on the lightweight stack alone — metrics, geometry, all seven
+violation rules, OCR correction, storage, and API — and is enforced in CI
+(`.github/workflows/ci.yml`) on Python 3.10–3.12.
 
 ---
 

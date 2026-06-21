@@ -43,14 +43,30 @@ def _banner(title: str) -> None:
     print("=" * 60)
 
 
+def _fmt(x) -> str:
+    return f"{x:.4f}" if isinstance(x, (int, float)) else "n/a (no ground truth)"
+
+
 def _print_detection(det: dict) -> None:
-    print(f"  mAP@0.5      : {det.get('map50', 0):.4f}")
-    print(f"  mAP@0.5:0.95 : {det.get('map5095', 0):.4f}")
+    print(f"  mAP@0.5      : {_fmt(det.get('map50'))}")
+    print(f"  mAP@0.5:0.95 : {_fmt(det.get('map5095'))}")
+    n_eval = det.get("n_classes_evaluated")
+    if n_eval is not None:
+        print(f"  Classes evaluated (have GT or predictions): {n_eval}")
     per = det.get("per_class_ap50") or {}
+    support = det.get("per_class_support") or {}
     if per:
-        print("  Per-class AP@0.5:")
+        print("  Per-class AP@0.5  (n_gt / n_pred):")
         for cls, ap in per.items():
-            print(f"    {cls:<16} {ap:.4f}")
+            s = support.get(cls, {})
+            print(
+                f"    {cls:<16} {ap:.4f}   "
+                f"({s.get('n_gt', '?')} / {s.get('n_pred', '?')})"
+            )
+    # Flag any class that was excluded so a reader sees WHY mAP moved.
+    excluded = [c for c, s in support.items() if s.get("n_gt", 0) == 0 and s.get("n_pred", 0) == 0]
+    if excluded:
+        print(f"  Excluded (absent from GT and predictions): {', '.join(excluded)}")
 
 
 def _print_violations(vc: dict) -> None:
@@ -152,12 +168,16 @@ def print_report(results: dict, bench: dict | None) -> None:
     det = results.get("detection", {})
     vc = results.get("violation_classification", {})
     macro = vc.get("macro", {}) if isinstance(vc, dict) else {}
+    def _cell(x):
+        return x if isinstance(x, (int, float)) else "n/a"
+
     print(
-        f"| Detection mAP@0.5 | {det.get('map50', 'n/a')} |\n"
-        f"| Detection mAP@0.5:0.95 | {det.get('map5095', 'n/a')} |\n"
-        f"| Violation macro-F1 | {macro.get('f1', 'n/a')} |\n"
-        f"| Violation macro-Precision | {macro.get('precision', 'n/a')} |\n"
-        f"| Violation macro-Recall | {macro.get('recall', 'n/a')} |\n"
+        f"| Detection mAP@0.5 | {_cell(det.get('map50'))} |\n"
+        f"| Detection mAP@0.5:0.95 | {_cell(det.get('map5095'))} |\n"
+        f"| Detection classes evaluated | {det.get('n_classes_evaluated', 'n/a')} |\n"
+        f"| Violation macro-F1 | {_cell(macro.get('f1'))} |\n"
+        f"| Violation macro-Precision | {_cell(macro.get('precision'))} |\n"
+        f"| Violation macro-Recall | {_cell(macro.get('recall'))} |\n"
         f"| End-to-end latency | {bench['mean_ms_per_frame'] if bench else 'n/a'} ms |"
     )
 
