@@ -57,10 +57,13 @@ class PlateOCR:
             log.warning("EasyOCR unavailable (%s); plate text disabled.", exc)
             self._reader = None
 
+    def _trocr_ready(self) -> bool:
+        return self._trocr is not None and self._trocr.available
+
     @property
     def available(self) -> bool:
         self._ensure_reader()
-        return self._trocr is not None or self._reader is not None
+        return self._trocr_ready() or self._reader is not None
 
     @staticmethod
     def _prep(crop: np.ndarray) -> np.ndarray:
@@ -93,11 +96,11 @@ class PlateOCR:
         self._ensure_reader()
         if plate_crop is None or plate_crop.size == 0:
             return Plate(bbox=bbox)
-        if self._trocr is None and self._reader is None:
+        if not self._trocr_ready() and self._reader is None:
             return Plate(bbox=bbox)
 
         try:
-            if self._trocr is not None and self._trocr.available:
+            if self._trocr_ready():
                 raw, conf = self._trocr.read(self._prep(plate_crop))
             else:
                 raw, conf = self._read_easyocr(plate_crop)
