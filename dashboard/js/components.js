@@ -66,21 +66,46 @@ export function severityBadge(types, confidence) {
 }
 
 export function kpiCard({ label, value, trend, sparkData, icon, color = "#0D6EFD", status }) {
-  const trendHtml = trend
-    ? `<span class="kpi-trend ${trend.up ? "up" : "down"}">${trend.up ? "↑" : "↓"} ${trend.delta}% vs yesterday</span>`
-    : status
-      ? `<span class="kpi-status"><span class="status-dot-inline online"></span>${esc(status)}</span>`
-      : "";
   const sparkId = `spark-${label.replace(/\s/g, "-").toLowerCase()}`;
-  return `<div class="kpi-card">
-    <div class="kpi-card-top">
-      <div class="kpi-icon" style="background:${color}14;color:${color}">${icon}</div>
-      <canvas class="kpi-sparkline" id="${sparkId}" data-spark='${JSON.stringify(sparkData || [])}'></canvas>
+  const hasSpark = Array.isArray(sparkData) && sparkData.length > 1;
+
+  const trendHtml = trend
+    ? `<span class="kpi-trend-pill ${trend.up ? "up" : "down"}">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          ${trend.up
+            ? '<path d="M18 15l-6-6-6 6"/>'
+            : '<path d="M6 9l6 6 6-6"/>'}
+        </svg>
+        ${trend.delta}%
+      </span>`
+    : status
+      ? `<span class="kpi-status-pill"><span class="status-dot-inline online"></span>${esc(status)}</span>`
+      : "";
+
+  const sparkHtml = hasSpark
+    ? `<div class="kpi-spark-wrap">
+        <canvas class="kpi-sparkline" id="${sparkId}"
+          data-spark='${JSON.stringify(sparkData)}'
+          data-color="${esc(color)}"></canvas>
+      </div>`
+    : `<div class="kpi-spark-wrap kpi-spark-placeholder" aria-hidden="true">
+        <div class="kpi-spark-bars"></div>
+      </div>`;
+
+  return `<article class="kpi-card" style="--kpi-accent:${esc(color)};--kpi-accent-soft:${esc(color)}14">
+    <div class="kpi-card-accent" aria-hidden="true"></div>
+    <div class="kpi-card-inner">
+      <div class="kpi-card-header">
+        <div class="kpi-icon" style="background:${color}18;color:${color}">${icon}</div>
+        ${trendHtml}
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">${esc(label)}</div>
+        <div class="kpi-value">${esc(String(value))}</div>
+      </div>
+      ${sparkHtml}
     </div>
-    <div class="kpi-label">${esc(label)}</div>
-    <div class="kpi-value">${esc(String(value))}</div>
-    ${trendHtml}
-  </div>`;
+  </article>`;
 }
 
 export function emptyState(msg, sub = "") {

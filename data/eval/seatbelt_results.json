@@ -1,7 +1,7 @@
 {
   "config": "config/viovision.yaml",
   "n_samples": 37,
-  "use_gt_detections": true,
+  "use_gt_detections": false,
   "model_status": {
     "detector": true,
     "ocr": true,
@@ -18,7 +18,7 @@
     "fp": 0,
     "fn": 4
   },
-  "negative_fp_rate": 0.13333333333333333,
-  "negative_fp": 4,
+  "negative_fp_rate": 0.0,
+  "negative_fp": 0,
   "negative_total": 30
 }

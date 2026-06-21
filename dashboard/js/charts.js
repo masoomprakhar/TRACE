@@ -188,6 +188,15 @@ export function sparkline(canvas, data, color = "#0D6EFD") {
   if (!canvas || !data?.length || !window.Chart) return;
   const id = canvas.id || `spark-${Math.random()}`;
   destroyChart(id);
+
+  const ctx = canvas.getContext("2d");
+  const h = canvas.offsetHeight || 48;
+  const fillGrad = ctx.createLinearGradient(0, 0, 0, h);
+  fillGrad.addColorStop(0, hexAlpha(color, 0.28));
+  fillGrad.addColorStop(0.65, hexAlpha(color, 0.06));
+  fillGrad.addColorStop(1, hexAlpha(color, 0));
+
+  const lastIdx = data.length - 1;
   registry[id] = new Chart(canvas, {
     type: "line",
     data: {
@@ -195,31 +204,65 @@ export function sparkline(canvas, data, color = "#0D6EFD") {
       datasets: [{
         data,
         borderColor: color,
-        borderWidth: 1.5,
-        pointRadius: 0,
-        fill: false,
-        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: data.map((_, i) => (i === lastIdx ? 3.5 : 0)),
+        pointHoverRadius: 4,
+        pointBackgroundColor: color,
+        pointBorderColor: "#fff",
+        pointBorderWidth: 2,
+        fill: true,
+        backgroundColor: fillGrad,
+        tension: 0.42,
       }],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { enabled: false } },
-      scales: { x: { display: false }, y: { display: false } },
+      layout: { padding: { top: 6, right: 4, bottom: 2, left: 4 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          displayColors: false,
+          backgroundColor: "#111827",
+          titleFont: { size: 11, weight: "600" },
+          bodyFont: { size: 11 },
+          padding: 8,
+          cornerRadius: 8,
+          callbacks: {
+            title: () => "",
+            label: (ctx) => String(ctx.parsed.y),
+          },
+        },
+      },
+      scales: {
+        x: { display: false },
+        y: { display: false, min: Math.min(...data) * 0.92 },
+      },
+      interaction: { intersect: false, mode: "index" },
     },
   });
 }
 
+function hexAlpha(hex, alpha) {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 export function renderSparklines(root = document) {
   configureChartDefaults();
-  root.querySelectorAll(".kpi-sparkline[data-spark]").forEach((canvas) => {
-    try {
-      const data = JSON.parse(canvas.dataset.spark);
-      const card = canvas.closest(".kpi-card");
-      const icon = card?.querySelector(".kpi-icon");
-      const color = icon ? getComputedStyle(icon).color : "#0D6EFD";
-      sparkline(canvas, data, color);
-    } catch (_) {}
+  requestAnimationFrame(() => {
+    root.querySelectorAll(".kpi-sparkline[data-spark]").forEach((canvas) => {
+      try {
+        const data = JSON.parse(canvas.dataset.spark);
+        if (!data?.length) return;
+        const color = canvas.dataset.color || "#0D6EFD";
+        sparkline(canvas, data, color);
+      } catch (_) {}
+    });
   });
 }
 

@@ -2,7 +2,7 @@ import { api } from "../api.js";
 import { $, num, pct } from "../formatters.js";
 import { getAnalyticsSummary } from "../data-bridge.js";
 import { toast, emptyState, kpiCard } from "../components.js";
-import { configureChartDefaults, typeDoughnut, hourChart, vehicleChart } from "../charts.js";
+import { configureChartDefaults, typeDoughnut, hourChart, vehicleChart, renderSparklines } from "../charts.js";
 
 export function initReports() {
   $("#reports-csv")?.addEventListener("click", () => window.open("/api/violations.csv", "_blank"));
@@ -33,13 +33,16 @@ export async function loadReports() {
       api.get("/api/report/summary").catch(() => null),
     ]);
     const s = summary || { total: 0, avg_confidence: 0, processing_fps: 0, top_plates: [] };
+    const hourSpark = Object.values(s.by_hour || {}).map((v) => Number(v) || 0);
+    const spark = hourSpark.some((v) => v > 0) ? hourSpark : null;
     if (kpiGrid) {
       kpiGrid.innerHTML = [
-        kpiCard({ label: "Total Violations", value: num(s.total), icon: "📊", color: "#0D6EFD" }),
-        kpiCard({ label: "Avg Confidence", value: pct(s.avg_confidence), icon: "🎯", color: "#10B981" }),
-        kpiCard({ label: "Processing FPS", value: s.processing_fps?.toFixed(1) || "—", icon: "⚡", color: "#F59E0B" }),
-        kpiCard({ label: "Distinct Plates", value: num((s.top_plates || []).length), icon: "🔢", color: "#8B5CF6" }),
+        kpiCard({ label: "Total Violations", value: num(s.total), icon: "📊", color: "#0D6EFD", sparkData: spark }),
+        kpiCard({ label: "Avg Confidence", value: pct(s.avg_confidence), icon: "🎯", color: "#10B981", sparkData: spark }),
+        kpiCard({ label: "Processing FPS", value: s.processing_fps?.toFixed(1) || "—", icon: "⚡", color: "#F59E0B", sparkData: spark }),
+        kpiCard({ label: "Distinct Plates", value: num((s.top_plates || []).length), icon: "🔢", color: "#8B5CF6", sparkData: spark }),
       ].join("");
+      renderSparklines(kpiGrid);
     }
     typeDoughnut("chart-reports-type", s.by_type || {});
     hourChart("chart-reports-hour", s.by_hour || {});

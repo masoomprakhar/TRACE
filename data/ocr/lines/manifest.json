@@ -421,183 +421,328 @@
       "split": "train"
     },
     {
-      "image": "val/syn_val_0000.jpg",
+      "image": "train/syn_train_0084.jpg",
       "plate_text": "RJ59GY4912",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0085.jpg",
+      "plate_text": "RJ50WER1606",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0086.jpg",
+      "plate_text": "WB13QAZ3361",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0087.jpg",
+      "plate_text": "UP80NWC6383",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0088.jpg",
+      "plate_text": "WB70V2121",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0089.jpg",
+      "plate_text": "KA98YDQ3725",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0090.jpg",
+      "plate_text": "UP48EH9702",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0091.jpg",
+      "plate_text": "RJ80HRU3344",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0092.jpg",
+      "plate_text": "WB37TFC8237",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0093.jpg",
+      "plate_text": "GJ26RD4886",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0094.jpg",
+      "plate_text": "RJ36U1803",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0095.jpg",
+      "plate_text": "TN80XZ3240",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0096.jpg",
+      "plate_text": "UP94C5835",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0097.jpg",
+      "plate_text": "UP68JFJ8894",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0098.jpg",
+      "plate_text": "TN87XNT6992",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0099.jpg",
+      "plate_text": "UP87XJU7242",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0100.jpg",
+      "plate_text": "UP79W2035",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0101.jpg",
+      "plate_text": "MH39DD4846",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0102.jpg",
+      "plate_text": "RJ76ZEP2622",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0103.jpg",
+      "plate_text": "WB57M2627",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0104.jpg",
+      "plate_text": "KA59X4475",
+      "split": "train"
+    },
+    {
+      "image": "val/syn_val_0000.jpg",
+      "plate_text": "TN09GUG4817",
       "split": "val"
     },
     {
       "image": "val/syn_val_0001.jpg",
-      "plate_text": "RJ50WER1606",
+      "plate_text": "DL70FD1422",
       "split": "val"
     },
     {
       "image": "val/syn_val_0002.jpg",
-      "plate_text": "WB13QAZ3361",
+      "plate_text": "UP03J1858",
       "split": "val"
     },
     {
       "image": "val/syn_val_0003.jpg",
-      "plate_text": "UP80NWC6383",
+      "plate_text": "UP66DQS4629",
       "split": "val"
     },
     {
       "image": "val/syn_val_0004.jpg",
-      "plate_text": "WB70V2121",
+      "plate_text": "MH62PX2768",
       "split": "val"
     },
     {
       "image": "val/syn_val_0005.jpg",
-      "plate_text": "KA98YDQ3725",
+      "plate_text": "DL09J9984",
       "split": "val"
     },
     {
       "image": "val/syn_val_0006.jpg",
-      "plate_text": "UP48EH9702",
+      "plate_text": "KA90W4522",
       "split": "val"
     },
     {
       "image": "val/syn_val_0007.jpg",
-      "plate_text": "RJ80HRU3344",
+      "plate_text": "RJ54DLP6120",
       "split": "val"
     },
     {
       "image": "val/syn_val_0008.jpg",
-      "plate_text": "WB37TFC8237",
+      "plate_text": "KA11P2582",
       "split": "val"
     },
     {
       "image": "val/syn_val_0009.jpg",
-      "plate_text": "GJ26RD4886",
+      "plate_text": "UP86P6793",
       "split": "val"
     },
     {
       "image": "val/syn_val_0010.jpg",
-      "plate_text": "RJ36U1803",
+      "plate_text": "TN20RHD6736",
       "split": "val"
     },
     {
       "image": "val/syn_val_0011.jpg",
-      "plate_text": "TN80XZ3240",
+      "plate_text": "RJ72VXW1430",
       "split": "val"
     },
     {
       "image": "val/syn_val_0012.jpg",
-      "plate_text": "UP94C5835",
+      "plate_text": "UP45F3347",
       "split": "val"
     },
     {
       "image": "val/syn_val_0013.jpg",
-      "plate_text": "UP68JFJ8894",
+      "plate_text": "KA96GNP8432",
       "split": "val"
     },
     {
       "image": "val/syn_val_0014.jpg",
-      "plate_text": "TN87XNT6992",
+      "plate_text": "KA07F1815",
       "split": "val"
     },
     {
       "image": "val/syn_val_0015.jpg",
-      "plate_text": "UP87XJU7242",
+      "plate_text": "WB54GS2864",
       "split": "val"
     },
     {
       "image": "val/syn_val_0016.jpg",
-      "plate_text": "UP79W2035",
+      "plate_text": "WB68KBH7475",
       "split": "val"
     },
     {
       "image": "val/syn_val_0017.jpg",
-      "plate_text": "MH39DD4846",
+      "plate_text": "DL98KL2965",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0018.jpg",
+      "plate_text": "TN65XMC7505",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0019.jpg",
+      "plate_text": "UP74UN7843",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0020.jpg",
+      "plate_text": "WB89CP2734",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0021.jpg",
+      "plate_text": "GJ96HL3754",
       "split": "val"
     },
     {
       "image": "test/syn_test_0000.jpg",
-      "plate_text": "RJ76ZEP2622",
+      "plate_text": "UP45WEH2684",
       "split": "test"
     },
     {
       "image": "test/syn_test_0001.jpg",
-      "plate_text": "WB57M2627",
+      "plate_text": "KA23RQU8354",
       "split": "test"
     },
     {
       "image": "test/syn_test_0002.jpg",
-      "plate_text": "KA59X4475",
+      "plate_text": "GJ36BMS2215",
       "split": "test"
     },
     {
       "image": "test/syn_test_0003.jpg",
-      "plate_text": "TN09GUG4817",
+      "plate_text": "GJ10CVV9307",
       "split": "test"
     },
     {
       "image": "test/syn_test_0004.jpg",
-      "plate_text": "DL70FD1422",
+      "plate_text": "TN42RSE2013",
       "split": "test"
     },
     {
       "image": "test/syn_test_0005.jpg",
-      "plate_text": "UP03J1858",
+      "plate_text": "DL06Y8172",
       "split": "test"
     },
     {
       "image": "test/syn_test_0006.jpg",
-      "plate_text": "UP66DQS4629",
+      "plate_text": "RJ53XV1857",
       "split": "test"
     },
     {
       "image": "test/syn_test_0007.jpg",
-      "plate_text": "MH62PX2768",
+      "plate_text": "GJ33XVE6461",
       "split": "test"
     },
     {
       "image": "test/syn_test_0008.jpg",
-      "plate_text": "DL09J9984",
+      "plate_text": "RJ17YCK7171",
       "split": "test"
     },
     {
       "image": "test/syn_test_0009.jpg",
-      "plate_text": "KA90W4522",
+      "plate_text": "UP03KF4509",
       "split": "test"
     },
     {
       "image": "test/syn_test_0010.jpg",
-      "plate_text": "RJ54DLP6120",
+      "plate_text": "KA38S9843",
       "split": "test"
     },
     {
       "image": "test/syn_test_0011.jpg",
-      "plate_text": "KA11P2582",
+      "plate_text": "RJ20F3712",
       "split": "test"
     },
     {
       "image": "test/syn_test_0012.jpg",
-      "plate_text": "UP86P6793",
+      "plate_text": "WB79ZQ4833",
       "split": "test"
     },
     {
       "image": "test/syn_test_0013.jpg",
-      "plate_text": "TN20RHD6736",
+      "plate_text": "TN48UQQ5616",
       "split": "test"
     },
     {
       "image": "test/syn_test_0014.jpg",
-      "plate_text": "RJ72VXW1430",
+      "plate_text": "DL33W8873",
       "split": "test"
     },
     {
       "image": "test/syn_test_0015.jpg",
-      "plate_text": "UP45F3347",
+      "plate_text": "KA37F5469",
       "split": "test"
     },
     {
       "image": "test/syn_test_0016.jpg",
-      "plate_text": "KA96GNP8432",
+      "plate_text": "TN58AP1872",
       "split": "test"
     },
     {
       "image": "test/syn_test_0017.jpg",
-      "plate_text": "KA07F1815",
+      "plate_text": "UP29L2623",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0018.jpg",
+      "plate_text": "WB90Y8685",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0019.jpg",
+      "plate_text": "DL71VSP2821",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0020.jpg",
+      "plate_text": "WB09R9782",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0021.jpg",
+      "plate_text": "MH79HU7825",
       "split": "test"
     }
   ]

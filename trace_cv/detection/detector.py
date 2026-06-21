@@ -90,11 +90,10 @@ class Detector:
         if boxes is None:
             return out
         for b in boxes:
-            name = _norm(names[int(b.cls)])
-            if self.class_map:
-                name = self.class_map.get(name, name)
-            if self.keep and name not in self.keep:
+            raw_name = _norm(names[int(b.cls)])
+            if self.keep and raw_name not in self.keep:
                 continue
+            name = self.class_map.get(raw_name, raw_name) if self.class_map else raw_name
             xyxy = b.xyxy[0].tolist()
             conf = float(b.conf[0]) if b.conf is not None else 0.0
             tid = int(b.id[0]) if getattr(b, "id", None) is not None else None
