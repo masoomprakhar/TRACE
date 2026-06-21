@@ -180,9 +180,13 @@ def process_yolo_split(
     if not img_root.exists():
         return 0
 
+    has_moto_classes = any(_is_moto(n) for n in id_to_name.values())
+    print(f"[{prefix}/{split}] classes={list(id_to_name.values())} has_moto={has_moto_classes}")
+
     out_split = IMAGES / split
     out_split.mkdir(parents=True, exist_ok=True)
     n = 0
+
     for img_path in sorted(img_root.iterdir()):
         if img_path.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
             continue
@@ -192,30 +196,101 @@ def process_yolo_split(
         h, w = img.shape[:2]
         lbl = lbl_root / f"{img_path.stem}.txt"
         boxes = parse_yolo_label_file(lbl, w, h, id_to_name)
-        motos = [b for b in boxes if _is_moto(b["name"])]
-        if not motos:
-            continue
-        for i, moto in enumerate(motos):
-            crop = rider_fraction_crop(img, moto["bbox"])
-            if crop is None or crop.size == 0:
-                continue
-            no_h, triple = labels_for_moto(
-                moto["bbox"], boxes, triple_min=triple_min
-            )
-            name = f"{prefix}_{split}_{img_path.stem}_m{i}.jpg"
-            dest = out_split / name
-            cv2.imwrite(str(dest), crop)
-            rows.append(
-                {
-                    "path": str(dest.relative_to(OUT)),
-                    "no_helmet": no_h,
-                    "triple_riding": triple,
-                    "split": split,
-                }
-            )
-            n += 1
-    return n
 
+        if has_moto_classes:
+            motos = [b for b in boxes if _is_moto(b["name"])]
+            if not motos:
+                continue
+            for i, moto in enumerate(motos):
+                crop = rider_fraction_crop(img, moto["bbox"])
+                if crop is None or crop.size == 0:
+                    continue
+                no_h, triple = labels_for_moto(
+                    moto["bbox"], boxes, triple_min=triple_min
+                )
+                name = f"{prefix}_{split}_{img_path.stem}_m{i}.jpg"
+                dest = out_split / name
+                cv2.imwrite(str(dest), crop)
+                rows.append(
+                    {
+                        "path": str(dest.relative_to(OUT)),
+                        "no_helmet": no_h,
+                        "triple_riding": triple,
+                        "split": split,
+                    }
+                )
+                n += 1
+        else:
+            helmet_boxes = [
+                b for b in boxes
+                if _is_helmet_ok(b["name"]) or _is_helmet_no(b["name"])
+            ]
+            triple_boxes = [
+                b for b in boxes
+                if _norm(b["name"]) == "triple_riding"
+            ]
+
+            for i, hbox in enumerate(helmet_boxes):
+                x1, y1, x2, y2 = hbox["bbox"]
+                cx1 = max(0, int(x1))
+                cy1 = max(0, int(y1))
+                cx2 = min(w, int(x2))
+                cy2 = min(h, int(y2))
+                if cx2 <= cx1 or cy2 <= cy1:
+                    continue
+                crop = img[cy1:cy2, cx1:cx2]
+                if crop.size == 0:
+                    continue
+                no_h = 1 if _is_helmet_no(hbox["name"]) else 0
+                triple = 1 if any(
+                    bbox_iou(hbox["bbox"], tb["bbox"]) >= 0.1 for tb in triple_boxes
+                ) else 0
+                name = f"{prefix}_{split}_{img_path.stem}_h{i}.jpg"
+                dest = out_split / name
+                cv2.imwrite(str(dest), crop)
+                rows.append(
+                    {
+                        "path": str(dest.relative_to(OUT)),
+                        "no_helmet": no_h,
+                        "triple_riding": triple,
+                        "split": split,
+                    }
+                )
+                n += 1
+
+            accounted = set()
+            for i, hbox in enumerate(helmet_boxes):
+                for j, tb in enumerate(triple_boxes):
+                    if bbox_iou(hbox["bbox"], tb["bbox"]) >= 0.1:
+                        accounted.add(j)
+            for j, tb in enumerate(triple_boxes):
+                if j in accounted:
+                    continue
+                x1, y1, x2, y2 = tb["bbox"]
+                cx1 = max(0, int(x1))
+                cy1 = max(0, int(y1))
+                cx2 = min(w, int(x2))
+                cy2 = min(h, int(y2))
+                if cx2 <= cx1 or cy2 <= cy1:
+                    continue
+                crop = img[cy1:cy2, cx1:cx2]
+                if crop.size == 0:
+                    continue
+                name = f"{prefix}_{split}_{img_path.stem}_t{j}.jpg"
+                dest = out_split / name
+                cv2.imwrite(str(dest), crop)
+                rows.append(
+                    {
+                        "path": str(dest.relative_to(OUT)),
+                        "no_helmet": 0,
+                        "triple_riding": 1,
+                        "split": split,
+                    }
+                )
+                n += 1
+
+    print(f"[{prefix}/{split}] -> {n} crops")
+    return n
 
 def download_khadatkar(raw_dir: Path) -> Path | None:
     key = os.environ.get("ROBOFLOW_API_KEY", "")
@@ -246,16 +321,13 @@ def download_hf_cctv(dest: Path) -> bool:
     if (dest / "merged_v3" / "data.yaml").exists():
         return True
     try:
-        subprocess.run(
-            [
-                "huggingface-cli",
-                "download",
-                "vivekvar/cctv-datasets",
-                "--local-dir",
-                str(dest),
-            ],
-            check=True,
-            capture_output=True,
+        from huggingface_hub import snapshot_download
+        snapshot_download(
+            repo_id="vivekvar/cctv-datasets",
+            repo_type="dataset",
+            local_dir=str(dest),
+            max_workers=1,   
+            resume_download=True,
         )
         return True
     except Exception as exc:
@@ -312,23 +384,29 @@ def main() -> int:
     if not args.skip_khadatkar:
         raw = ROOT / "data" / "raw" / "khadatkar_helmet"
         ds_dir = download_khadatkar(raw)
-        if ds_dir and ds_dir.exists():
-            names = load_class_names(ds_dir / "data.yaml")
-            for split in ("train", "valid", "test"):
-                total += process_yolo_split(
-                    ds_dir, split, names, rows, "kh", triple_min=args.triple_min
-                )
+    else:
+        raw = ROOT / "data" / "raw" / "khadatkar_helmet"
+        ds_dir = raw if raw.exists() else None
+
+    if ds_dir and ds_dir.exists():
+        names = load_class_names(ds_dir / "data.yaml")
+        for split in ("train", "valid", "test"):
+            total += process_yolo_split(
+                ds_dir, split, names, rows, "kh", triple_min=args.triple_min
+            )
 
     if not args.skip_hf:
         hf_root = ROOT / "data" / "datasets" / "cctv_hf"
-        if download_hf_cctv(hf_root):
-            merged = hf_root / "merged_v3"
-            if merged.exists():
-                names = load_class_names(merged / "data.yaml")
-                for split in ("train", "valid", "test"):
-                    total += process_yolo_split(
-                        merged, split, names, rows, "cctv", triple_min=args.triple_min
-                    )
+        download_hf_cctv(hf_root)
+
+    hf_root = ROOT / "data" / "datasets" / "cctv_hf"
+    merged = hf_root / "merged_v3"
+    if merged.exists():
+        names = load_class_names(merged / "data.yaml")
+        for split in ("train", "valid", "test"):
+            total += process_yolo_split(
+                merged, split, names, rows, "cctv", triple_min=args.triple_min
+            )
 
     if not rows and args.synthetic:
         total += build_synthetic(OUT, rows)
