@@ -1,0 +1,59 @@
+# TRACE with Roboflow-hosted helmet + plate models.
+#   export ROBOFLOW_API_KEY=your_key
+#   export TRACE_CONFIG=config/roboflow.yaml
+#   python -m trace_cv.cli serve
+
+device: cpu
+storage_dir: data/output
+db_url: sqlite:///data/trace.db
+
+models:
+  detector: viovision/runs/detect/runs/train/viovision_yolo11n/weights/best.pt
+  rider_backend: cnn
+  rider_cnn_weights: models/weights/rider_multilabel_cnn.pt
+  helmet: null
+  helmet_backend: roboflow
+  roboflow_helmet_workflow_id: general-segmentation-api
+  roboflow_helmet_classes: "helmet, no_helmet"
+  roboflow_helmet_model_id: null
+  seatbelt: models/weights/seatbelt.pt
+  plate: null
+  plate_backend: roboflow
+  roboflow_workspace: prakhar-parkar
+  roboflow_workflow_id: general-segmentation-api
+  roboflow_plate_classes: license_plate
+  ocr_backend: trocr
+  trocr_model_path: models/weights/trocr_plate
+  ocr_langs: [en]
+  detector_imgsz: 640
+  detector_backend: viovision
+  detector_class_map:
+    two_wheeler: motorcycle
+    signal_light: traffic_light
+    license_plate: license_plate
+    windshield: windshield
+
+thresholds:
+  detection_conf: 0.35
+  nms_iou: 0.45
+  helmet_conf: 0.55
+  seatbelt_conf: 0.65
+  triple_riding_min: 3
+  confirm_frames: 3
+  parking_seconds: 30.0
+  stationary_iou: 0.90
+  rider_overlap: 0.20
+
+scene:
+  fps: 15.0
+  stop_line:
+    enabled: true
+    y: 380
+  lane:
+    enabled: true
+    divider_x: 480
+    correct_direction: down
+  signal:
+    enabled: true
+    bbox: [700, 24, 790, 108]
+  no_parking_zones: []

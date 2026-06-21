@@ -1,0 +1,13 @@
+names:
+- helmet
+- no_helmet
+nc: 2
+roboflow:
+  license: CC BY 4.0
+  project: helmet-0z7wk-z6kjh
+  url: https://universe.roboflow.com/prakhar-parkar/helmet-0z7wk-z6kjh/dataset/1
+  version: 1
+  workspace: prakhar-parkar
+test: ../test/images
+train: ../train/images
+val: ../valid/images

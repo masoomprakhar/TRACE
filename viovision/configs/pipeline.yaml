@@ -1,0 +1,40 @@
+# Pipeline configuration. Toggle individual components between mock and
+# real implementations independently — you don't have to flip everything
+# at once. This is what makes the guide's Day 1 -> Day 5 progression
+# (section 6) possible: start all-mock, swap in real models as each one
+# clears its "good enough" bar.
+
+use_mocks:
+  detector: false
+  helmet: false
+  seatbelt: false
+  signal: true
+  ocr: false
+  vlm: true
+
+weights:
+  detector: runs/detect/runs/train/viovision_yolo11n/weights/best.pt
+  helmet: models/weights/helmet_svm.pkl
+  seatbelt: models/weights/seatbelt_svm.pkl
+  signal: models/weights/signal_svm.pkl
+
+detector:
+  conf_threshold: 0.35
+  imgsz: 640
+  use_sahi: false   # ByteTrack (detector.track()) is unavailable when this is true
+
+signal:
+  # "sklearn" or "hsv_heuristic" — only used when use_mocks.signal is false
+  mode: hsv_heuristic
+
+review_thresholds:
+  helmet: 0.55
+  seatbelt: 0.65
+  signal: 0.55
+  ocr: 0.6
+
+calibration:
+  # Filled in per-camera during deployment; placeholder polygon here.
+  stop_line_zone: [[0, 0], [0, 0], [0, 0], [0, 0]]
+  no_parking_zone: [[0, 0], [0, 0], [0, 0], [0, 0]]
+  allowed_direction: [1.0, 0.0]

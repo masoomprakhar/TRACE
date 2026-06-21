@@ -1,0 +1,22 @@
+# TRACE — heavy ML dependencies (optional, lazy-loaded).
+# Install when you want real detection / OCR:
+#   pip install -r requirements-ml.txt
+#
+# The detector uses Ultralytics YOLO (COCO weights auto-download on first
+# use and already cover: person, bicycle, car, motorcycle, bus, truck,
+# traffic light). OCR uses EasyOCR. Albumentations powers augmentation
+# for the (optional) training scripts.
+
+ultralytics>=8.2          # YOLOv8/YOLOv10 detection + built-in ByteTrack
+torch>=2.2                # backend for ultralytics / classifiers
+torchvision>=0.17
+easyocr>=1.7              # license-plate OCR fallback
+transformers>=4.40        # TrOCR fine-tuned plate OCR
+datasets>=2.19            # TrOCR training helpers
+Pillow>=10.0             # imaging / plate rendering for the OCR demo
+supervision>=0.20         # detection utilities / annotators
+albumentations>=1.4       # training-time augmentation
+scikit-learn>=1.4         # evaluation helpers / calibration / VioVision sklearn bridge
+scikit-image>=0.22        # HOG features for VioVision helmet/seatbelt models
+inference-sdk>=0.9        # Roboflow workflow plate detection (optional)
+roboflow>=1.1             # download Indian license plate eval dataset (optional)

@@ -1,0 +1,12 @@
+names:
+- license_plate
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: indian-license-plate-detection-6tmbr-mwzdr-3cqpu
+  url: https://universe.roboflow.com/prakhar-parkar/indian-license-plate-detection-6tmbr-mwzdr-3cqpu/dataset/1
+  version: 1
+  workspace: prakhar-parkar
+test: ../test/images
+train: ../train/images
+val: ../valid/images

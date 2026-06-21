@@ -1,0 +1,15 @@
+============================================================
+SEATBELT EVALUATION REPORT
+============================================================
+  Config         : config/viovision.yaml
+  Samples        : 37
+  GT detections  : True
+  Model status   : {"detector": true, "ocr": true, "helmet": true, "seatbelt": true, "plate": true}
+
+no_seatbelt metrics:
+  Precision : 0.0000
+  Recall    : 0.0000
+  F1-score  : 0.0000
+  TP/FP/FN  : 0/0/4
+
+Negative FP rate (bike/plate): 0.1333 (4/30)

@@ -1,0 +1,31 @@
+# TRACE — local stack. Defaults to SQLite + on-disk evidence (no extra
+# services needed). Uncomment the `db` service to switch to PostgreSQL.
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      - TRACE_LOG_LEVEL=INFO
+      # - TRACE_CONFIG=/app/config/default.yaml
+    # For GPU inference, install the ML extras and enable the NVIDIA runtime:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # db:
+  #   image: postgres:16
+  #   environment:
+  #     POSTGRES_DB: trace
+  #     POSTGRES_PASSWORD: trace
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+# volumes:
+#   pgdata:

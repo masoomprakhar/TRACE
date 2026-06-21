@@ -1,0 +1,67 @@
+
+============================================================
+TRACE EVALUATION REPORT
+============================================================
+  Config         : config/roboflow.yaml
+  Samples        : 63
+  GT detections  : False
+  Model status   : {"detector": true, "ocr": true, "helmet": true, "seatbelt": true, "plate": true}
+
+============================================================
+1. DETECTION — mAP (object localization)
+============================================================
+  mAP@0.5      : 0.8333
+  mAP@0.5:0.95 : 0.8333
+  Per-class AP@0.5:
+    car              1.0000
+    motorcycle       0.0000
+    person           1.0000
+    bus              1.0000
+    truck            1.0000
+    license_plate    1.0000
+
+============================================================
+2. VIOLATION CLASSIFICATION — P / R / F1 / Accuracy
+============================================================
+  Exact-set accuracy : 0.6825
+  Macro averages:
+    Precision : 0.0238
+    Recall    : 0.0357
+    F1-score  : 0.0286
+  Micro averages:
+    Precision : 0.0476
+    Recall    : 0.2500
+    F1-score  : 0.0800
+    Accuracy  : 0.0417
+  Per violation type:
+    no_helmet          P=0.167  R=0.250  F1=0.200  Acc=0.873
+    no_seatbelt        P=0.000  R=0.000  F1=0.000  Acc=0.857
+    triple_riding      P=0.000  R=0.000  F1=0.000  Acc=1.000
+    wrong_side         P=0.000  R=0.000  F1=0.000  Acc=1.000
+    stop_line          P=0.000  R=0.000  F1=0.000  Acc=0.905
+    red_light          P=0.000  R=0.000  F1=0.000  Acc=1.000
+    illegal_parking    P=0.000  R=0.000  F1=0.000  Acc=1.000
+
+============================================================
+3. LICENSE PLATE OCR
+============================================================
+  Exact match  : 0.0000
+  Mean CER     : 1.6367
+
+============================================================
+PLATE DETECTION (Roboflow workflow)
+============================================================
+  mAP@0.5      : 0.8728
+  mAP@0.5:0.95 : 0.6752
+  Per-class AP@0.5:
+    license_plate    0.8728
+
+============================================================
+CONCEPT NOTE — copy these numbers
+============================================================
+| Detection mAP@0.5 | 0.8333 |
+| Detection mAP@0.5:0.95 | 0.8333 |
+| Violation macro-F1 | 0.0286 |
+| Violation macro-Precision | 0.0238 |
+| Violation macro-Recall | 0.0357 |
+| End-to-end latency | n/a ms |

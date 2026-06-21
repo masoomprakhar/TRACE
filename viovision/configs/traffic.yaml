@@ -1,0 +1,23 @@
+# Ultralytics dataset config for VioVision's primary detector.
+#
+# CRITICAL: class order/index here must exactly match
+# CLASS_ID_TO_NAME in src/models/yolo_detector.py. If you add/reorder
+# classes, update both files together or the adapter will mislabel
+# every detection.
+#
+# Per guide section 3: "Keep classes consistent with your SharedState
+# cls values exactly. Annotate to the schema, not to a model." — this
+# file IS that schema for the detector.
+
+path: ../data            # relative to this file's location
+train: splits/train/images
+val: splits/valid/images
+test: splits/test/images   # hold out hard-conditions subset per guide section 4
+
+names:
+  0: car
+  1: two_wheeler
+  2: person
+  3: license_plate
+  4: windshield
+  5: signal_light

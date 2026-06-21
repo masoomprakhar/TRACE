@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TRACE — Concept Note</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+
+  body {
+    font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #1f2733;
+    margin: 0;
+  }
+
+  /* ---------- Cover ---------- */
+  .cover {
+    background-color: #16243f;
+    color: #ffffff;
+    padding: 46px 40px 40px 40px;
+    margin-bottom: 26px;
+  }
+  .cover .kicker {
+    color: #f5b301;
+    font-size: 11pt;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .cover h1 {
+    font-size: 40pt;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+  .cover .tagline {
+    font-size: 13pt;
+    color: #f5b301;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 0 18px 0;
+  }
+  .cover .subtitle {
+    font-size: 14pt;
+    color: #cdd8ec;
+    font-weight: normal;
+    margin: 0 0 24px 0;
+    line-height: 1.35;
+  }
+  .cover .doctype {
+    display: inline-block;
+    background-color: #f5b301;
+    color: #16243f;
+    font-weight: bold;
+    font-size: 10pt;
+    padding: 5px 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .meta {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 26px;
+    font-size: 10pt;
+  }
+  .meta td {
+    border-top: 1px solid #34466b;
+    padding: 7px 8px;
+    color: #e7edf7;
+    vertical-align: top;
+  }
+  .meta td.label {
+    color: #f5b301;
+    font-weight: bold;
+    width: 26%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 9pt;
+  }
+
+  /* ---------- Body content ---------- */
+  .content { padding: 0 24px; }
+
+  h2 {
+    font-size: 16pt;
+    color: #16243f;
+    border-left: 5px solid #f5b301;
+    padding: 2px 0 2px 12px;
+    margin: 26px 0 12px 0;
+  }
+  h3 {
+    font-size: 12pt;
+    color: #2a3c5e;
+    margin: 18px 0 6px 0;
+  }
+  p { margin: 8px 0; }
+  strong { color: #16243f; }
+  em { color: #3a4a66; }
+
+  ul, ol { margin: 8px 0 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+
+  /* ---------- Tables ---------- */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 9.8pt;
+  }
+  table.data th {
+    background-color: #16243f;
+    color: #ffffff;
+    text-align: left;
+    padding: 7px 9px;
+    font-size: 9.5pt;
+  }
+  table.data td {
+    border: 1px solid #d4dae4;
+    padding: 6px 9px;
+    vertical-align: top;
+  }
+  table.data tr:nth-child(even) td { background-color: #f3f6fb; }
+
+  /* ---------- Diagram / code ---------- */
+  pre.diagram {
+    background-color: #f3f6fb;
+    border: 1px solid #d4dae4;
+    border-left: 4px solid #16243f;
+    padding: 14px 16px;
+    font-family: "Liberation Mono", "Courier New", monospace;
+    font-size: 8.4pt;
+    line-height: 1.3;
+    color: #1f2733;
+    white-space: pre;
+  }
+  code {
+    font-family: "Liberation Mono", "Courier New", monospace;
+    background-color: #eef2f8;
+    padding: 1px 4px;
+    font-size: 9pt;
+    color: #b1361e;
+  }
+
+  .lead {
+    font-size: 11pt;
+    color: #2a3c5e;
+    border-bottom: 2px solid #eef2f8;
+    padding-bottom: 12px;
+  }
+
+  .pagebreak { page-break-before: always; }
+
+  .footer {
+    margin-top: 30px;
+    padding: 14px 24px;
+    border-top: 2px solid #16243f;
+    color: #6b7689;
+    font-size: 8.5pt;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="kicker">Concept Note &nbsp;·&nbsp; Solution Framework</div>
+  <h1>TRACE</h1>
+  <div class="tagline">Traffic Rule Analysis &amp; Compliance Engine</div>
+  <div class="subtitle">Automated Photo Identification and Classification for<br>Traffic Violations Using Computer Vision</div>
+  <span class="doctype">Hackathon Submission</span>
+
+  <table class="meta">
+    <tr><td class="label">Team</td><td><em>‹Your team name›</em></td></tr>
+    <tr><td class="label">Members</td><td><em>‹Member 1, Member 2, Member 3, Member 4›</em></td></tr>
+    <tr><td class="label">Institution</td><td><em>‹Your institution›</em></td></tr>
+    <tr><td class="label">Track</td><td>Computer Vision · Intelligent Transportation Systems</td></tr>
+    <tr><td class="label">Date</td><td>June 2026</td></tr>
+  </table>
+</div>
+
+<div class="content">
+
+  <h2>1. Executive Summary</h2>
+  <p class="lead">Traffic surveillance cameras across Indian cities generate millions of images every day, yet the vast majority are never reviewed. Manual inspection is slow, expensive, inconsistent, and impossible to scale to the volume of footage now being captured.</p>
+  <p><strong>TRACE</strong> is a computer-vision system that automatically processes traffic imagery to detect road users, identify and classify seven categories of traffic violations, read license plates, and generate court-ready annotated evidence — all with confidence scores and full audit metadata. It is engineered to remain accurate under the real-world conditions that defeat naïve detectors: low light, rain, shadows, motion blur, and dense traffic.</p>
+  <p>Three design decisions set TRACE apart from a generic “run YOLO on an image” approach:</p>
+  <ol>
+    <li><strong>Quality-adaptive preprocessing</strong> that diagnoses each frame and applies only the corrections it needs.</li>
+    <li><strong>Temporal reasoning</strong> through multi-object tracking, so violations that are fundamentally sequential (triple riding, illegal parking, red-light running) are judged across frames rather than guessed from one.</li>
+    <li><strong>Domain-adapted plate recognition</strong> tuned to the Indian number-plate format, materially improving OCR accuracy over off-the-shelf engines.</li>
+  </ol>
+  <p>The result is a scalable, auditable enforcement assistant that reduces manual review effort while improving both the consistency and the defensibility of traffic-law enforcement.</p>
+
+  <h2>2. Problem Statement &amp; Motivation</h2>
+  <p>India records over <strong>150,000 road-traffic fatalities every year</strong> — among the highest in the world (Ministry of Road Transport &amp; Highways, <em>Road Accidents in India</em>). A large share is attributable to preventable, enforceable behaviours: riding without a helmet, driving without a seatbelt, overloading two-wheelers, jumping red lights, and driving on the wrong side.</p>
+  <p>Enforcement has not kept pace with surveillance. Cities have deployed thousands of cameras, but the bottleneck has simply moved downstream:</p>
+  <ul>
+    <li><strong>Volume.</strong> A single junction camera can produce tens of thousands of frames per day. No human team can review them all.</li>
+    <li><strong>Inconsistency.</strong> Manual adjudication varies between reviewers and across shifts; identical violations are treated differently.</li>
+    <li><strong>Latency.</strong> By the time footage is reviewed, the evidentiary and deterrent value has decayed.</li>
+    <li><strong>Cost.</strong> Skilled reviewer time is expensive and poorly utilised on routine, repetitive screening.</li>
+  </ul>
+  <p>The opportunity is clear: an intelligent system that performs the first-pass screening automatically — flagging probable violations with evidence and confidence scores, and escalating only ambiguous cases to a human — turns an unmanageable firehose into a prioritised, reviewable queue.</p>
+
+  <h2>3. Solution Overview</h2>
+  <p>TRACE ingests still images or video frames and returns, for every detected violation, a structured record containing: the violation type(s), a confidence score per violation, the offending vehicle’s class and license-plate number, an annotated evidence image, and a complete metadata sidecar (timestamp, location, track ID, processing time).</p>
+  <p><strong>Capabilities delivered against the problem statement:</strong></p>
+  <ul>
+    <li><strong>Image Preprocessing</strong> — adaptive enhancement for low light, rain/fog, shadows, and motion blur.</li>
+    <li><strong>Vehicle &amp; Road-User Detection</strong> — localises and classifies cars, motorcycles, trucks, buses, bicycles, pedestrians, riders, and drivers.</li>
+    <li><strong>Violation Detection</strong> — seven classes: helmet non-compliance, seatbelt non-compliance, triple riding, wrong-side driving, stop-line violation, red-light violation, and illegal parking.</li>
+    <li><strong>Violation Classification</strong> — each detection is categorised and assigned a calibrated confidence score.</li>
+    <li><strong>License Plate Recognition</strong> — plate localisation followed by OCR with India-specific format correction.</li>
+    <li><strong>Evidence Generation</strong> — annotated images plus persisted metadata and timestamps.</li>
+    <li><strong>Analytics &amp; Reporting</strong> — violation statistics, trends, hotspots, and searchable records.</li>
+    <li><strong>Performance Evaluation</strong> — Accuracy, Precision, Recall, F1-score, and mAP, plus throughput benchmarks.</li>
+  </ul>
+
+  <div class="pagebreak"></div>
+  <h2>4. System Architecture</h2>
+  <p>TRACE is a modular pipeline. Each stage is independently testable and replaceable, which keeps the system maintainable and lets us swap models without disturbing the rest of the flow.</p>
+<pre class="diagram">                    +-----------------------------+
+   Image / Video --> |  1. Adaptive Preprocessing  |  low-light . deblur . dehaze
+                     +--------------+--------------+
+                                    v
+                     +-----------------------------+
+                     |  2. Detection (YOLOv10)     |  vehicles . riders . pedestrians
+                     +--------------+--------------+
+                                    v
+                     +-----------------------------+
+                     |  3. Tracking (ByteTrack)    |  persistent IDs across frames
+                     +--------------+--------------+
+                                    v
+                     +-----------------------------+
+                     |  4. Violation Engine        |  7 parallel violation modules
+                     +--------------+--------------+
+                                    v
+                     +-----------------------------+
+                     |  5. License Plate + OCR     |  detect -> read -> correct
+                     +--------------+--------------+
+                                    v
+                     +-----------------------------+
+                     |  6. Evidence + Metadata     |  annotated image + JSON record
+                     +--------------+--------------+
+                                    v
+              +------------------------------------------+
+              |  7. API . Database . Analytics Dashboard |
+              +------------------------------------------+</pre>
+
+  <h2>5. Technical Approach</h2>
+
+  <h3>5.1 Image Preprocessing — adaptive, not blanket</h3>
+  <p>Most pipelines apply a fixed enhancement to every image, which wastes compute and can degrade already-good frames. TRACE first <strong>diagnoses</strong> each frame, then routes it only to the corrections it needs:</p>
+  <table class="data">
+    <tr><th>Condition</th><th>Detector (cheap heuristic)</th><th>Corrective model</th></tr>
+    <tr><td>Low light</td><td>mean luminance below threshold</td><td>Zero-DCE++ (no paired data required)</td></tr>
+    <tr><td>Motion blur</td><td>Laplacian variance below threshold</td><td>DeblurGAN-v2 (MobileNet backbone)</td></tr>
+    <tr><td>Rain / fog</td><td>high-frequency / haze estimate</td><td>Dark Channel Prior / MSBDN</td></tr>
+    <tr><td>Shadows / contrast</td><td>histogram spread</td><td>CLAHE on the luminance channel</td></tr>
+  </table>
+  <p>This keeps the average frame fast (most frames need little correction) while rescuing the hard frames that would otherwise produce misses or false alarms.</p>
+
+  <h3>5.2 Vehicle &amp; Road-User Detection</h3>
+  <p>We use <strong>YOLOv10-M</strong> as the primary detector. Its NMS-free design yields 20–30% lower latency than YOLOv8 at comparable accuracy, and a single multi-class head detects vehicles and people together. The base model is fine-tuned on the <strong>India Driving Dataset (IDD)</strong> so it is robust to Indian road scenes, mixed traffic, and occlusion. Detected classes: <code>motorcycle, car, truck, bus, bicycle, person</code>.</p>
+
+  <h3>5.3 Traffic Violation Detection</h3>
+  <table class="data">
+    <tr><th>Violation</th><th>Detection strategy</th></tr>
+    <tr><td><strong>Helmet non-compliance</strong></td><td>Crop rider head region &rarr; EfficientNet-B2 classifier (<code>helmet</code> / <code>no_helmet</code>)</td></tr>
+    <tr><td><strong>Seatbelt non-compliance</strong></td><td>Crop driver region &rarr; MobileNetV3, 3-class (<code>belt</code> / <code>no_belt</code> / <code>occluded</code>)</td></tr>
+    <tr><td><strong>Triple riding</strong></td><td>Count distinct tracked persons whose centroids fall within a motorcycle’s box</td></tr>
+    <tr><td><strong>Wrong-side driving</strong></td><td>Movement vector (from tracking) compared against the calibrated lane direction</td></tr>
+    <tr><td><strong>Stop-line violation</strong></td><td>Vehicle box crosses the configured stop-line band while the signal is red</td></tr>
+    <tr><td><strong>Red-light violation</strong></td><td>Signal-ROI colour state + stop-line crossing, evaluated as a two-event sequence</td></tr>
+    <tr><td><strong>Illegal parking</strong></td><td>Vehicle stationary beyond a duration threshold inside a no-parking zone polygon</td></tr>
+  </table>
+  <p>The <strong><code>occluded</code> seatbelt class</strong> is a deliberate choice: a naïve binary classifier reports false violations whenever the driver is partly hidden by window glare or A-pillars. Explicitly modelling occlusion removes that failure mode.</p>
+
+  <h3>5.4 Violation Classification &amp; Confidence</h3>
+  <p>Each module emits a softmax probability. Because raw softmax scores are poorly calibrated, we apply <strong>temperature scaling</strong> fitted on the validation set so that a reported “90% confidence” genuinely corresponds to ~90% empirical correctness. Violations below a configurable confidence threshold are routed to a <strong>human-review queue</strong> rather than auto-penalised — the system augments officers, it does not replace their judgement.</p>
+
+  <h3>5.5 License Plate Recognition</h3>
+  <p>A lightweight <strong>YOLOv8n</strong> localises the plate within each vehicle crop; <strong>PaddleOCR (PP-OCRv4)</strong> reads the characters. We then apply an <strong>India-specific correction layer</strong>:</p>
+  <ul>
+    <li>Format validation against the standard pattern <code>[A-Z]{2} [0-9]{2} [A-Z]{1,2} [0-9]{4}</code> (e.g. <code>MH 01 AB 1234</code>).</li>
+    <li>Confusion-aware correction of common OCR errors (<code>0&harr;O</code>, <code>1&harr;I</code>, <code>8&harr;B</code>, <code>5&harr;S</code>) using the known position of letters vs digits in the plate.</li>
+  </ul>
+  <p>This domain adaptation recovers plates that generic OCR returns malformed.</p>
+
+  <h3>5.6 Evidence Generation</h3>
+  <p>For every confirmed violation the system produces a tamper-evident evidence package:</p>
+  <ul>
+    <li><strong>Annotated image</strong> — colour-coded boxes (vehicle, violation region, plate), violation labels with confidence, and a metadata banner.</li>
+    <li><strong>Metadata sidecar (JSON)</strong> — timestamp, location/camera ID, vehicle type, violation types, plate number and confidence, track ID, and pipeline latency.</li>
+    <li>Both are persisted to the database and object store for retrieval, export, and audit.</li>
+  </ul>
+
+  <h3>5.7 Analytics &amp; Reporting</h3>
+  <p>A web dashboard surfaces:</p>
+  <ul>
+    <li>Live annotated feed and real-time per-type violation counters.</li>
+    <li>A searchable, filterable violations table (by date, type, plate, confidence) with one-click evidence view and CSV export.</li>
+    <li>Trend charts (violations over time, by type, by vehicle class) and a temporal heatmap of hotspots.</li>
+    <li><strong>Fuzzy plate search</strong> that ranks partial matches, returning every incident linked to a plate.</li>
+  </ul>
+
+  <div class="pagebreak"></div>
+  <h2>6. Key Innovations</h2>
+  <p>What distinguishes TRACE from a standard detector demo:</p>
+  <ol>
+    <li><strong>Quality-adaptive preprocessing.</strong> Per-frame diagnosis routes only the frames that need help to the right restoration model — faster on average and more robust on the hard cases that decide accuracy in the field.</li>
+    <li><strong>Temporal reasoning via tracking.</strong> Persistent IDs turn single-frame guesses into multi-frame decisions. A 5-frame confirmation window cuts false positives substantially, and inherently sequential violations (triple riding, parking duration, red-light + stop-line) become tractable.</li>
+    <li><strong>Calibrated confidence + human-in-the-loop.</strong> Temperature-scaled scores and a review queue make the system’s output trustworthy and deployable, not just a leaderboard number.</li>
+    <li><strong>Domain-adapted Indian-plate OCR.</strong> Format-aware, confusion-aware correction meaningfully lifts real plate-read accuracy.</li>
+    <li><strong>Edge-ready.</strong> Models export to ONNX/TensorRT, enabling deployment on a Jetson-class device at the camera rather than a costly central GPU farm.</li>
+  </ol>
+
+  <h2>7. Technology Stack</h2>
+  <table class="data">
+    <tr><th>Layer</th><th>Choice</th></tr>
+    <tr><td>Detection</td><td>YOLOv10 (vehicles/people), YOLOv8n (plates)</td></tr>
+    <tr><td>Tracking</td><td>ByteTrack</td></tr>
+    <tr><td>Classifiers</td><td>EfficientNet-B2 (helmet), MobileNetV3 (seatbelt)</td></tr>
+    <tr><td>Preprocessing</td><td>Zero-DCE++, DeblurGAN-v2, Dark Channel Prior, OpenCV/CLAHE</td></tr>
+    <tr><td>OCR</td><td>PaddleOCR PP-OCRv4 + custom Indian-plate corrector</td></tr>
+    <tr><td>Training</td><td>PyTorch, Ultralytics, Albumentations, Weights &amp; Biases</td></tr>
+    <tr><td>Backend</td><td>FastAPI, SQLAlchemy, WebSocket</td></tr>
+    <tr><td>Storage</td><td>PostgreSQL / SQLite, object store for evidence</td></tr>
+    <tr><td>Dashboard</td><td>React + Vite + Tailwind, Recharts, Leaflet</td></tr>
+    <tr><td>Packaging</td><td>Docker Compose, ONNX / TensorRT export</td></tr>
+  </table>
+
+  <h2>8. Evaluation &amp; Expected Performance</h2>
+  <p>We evaluate every stage on a held-out test split, plus an end-to-end test on ~200 fully annotated images where predicted violations are matched to ground truth by IoU &gt; 0.5.</p>
+  <table class="data">
+    <tr><th>Task</th><th>Metric</th><th>Target</th></tr>
+    <tr><td>Vehicle detection</td><td>mAP@0.5</td><td>&gt; 0.80</td></tr>
+    <tr><td>Helmet compliance</td><td>F1</td><td>&gt; 0.88</td></tr>
+    <tr><td>Seatbelt compliance</td><td>F1</td><td>&gt; 0.82</td></tr>
+    <tr><td>Triple riding</td><td>F1</td><td>&gt; 0.85</td></tr>
+    <tr><td>Plate detection</td><td>mAP@0.5</td><td>&gt; 0.90</td></tr>
+    <tr><td>Plate OCR</td><td>Exact-match</td><td>&gt; 0.75</td></tr>
+    <tr><td>Overall violations</td><td>F1</td><td>&gt; 0.82</td></tr>
+    <tr><td>Throughput</td><td>FPS</td><td>15 (GPU) / 5 (CPU)</td></tr>
+  </table>
+  <p>Reported metrics: <strong>Accuracy, Precision, Recall, F1-score, mAP@0.5, mAP@0.5:0.95</strong>, OCR character-error-rate and exact-match, plus per-class confusion matrices and computational-efficiency benchmarks.</p>
+
+  <h2>9. Implementation Roadmap</h2>
+  <p><strong>Data strategy.</strong> Public datasets (IDD, COCO, Roboflow helmet/seatbelt/plate sets) augmented with synthetic data — weather/blur augmentation via Albumentations and copy-paste / generative augmentation for rare classes (e.g. night-time triple riding) — to overcome class scarcity.</p>
+  <table class="data">
+    <tr><th>Phase</th><th>Focus</th><th>Outcome</th></tr>
+    <tr><td><strong>1 — Foundation</strong></td><td>Repo, preprocessing, YOLOv10 inference</td><td>Detections on real footage</td></tr>
+    <tr><td><strong>2 — Core slice</strong></td><td>Tracking + helmet + plate OCR end-to-end</td><td>First demoable pipeline</td></tr>
+    <tr><td><strong>3 — Breadth</strong></td><td>Remaining violation modules</td><td>All 7 violations</td></tr>
+    <tr><td><strong>4 — Product</strong></td><td>FastAPI + dashboard + database</td><td>Searchable evidence &amp; analytics</td></tr>
+    <tr><td><strong>5 — Evaluation</strong></td><td>Metrics, calibration, benchmarks</td><td>Numbers for the report</td></tr>
+  </table>
+  <p>Wrong-side and parking detection require one-time per-camera calibration and are sequenced last as enhancements, so they never block the core demo.</p>
+
+  <h2>10. Impact, Scalability &amp; Deployment</h2>
+  <ul>
+    <li><strong>Efficiency.</strong> Automated first-pass screening converts an unreviewable volume of footage into a prioritised, evidence-backed queue, freeing officers for adjudication and field work.</li>
+    <li><strong>Consistency &amp; fairness.</strong> Uniform, calibrated criteria applied to every frame remove reviewer-to-reviewer variability.</li>
+    <li><strong>Scalability.</strong> A stateless, containerised pipeline scales horizontally; edge export pushes inference to the camera, reducing bandwidth and central compute.</li>
+    <li><strong>Auditability.</strong> Every decision ships with annotated evidence, confidence, and metadata — defensible if challenged.</li>
+    <li><strong>Safety outcome.</strong> Faster, more consistent enforcement of helmet, seatbelt, and signal compliance targets exactly the behaviours most strongly linked to fatalities.</li>
+  </ul>
+
+  <h2>11. Conclusion</h2>
+  <p>TRACE reframes traffic enforcement from a manual review bottleneck into an automated, auditable, and scalable screening pipeline. By pairing strong detection with the features that matter in the real world — adaptive preprocessing, temporal reasoning, calibrated confidence, and domain-adapted plate recognition — it delivers accuracy that survives outside the lab and evidence that stands up to scrutiny. The architecture is modular, edge-deployable, and measurable against the exact metrics the challenge specifies, making it both a compelling prototype and a credible path to real-world deployment.</p>
+
+  <h2>Appendix — Primary Data Sources</h2>
+  <ul>
+    <li><strong>IDD</strong> — India Driving Dataset (Indian road scenes)</li>
+    <li><strong>COCO</strong> — base vehicle/person classes</li>
+    <li><strong>Roboflow Universe</strong> — helmet, seatbelt, and license-plate datasets</li>
+    <li><strong>CCPD / UFPR-ALPR</strong> — license-plate detection and recognition benchmarks</li>
+    <li>Synthetic augmentation — Albumentations (weather/blur), copy-paste and generative methods for rare classes</li>
+  </ul>
+
+</div>
+
+<div class="footer">
+  TRACE — Automated Traffic Violation Detection · Concept Note · June 2026
+</div>
+
+</body>
+</html>

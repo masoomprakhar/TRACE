@@ -1,0 +1,26 @@
+# Core dependencies — required for everything except the YOLO detector
+# and PaddleOCR. Mocks + all three sklearn classifiers + geometry logic
+# run on this alone.
+numpy>=1.26
+opencv-python>=4.9
+scikit-learn>=1.9.0
+scikit-image>=0.22      # HOG feature extraction
+pyyaml>=6.0
+requests>=2.31           # VLM adapter (Anthropic API calls)
+
+# --- Optional: only needed once USE_MOCKS=false for the detector -----
+# Per the guide, this is the one component that genuinely needs a deep
+# model (YOLOv11), so torch comes in only through ultralytics.
+# Uncomment when you start training/running the real detector:
+#
+torch>=2.2
+torchvision>=0.17
+ultralytics>=8.3        # ships YOLOv11 support AND ByteTrack (tracker="bytetrack.yaml")
+sahi>=0.11               # tiled inference for high-res CCTV frames (mutually exclusive with tracking)
+
+# --- Optional: only needed once USE_MOCKS=false for OCR -----
+easyocr>=1.7          # replaces PaddleOCR (broken on most hardware in 3.x)
+
+# --- Dev / training utilities -----
+pandas>=2.2               # convenient for metrics/eval harness, section 8
+matplotlib>=3.8           # plotting eval results, hard-conditions breakdowns

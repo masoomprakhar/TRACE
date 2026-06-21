@@ -1,0 +1,21 @@
+# Example Ultralytics dataset YAML for the TRACE license-plate detector.
+# Copy this file, edit the paths, and pass it to:
+#   python training/train_plate.py --data <your_copy>.yaml
+#
+# Layout expected by Ultralytics (YOLO detection format):
+#   <path>/
+#     images/train/*.jpg   labels/train/*.txt
+#     images/val/*.jpg     labels/val/*.txt
+# Each label line: "0 <x_center> <y_center> <w> <h>" (normalised 0-1).
+#
+# Single class only. The runtime treats this purely as a localizer
+# (trace_cv/detection/detector.py builds it with keep=set(), so any class
+# name is accepted) — the cropped box is handed to EasyOCR. Most Roboflow
+# Universe plate datasets already export exactly this shape.
+
+path: data/datasets/plate        # dataset root (absolute or repo-relative)
+train: images/train
+val: images/val
+
+names:
+  0: license_plate

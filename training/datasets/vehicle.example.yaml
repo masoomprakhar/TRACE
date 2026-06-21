@@ -1,0 +1,28 @@
+# Example Ultralytics dataset YAML for the TRACE vehicle/person detector.
+# Copy this file, edit the paths, and pass it to:
+#   python training/train_detector.py --data <your_copy>.yaml
+#
+# Layout expected by Ultralytics (YOLO detection format):
+#   <path>/
+#     images/train/*.jpg   labels/train/*.txt   (one .txt per image)
+#     images/val/*.jpg     labels/val/*.txt
+# Each label line: "<class_id> <x_center> <y_center> <w> <h>" (normalised 0-1).
+#
+# Keep these class NAMES if you want the rest of the TRACE pipeline
+# (triple-riding, parking, red-light, ...) to work unchanged — the runtime
+# Detector keeps the COCO-style names below (trace_cv/detection/detector.py).
+# Remap your source dataset's labels (e.g. IDD / India Driving Dataset) to
+# these ids. Drop classes you don't have; ids must stay contiguous from 0.
+
+path: data/datasets/vehicle      # dataset root (absolute or repo-relative)
+train: images/train              # images dir, relative to 'path'
+val: images/val
+
+names:
+  0: person
+  1: bicycle
+  2: car
+  3: motorcycle
+  4: bus
+  5: truck
+  6: traffic_light

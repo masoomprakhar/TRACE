@@ -1,0 +1,14 @@
+# TRACE — core runtime dependencies (lightweight, CPU-friendly).
+# The app imports and runs with just these. Heavy ML deps are in
+# requirements-ml.txt and are lazy-loaded only when needed.
+
+numpy>=1.24
+opencv-python-headless>=4.8
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+python-multipart>=0.0.9
+SQLAlchemy>=2.0
+PyYAML>=6.0
+aiofiles>=23.0
+Jinja2>=3.1

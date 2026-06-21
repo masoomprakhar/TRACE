@@ -1,0 +1,604 @@
+{
+  "samples": [
+    {
+      "image": "train/syn_train_0000.jpg",
+      "plate_text": "KA04JHH3286",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0001.jpg",
+      "plate_text": "KA28S1434",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0002.jpg",
+      "plate_text": "MH98Y7924",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0003.jpg",
+      "plate_text": "KA12DM6635",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0004.jpg",
+      "plate_text": "RJ11KWV6925",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0005.jpg",
+      "plate_text": "KA30N5554",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0006.jpg",
+      "plate_text": "GJ90WCV3803",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0007.jpg",
+      "plate_text": "TN88BH1525",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0008.jpg",
+      "plate_text": "UP28RNW8517",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0009.jpg",
+      "plate_text": "GJ96PUN6930",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0010.jpg",
+      "plate_text": "KA20FXP2040",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0011.jpg",
+      "plate_text": "MH88DXT5371",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0012.jpg",
+      "plate_text": "GJ65S2743",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0013.jpg",
+      "plate_text": "MH77RA2832",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0014.jpg",
+      "plate_text": "KA11RCT3060",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0015.jpg",
+      "plate_text": "RJ28ZYG6107",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0016.jpg",
+      "plate_text": "TN29L1344",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0017.jpg",
+      "plate_text": "MH30B6413",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0018.jpg",
+      "plate_text": "DL93URH8749",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0019.jpg",
+      "plate_text": "RJ53ZB2612",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0020.jpg",
+      "plate_text": "TN25QEP4006",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0021.jpg",
+      "plate_text": "KA07TAC4872",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0022.jpg",
+      "plate_text": "MH22AN5345",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0023.jpg",
+      "plate_text": "WB20K4566",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0024.jpg",
+      "plate_text": "WB65FBS2312",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0025.jpg",
+      "plate_text": "KA73U1651",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0026.jpg",
+      "plate_text": "UP31NE5915",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0027.jpg",
+      "plate_text": "KA10GSJ3170",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0028.jpg",
+      "plate_text": "GJ79SAX5905",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0029.jpg",
+      "plate_text": "DL35VG6617",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0030.jpg",
+      "plate_text": "MH12PJB1058",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0031.jpg",
+      "plate_text": "RJ72D2232",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0032.jpg",
+      "plate_text": "DL56B6050",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0033.jpg",
+      "plate_text": "KA46PVZ3532",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0034.jpg",
+      "plate_text": "UP53ZHJ3608",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0035.jpg",
+      "plate_text": "WB45HH1387",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0036.jpg",
+      "plate_text": "GJ45SNX9785",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0037.jpg",
+      "plate_text": "GJ05V8119",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0038.jpg",
+      "plate_text": "RJ74J1727",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0039.jpg",
+      "plate_text": "UP80XD5920",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0040.jpg",
+      "plate_text": "DL25XN3851",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0041.jpg",
+      "plate_text": "UP60QX4501",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0042.jpg",
+      "plate_text": "UP12X6085",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0043.jpg",
+      "plate_text": "WB79Q7790",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0044.jpg",
+      "plate_text": "MH97P4585",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0045.jpg",
+      "plate_text": "KA59Q9702",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0046.jpg",
+      "plate_text": "RJ71FZ8777",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0047.jpg",
+      "plate_text": "WB81J8206",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0048.jpg",
+      "plate_text": "KA18H7275",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0049.jpg",
+      "plate_text": "WB54G7883",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0050.jpg",
+      "plate_text": "GJ97PT9947",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0051.jpg",
+      "plate_text": "RJ44XNZ3704",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0052.jpg",
+      "plate_text": "MH11PEQ3977",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0053.jpg",
+      "plate_text": "UP98JP5133",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0054.jpg",
+      "plate_text": "UP29CWB1508",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0055.jpg",
+      "plate_text": "WB86U4571",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0056.jpg",
+      "plate_text": "KA21DU1420",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0057.jpg",
+      "plate_text": "TN14KXV2983",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0058.jpg",
+      "plate_text": "UP02RD8102",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0059.jpg",
+      "plate_text": "GJ79RQP5397",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0060.jpg",
+      "plate_text": "WB73XNL1470",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0061.jpg",
+      "plate_text": "GJ44VY5526",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0062.jpg",
+      "plate_text": "WB72Y8800",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0063.jpg",
+      "plate_text": "TN40UMR9698",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0064.jpg",
+      "plate_text": "GJ33D4155",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0065.jpg",
+      "plate_text": "GJ93SVK2647",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0066.jpg",
+      "plate_text": "DL36B5786",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0067.jpg",
+      "plate_text": "WB62LF1841",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0068.jpg",
+      "plate_text": "KA74XBE3444",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0069.jpg",
+      "plate_text": "TN67QQ5871",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0070.jpg",
+      "plate_text": "TN81J2330",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0071.jpg",
+      "plate_text": "RJ58VRK1534",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0072.jpg",
+      "plate_text": "TN34UXG7965",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0073.jpg",
+      "plate_text": "DL10F6039",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0074.jpg",
+      "plate_text": "RJ35TRQ2317",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0075.jpg",
+      "plate_text": "TN87UAX5415",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0076.jpg",
+      "plate_text": "GJ24PWR2494",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0077.jpg",
+      "plate_text": "DL43YR5722",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0078.jpg",
+      "plate_text": "UP15SA9889",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0079.jpg",
+      "plate_text": "WB81BG5375",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0080.jpg",
+      "plate_text": "KA04VHY3594",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0081.jpg",
+      "plate_text": "KA60W3522",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0082.jpg",
+      "plate_text": "WB32TE7284",
+      "split": "train"
+    },
+    {
+      "image": "train/syn_train_0083.jpg",
+      "plate_text": "RJ44JAK5891",
+      "split": "train"
+    },
+    {
+      "image": "val/syn_val_0000.jpg",
+      "plate_text": "RJ59GY4912",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0001.jpg",
+      "plate_text": "RJ50WER1606",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0002.jpg",
+      "plate_text": "WB13QAZ3361",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0003.jpg",
+      "plate_text": "UP80NWC6383",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0004.jpg",
+      "plate_text": "WB70V2121",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0005.jpg",
+      "plate_text": "KA98YDQ3725",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0006.jpg",
+      "plate_text": "UP48EH9702",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0007.jpg",
+      "plate_text": "RJ80HRU3344",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0008.jpg",
+      "plate_text": "WB37TFC8237",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0009.jpg",
+      "plate_text": "GJ26RD4886",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0010.jpg",
+      "plate_text": "RJ36U1803",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0011.jpg",
+      "plate_text": "TN80XZ3240",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0012.jpg",
+      "plate_text": "UP94C5835",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0013.jpg",
+      "plate_text": "UP68JFJ8894",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0014.jpg",
+      "plate_text": "TN87XNT6992",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0015.jpg",
+      "plate_text": "UP87XJU7242",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0016.jpg",
+      "plate_text": "UP79W2035",
+      "split": "val"
+    },
+    {
+      "image": "val/syn_val_0017.jpg",
+      "plate_text": "MH39DD4846",
+      "split": "val"
+    },
+    {
+      "image": "test/syn_test_0000.jpg",
+      "plate_text": "RJ76ZEP2622",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0001.jpg",
+      "plate_text": "WB57M2627",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0002.jpg",
+      "plate_text": "KA59X4475",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0003.jpg",
+      "plate_text": "TN09GUG4817",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0004.jpg",
+      "plate_text": "DL70FD1422",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0005.jpg",
+      "plate_text": "UP03J1858",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0006.jpg",
+      "plate_text": "UP66DQS4629",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0007.jpg",
+      "plate_text": "MH62PX2768",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0008.jpg",
+      "plate_text": "DL09J9984",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0009.jpg",
+      "plate_text": "KA90W4522",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0010.jpg",
+      "plate_text": "RJ54DLP6120",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0011.jpg",
+      "plate_text": "KA11P2582",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0012.jpg",
+      "plate_text": "UP86P6793",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0013.jpg",
+      "plate_text": "TN20RHD6736",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0014.jpg",
+      "plate_text": "RJ72VXW1430",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0015.jpg",
+      "plate_text": "UP45F3347",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0016.jpg",
+      "plate_text": "KA96GNP8432",
+      "split": "test"
+    },
+    {
+      "image": "test/syn_test_0017.jpg",
+      "plate_text": "KA07F1815",
+      "split": "test"
+    }
+  ]
+}

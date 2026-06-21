@@ -1,0 +1,55 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# ML weights & datasets (never commit)
+*.pt
+*.onnx
+*.engine
+*.pth
+data/raw/
+data/processed/
+data/datasets/
+models/weights/*
+!models/weights/.gitkeep
+
+# Runtime output (evidence, db, training runs)
+data/output/
+data/datasets/
+runs/
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / dashboard build
+node_modules/
+dashboard/dist/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# LibreOffice / render temp
+lo_profile/
+
+
+viovision/data/
+viovision/models/
+viovision/uvh26/
+viovision/yolo*
+viovision/runs/
+viovision/venv

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRACE — Traffic Regulation &amp; Analytics for Continuous Enforcement</title>
+  <meta name="description" content="TRACE: premium traffic violation detection, ANPR, live monitoring, and enforcement analytics." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230D6EFD'/%3E%3Cpath d='M16 6l8 4v8c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10v-8l8-4z' fill='white' opacity='.9'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.5 3.5 9.5 8 11 4.5-1.5 8-5.5 8-11V6l-8-4z" fill="#0D6EFD"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">TRACE</div>
+          <div class="brand-tagline">Traffic Regulation &amp; Analytics for Continuous Enforcement</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Overview
+        </button>
+        <button class="nav-item" data-view="live">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 8.5A10 10 0 0112 2a10 10 0 0110 6.5v7a2 2 0 01-2 2H4a2 2 0 01-2-2v-7z"/></svg>
+          Live Monitor
+        </button>
+        <button class="nav-item" data-view="violations">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          Violations
+          <span class="nav-badge" id="nav-violations-count">128</span>
+        </button>
+        <button class="nav-item" data-view="anpr">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          ANPR Search
+        </button>
+        <button class="nav-item" data-view="evidence">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          Evidence Center
+        </button>
+        <button class="nav-item" data-view="reports">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>
+          Reports
+        </button>
+        <button class="nav-item" data-view="hotspots">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Hotspots
+        </button>
+        <button class="nav-item" data-view="offenders">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          Repeat Offenders
+        </button>
+        <button class="nav-item" data-view="alerts">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+          Alerts
+          <span class="nav-badge nav-badge-danger" id="nav-alerts-count">12</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">PS</div>
+          <div>
+            <div class="user-name">Prakhar Singh</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+        <div class="promo-card">
+          <div class="promo-title">TRACE AI</div>
+          <p>Next-gen traffic enforcement powered by computer vision.</p>
+          <a href="#settings" class="promo-link">Learn more →</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <header class="page-header">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle menu">☰</button>
+        <div class="page-header-text">
+          <h1 id="page-title">Overview</h1>
+          <p id="page-subtitle">Real-time traffic monitoring &amp; violation analytics</p>
+        </div>
+        <div class="header-utils">
+          <div class="weather-widget">
+            <span>☀️</span> 32°C New Delhi
+          </div>
+          <div class="clock-widget" id="header-clock">—</div>
+          <div class="notif-wrap">
+            <button class="icon-btn" id="notif-btn" aria-label="Notifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+              <span class="notif-dot"></span>
+            </button>
+            <div class="notif-dropdown" id="notif-dropdown"></div>
+          </div>
+          <div class="header-user">
+            <span class="status-dot-inline online" id="header-status-dot"></span>
+            <div class="header-avatar">PS</div>
+            <span class="header-user-name">Prakhar Singh</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- OVERVIEW -->
+        <section class="view active" id="view-overview">
+          <div class="kpi-grid" id="overview-kpis"></div>
+          <div class="overview-mid">
+            <div class="card live-feed-card">
+              <div class="card-header"><h3>Live Feed</h3></div>
+              <div id="overview-live-feed"></div>
+            </div>
+            <div class="card dist-card">
+              <div class="card-header"><h3>Violation Distribution</h3><span class="card-sub">This Week</span></div>
+              <div class="chart-with-legend">
+                <div class="dist-chart-wrap">
+                  <canvas id="chart-overview-type"></canvas>
+                  <div class="dist-chart-center" id="overview-dist-total">—</div>
+                </div>
+                <div class="dist-legend-panel">
+                  <div class="dist-legend-head" aria-hidden="true">
+                    <span class="dist-col-type">Violation</span>
+                    <span class="dist-col-count">Count</span>
+                    <span class="dist-col-pct">Share</span>
+                  </div>
+                  <div id="overview-dist-legend" class="dist-legend-body"></div>
+                  <div class="dist-legend-foot">
+                    <span>Total violations</span>
+                    <strong id="overview-dist-foot-total">—</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Recent Violations</h3></div>
+              <div id="overview-recent" class="recent-list"></div>
+            </div>
+          </div>
+          <div class="overview-bottom">
+            <div class="card">
+              <div class="card-header"><h3>Violation Trend</h3><span class="card-sub">This Month</span></div>
+              <div class="chart-box"><canvas id="chart-overview-trend"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Severity Breakdown</h3></div>
+              <div class="chart-box chart-box-sm chart-center-label">
+                <canvas id="chart-overview-severity"></canvas>
+                <div class="chart-center" id="overview-severity-center">312</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Top Violation Hotspots</h3></div>
+              <div id="overview-hotspots" class="hotspot-list"></div>
+            </div>
+            <div class="card anpr-widget">
+              <div class="card-header"><h3>ANPR Search</h3></div>
+              <div class="anpr-widget-body">
+                <input type="text" id="overview-anpr-input" class="input" placeholder="Enter license plate number" />
+                <button class="btn btn-primary" id="overview-anpr-btn">Search</button>
+                <div class="anpr-recent-label">Recent Searches</div>
+                <div id="overview-anpr-tags" class="tag-row"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- LIVE -->
+        <section class="view" id="view-live">
+          <div class="live-source-bar">
+            <div class="live-source-label">Video source</div>
+            <div class="btn-group live-source-toggle">
+              <button type="button" class="btn btn-ghost live-src-btn active" data-live-src="device">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 8.5A10 10 0 0112 2a10 10 0 0110 6.5v7a2 2 0 01-2 2H4a2 2 0 01-2-2v-7z"/></svg>
+                Device camera <span class="demo-pill">Demo</span>
+              </button>
+              <button type="button" class="btn btn-ghost live-src-btn" data-live-src="cctv">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                CCTV stream
+              </button>
+            </div>
+            <div class="live-source-actions">
+              <button type="button" class="btn btn-primary" id="live-start-btn">Start live</button>
+              <button type="button" class="btn btn-danger hidden" id="live-stop-btn">Stop</button>
+            </div>
+          </div>
+          <div class="live-layout">
+            <div class="live-main">
+              <div class="card live-viewport-card">
+                <div class="live-viewport">
+                  <div id="live-idle" class="live-idle">
+                    <img src="assets/live-placeholder.png" alt="" class="live-idle-img" />
+                    <div class="live-idle-content">
+                      <h3>Live AI monitoring</h3>
+                      <p>Watch a CCTV feed in production, or use your phone/laptop camera for an instant demo — no extra hardware.</p>
+                      <div class="live-idle-actions">
+                        <button type="button" class="btn btn-primary btn-lg" id="live-demo-start">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 8.5A10 10 0 0112 2a10 10 0 0110 6.5v7a2 2 0 01-2 2H4a2 2 0 01-2-2v-7z"/></svg>
+                          Start demo — device camera
+                        </button>
+                        <button type="button" class="btn btn-ghost btn-lg live-idle-cctv" id="live-cctv-start">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                          Connect CCTV
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <video id="live-video" class="live-media hidden" playsinline muted></video>
+                  <img id="live-cctv-img" class="live-media hidden" alt="CCTV stream" />
+                  <canvas id="live-canvas" class="hidden"></canvas>
+                  <div class="live-scan hidden" id="live-scan">Analyzing frame…</div>
+                  <div class="live-overlay-top">
+                    <span id="live-cam-label">Device camera</span>
+                    <span class="live-badge hidden" id="live-dot">LIVE</span>
+                  </div>
+                  <div class="live-overlay-bottom">
+                    <span id="live-fps-tag">— fps</span>
+                    <span id="live-res-tag">—</span>
+                  </div>
+                </div>
+                <div class="camera-strip" id="live-camera-strip"></div>
+              </div>
+              <div class="card">
+                <div class="card-header"><h3>Stream settings</h3></div>
+                <div class="live-controls">
+                  <div id="live-cctv-wrap" class="hidden">
+                    <label class="field-label">CCTV / RTSP URL
+                      <input type="text" id="live-cctv-url" class="input" placeholder="rtsp://… or http://… (leave empty for local webcam index 0)" />
+                    </label>
+                    <p class="text-sm text-muted mb-3">Streams are proxied through <code class="mono">GET /api/live/stream</code> for browser playback.</p>
+                  </div>
+                  <div id="live-device-hint" class="live-hint">
+                    <strong>Demo mode:</strong> Uses your browser webcam. Point it at traffic footage on another screen, or use a printed road scene for testing.
+                  </div>
+                  <label class="check-label"><input type="checkbox" id="live-persist" checked /> Save detected violations to queue</label>
+                  <label class="field-label">Analyze every (ms)
+                    <input type="number" id="live-interval" class="input" value="2000" min="500" step="500" />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="live-side">
+              <div class="card">
+                <div class="card-header"><h3>Live Metrics</h3><span id="live-status-text" class="card-sub">Stopped</span></div>
+                <div class="live-metrics hidden" id="live-summary"></div>
+              </div>
+              <div class="card flex-1">
+                <div class="card-header"><h3>Detections</h3><span id="live-results-tag" class="card-sub">—</span></div>
+                <div id="live-results-body" class="live-results-body"></div>
+              </div>
+              <div class="card hidden" id="live-annotated-wrap">
+                <div class="card-header"><h3>Annotated Frame</h3></div>
+                <img id="live-annotated-img" alt="Annotated" class="w-full rounded" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIOLATIONS -->
+        <section class="view" id="view-violations">
+          <div class="card">
+            <div class="filter-bar">
+              <select id="filter-type" class="input"><option value="">All types</option></select>
+              <select id="filter-severity" class="input">
+                <option value="">All severity</option>
+                <option value="critical">Critical</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+              <input type="text" id="filter-plate" class="input" placeholder="Filter by plate…" />
+              <button class="btn btn-ghost" id="filter-refresh">Refresh</button>
+              <button class="btn btn-primary" id="export-csv">Export CSV</button>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr><th></th><th>Time</th><th>Violation</th><th>Severity</th><th>Vehicle</th><th>Plate</th><th>Location</th><th>Confidence</th></tr>
+                </thead>
+                <tbody id="violations-tbody"></tbody>
+              </table>
+            </div>
+            <div class="pager">
+              <span id="violations-range">—</span>
+              <div class="btn-row">
+                <button class="btn btn-ghost btn-sm" id="page-prev">Previous</button>
+                <button class="btn btn-ghost btn-sm" id="page-next">Next</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ANPR -->
+        <section class="view" id="view-anpr">
+          <div class="anpr-hero card">
+            <div class="anpr-hero-content">
+              <h2>License Plate Search</h2>
+              <p>Search the ANPR database — partial matches supported.</p>
+              <div class="anpr-search-row">
+                <input type="text" id="anpr-query" class="input input-lg" placeholder="DL01AB1234" />
+                <button class="btn btn-primary btn-lg" id="anpr-search-btn">Search</button>
+              </div>
+              <div class="anpr-recent-label">Recent Searches</div>
+              <div id="anpr-recent-tags" class="tag-row"></div>
+            </div>
+            <div class="anpr-hero-art" aria-hidden="true">
+              <div class="plate-scan-art"><span class="plate-art-text">DL 01 AB 1234</span></div>
+            </div>
+          </div>
+          <div id="anpr-results" class="mt-4"></div>
+          <div class="card mt-4">
+            <div class="card-header"><h3>Plate History</h3></div>
+            <div id="anpr-timeline" class="timeline"></div>
+          </div>
+        </section>
+
+        <!-- EVIDENCE -->
+        <section class="view" id="view-evidence">
+          <div class="card mb-4">
+            <div class="card-header"><h3>Analyze Frame</h3><span id="evidence-upload-status" class="card-sub"></span></div>
+            <div class="dropzone" id="evidence-dropzone" tabindex="0">
+              <input type="file" id="evidence-file-input" accept="image/*" class="hidden" />
+              <p>Drop an image here or <button type="button" class="link-btn" id="evidence-choose">browse</button></p>
+            </div>
+          </div>
+          <div id="evidence-upload-result" class="hidden mb-4"></div>
+          <div class="filter-bar mb-4">
+            <select id="evidence-filter-type" class="input"><option value="">All types</option></select>
+            <button class="btn btn-ghost" id="evidence-refresh">Refresh</button>
+          </div>
+          <div class="evidence-grid" id="evidence-grid"></div>
+        </section>
+
+        <!-- REPORTS -->
+        <section class="view" id="view-reports">
+          <div class="filter-bar mb-4">
+            <button class="btn btn-primary" id="reports-csv">Download CSV</button>
+            <button class="btn btn-ghost" id="reports-copy">Copy Report</button>
+            <button class="btn btn-ghost" id="reports-print">Print</button>
+            <button class="btn btn-ghost" id="reports-refresh">Refresh</button>
+          </div>
+          <div class="kpi-grid kpi-grid-4" id="reports-kpis"></div>
+          <div class="reports-charts">
+            <div class="card"><div class="card-header"><h3>By Type</h3></div><div class="chart-box"><canvas id="chart-reports-type"></canvas></div></div>
+            <div class="card"><div class="card-header"><h3>By Hour</h3></div><div class="chart-box"><canvas id="chart-reports-hour"></canvas></div></div>
+            <div class="card"><div class="card-header"><h3>By Vehicle</h3></div><div class="chart-box"><canvas id="chart-reports-vehicle"></canvas></div></div>
+          </div>
+          <div class="card mt-4">
+            <div class="card-header"><h3>Report Preview</h3></div>
+            <pre id="reports-preview" class="report-preview"></pre>
+          </div>
+        </section>
+
+        <!-- HOTSPOTS -->
+        <section class="view" id="view-hotspots">
+          <div class="hotspots-layout">
+            <div class="card"><div id="hotspots-map"></div></div>
+            <div class="card"><div class="card-header"><h3>Ranked Hotspots</h3></div><div id="hotspots-list"></div></div>
+          </div>
+          <div class="card mt-4">
+            <div class="card-header"><h3>Camera Activity</h3></div>
+            <div class="table-wrap">
+              <table class="data-table"><thead><tr><th>Camera</th><th>Violations</th><th>Status</th></tr></thead>
+              <tbody id="hotspots-cameras"></tbody></table>
+            </div>
+          </div>
+          <div class="card mt-4">
+            <div class="card-header"><h3>Hourly Pattern</h3></div>
+            <div class="chart-box"><canvas id="chart-hotspots-hour"></canvas></div>
+          </div>
+        </section>
+
+        <!-- OFFENDERS -->
+        <section class="view" id="view-offenders">
+          <div class="offenders-layout">
+            <div class="card">
+              <div class="card-header"><h3>Leaderboard</h3></div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>#</th><th>Plate</th><th>Count</th><th>Last Seen</th><th>Violations</th><th>Risk</th></tr></thead>
+                  <tbody id="offenders-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Top 10 Plates</h3></div>
+              <div class="chart-box"><canvas id="chart-offenders"></canvas></div>
+            </div>
+          </div>
+          <div id="offender-detail" class="hidden mt-4"></div>
+        </section>
+
+        <!-- ALERTS -->
+        <section class="view" id="view-alerts">
+          <div class="alerts-toolbar">
+            <div class="tabs">
+              <button class="alerts-tab active" data-filter="all">All</button>
+              <button class="alerts-tab" data-filter="unread">Unread</button>
+              <button class="alerts-tab" data-filter="read">Read</button>
+            </div>
+            <button class="btn btn-ghost" id="alerts-mark-read">Mark all read</button>
+          </div>
+          <div id="alerts-list" class="alerts-list"></div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="view" id="view-settings">
+          <div class="settings-grid">
+            <div class="card">
+              <div class="card-header"><h3>System Health</h3></div>
+              <div class="settings-health">
+                <span class="status-pill ok" id="settings-status">—</span>
+                <span id="settings-version" class="text-muted"></span>
+              </div>
+              <div class="model-grid" id="settings-models"></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Detection Settings</h3></div>
+              <p class="text-muted text-sm">Review threshold: <strong id="settings-threshold">35%</strong></p>
+              <div class="badge-row mt-3" id="settings-taxonomy"></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Defaults</h3></div>
+              <label class="field-label">Live analyze interval (ms)
+                <input type="number" id="settings-interval" class="input" value="2000" />
+              </label>
+              <label class="field-label">Default location
+                <input type="text" id="settings-location" class="input" value="Camera-01" />
+              </label>
+              <button class="btn btn-primary mt-3" id="settings-save">Save</button>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Demo &amp; Data</h3></div>
+              <p class="text-sm text-muted mb-3">Populate the database with sample violations for demos.</p>
+              <button class="btn btn-ghost" id="settings-seed-hint">Seed demo data (CLI)</button>
+              <button class="btn btn-ghost mt-2" id="settings-clear-storage">Clear local storage</button>
+              <p class="text-sm mt-4"><a href="/docs" class="link">API Documentation →</a></p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Evidence drawer -->
+  <div class="drawer-backdrop" id="drawer">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h3 id="drawer-title">Evidence</h3>
+        <button class="icon-btn" id="drawer-close" aria-label="Close">✕</button>
+      </div>
+      <div class="drawer-body">
+        <img id="drawer-img" alt="Evidence" class="drawer-img" />
+        <div id="drawer-meta" class="drawer-meta"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-stack" class="toast-stack"></div>
+
+  <!-- Mobile bottom nav -->
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav-item active" data-view="overview">Overview</button>
+    <button class="mobile-nav-item" data-view="live">Live</button>
+    <button class="mobile-nav-item" data-view="violations">Violations</button>
+    <button class="mobile-nav-item" data-view="anpr">ANPR</button>
+    <button class="mobile-nav-item" data-view="alerts">Alerts</button>
+  </nav>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { VIOLATION_ORDER, vinfo } from "./js/formatters.js";
+    for (const id of ["filter-type", "evidence-filter-type", "analyze-filter-type"]) {
+      const sel = document.getElementById(id);
+      if (!sel || sel.options.length > 1) continue;
+      VIOLATION_ORDER.forEach((t) => {
+        const o = document.createElement("option");
+        o.value = t; o.textContent = vinfo(t).label;
+        sel.appendChild(o);
+      });
+    }
+  </script>
+</body>
+</html>

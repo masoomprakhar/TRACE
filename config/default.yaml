@@ -1,0 +1,44 @@
+# TRACE — default configuration.
+# Per-camera scene geometry (stop line, lane divider, signal ROI, no-parking
+# zones) is what turns geometric detections into violations. Override per
+# deployment with --config or by editing this file.
+
+device: cpu                      # "cpu" or "cuda"
+storage_dir: data/output         # annotated evidence + JSON sidecars
+db_url: sqlite:///data/trace.db
+
+models:
+  detector: yolov8n.pt           # auto-downloads; covers vehicles/person/traffic-light
+  helmet: null                   # path to helmet classifier/detector (optional)
+  seatbelt: null                 # path to seatbelt classifier (optional)
+  plate: null                    # path to license-plate detector (optional)
+  ocr_langs: [en]
+
+thresholds:
+  detection_conf: 0.35
+  nms_iou: 0.45
+  helmet_conf: 0.60
+  seatbelt_conf: 0.65
+  triple_riding_min: 3           # persons on a 2-wheeler to flag
+  confirm_frames: 3              # frames a violation must persist (video mode)
+  parking_seconds: 30.0          # stationary duration to flag illegal parking
+  stationary_iou: 0.90           # IoU across frames that counts as "not moving"
+  rider_overlap: 0.20            # person∩motorcycle / person-area to be a "rider"
+
+scene:
+  fps: 15.0
+  # Stop line: horizontal pixel band. Vehicles crossing while red = violation.
+  stop_line:
+    enabled: false
+    y: null                      # pixel row of the stop line
+  # Lane / wrong-side: vehicles left of divider_x moving against correct flow.
+  lane:
+    enabled: false
+    divider_x: null              # pixel column dividing the two carriageways
+    correct_direction: down      # legal motion on the RIGHT of divider: up|down|left|right
+  # Traffic signal: fixed ROI, else auto-detected from COCO "traffic light".
+  signal:
+    enabled: true
+    bbox: null                   # [x1,y1,x2,y2]; null = auto-detect
+  # No-parking zones as pixel polygons.
+  no_parking_zones: []           # e.g. [{name: "Gate", polygon: [[x,y],[x,y],...]}]

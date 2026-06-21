@@ -1,0 +1,1821 @@
+{
+  "version": 2,
+  "dataset": "roboflow-mixed-eval",
+  "n_samples": 63,
+  "violation_labels": [
+    "no_helmet",
+    "no_seatbelt",
+    "triple_riding",
+    "wrong_side",
+    "stop_line",
+    "red_light",
+    "illegal_parking"
+  ],
+  "detection_labels": [
+    "car",
+    "motorcycle",
+    "person",
+    "bus",
+    "truck",
+    "license_plate"
+  ],
+  "note": "Roboflow helmet (violation F1) + plate (mAP/OCR) test sets.",
+  "samples": [
+    {
+      "id": "helmet_14_jpg.rf.b8e606a2377aea36d43ff2299d8e05b0",
+      "image": "data/eval/images/helmet_14_jpg.rf.b8e606a2377aea36d43ff2299d8e05b0.jpg",
+      "width": 976,
+      "height": 549,
+      "vehicle": "motorcycle",
+      "violations": [
+        "no_helmet"
+      ],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            455.0,
+            64.0,
+            519.0,
+            114.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_24_jpg.rf.b1237395c6ca93296dd9ae49dd4ddf22",
+      "image": "data/eval/images/helmet_24_jpg.rf.b1237395c6ca93296dd9ae49dd4ddf22.jpg",
+      "width": 2466,
+      "height": 1801,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            1787.0,
+            16.0,
+            2009.0,
+            307.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_27_jpg.rf.77d8299b089750278e717d4a201cc87c",
+      "image": "data/eval/images/helmet_27_jpg.rf.77d8299b089750278e717d4a201cc87c.jpg",
+      "width": 1440,
+      "height": 983,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            315.0,
+            116.0,
+            460.0,
+            249.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_2_jpeg.rf.1fa748b6e477336af915150f177bc2a6",
+      "image": "data/eval/images/helmet_2_jpeg.rf.1fa748b6e477336af915150f177bc2a6.jpg",
+      "width": 1200,
+      "height": 900,
+      "vehicle": "motorcycle",
+      "violations": [
+        "no_helmet"
+      ],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            579.0,
+            80.0,
+            644.0,
+            142.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_42_jpeg.rf.e04fcb117fc45b8e9d40830640120555",
+      "image": "data/eval/images/helmet_42_jpeg.rf.e04fcb117fc45b8e9d40830640120555.jpg",
+      "width": 275,
+      "height": 183,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            64.0,
+            11.0,
+            183.0,
+            137.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_43_jpeg.rf.0bc4f40a2d8e3e2cae5f101296be1c3f",
+      "image": "data/eval/images/helmet_43_jpeg.rf.0bc4f40a2d8e3e2cae5f101296be1c3f.jpg",
+      "width": 264,
+      "height": 191,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            82.0,
+            7.0,
+            135.0,
+            66.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_58_jpeg.rf.73aee43e6dbc07771ca999b305bde542",
+      "image": "data/eval/images/helmet_58_jpeg.rf.73aee43e6dbc07771ca999b305bde542.jpg",
+      "width": 260,
+      "height": 194,
+      "vehicle": "motorcycle",
+      "violations": [
+        "no_helmet"
+      ],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            137.0,
+            11.0,
+            163.0,
+            38.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_9_jpg.rf.824a2da6549970fe9e89f1d3d4232d77",
+      "image": "data/eval/images/helmet_9_jpg.rf.824a2da6549970fe9e89f1d3d4232d77.jpg",
+      "width": 512,
+      "height": 285,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            240.0,
+            14.0,
+            326.0,
+            126.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685",
+      "image": "data/eval/images/helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685.jpg",
+      "width": 612,
+      "height": 408,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            142.0,
+            92.0,
+            479.0,
+            388.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f",
+      "image": "data/eval/images/helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f.jpg",
+      "width": 612,
+      "height": 408,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            203.0,
+            20.0,
+            378.0,
+            182.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_gettyimages-1217689341-612x612_jpg.rf.4bbfb9075a141d4f5046916d30b19784",
+      "image": "data/eval/images/helmet_gettyimages-1217689341-612x612_jpg.rf.4bbfb9075a141d4f5046916d30b19784.jpg",
+      "width": 612,
+      "height": 394,
+      "vehicle": "motorcycle",
+      "violations": [
+        "no_helmet"
+      ],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            290.0,
+            54.0,
+            336.0,
+            115.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_gettyimages-172702895-612x612_jpg.rf.da197f35d6ff7d256f049e24940e00ce",
+      "image": "data/eval/images/helmet_gettyimages-172702895-612x612_jpg.rf.da197f35d6ff7d256f049e24940e00ce.jpg",
+      "width": 612,
+      "height": 424,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            91.0,
+            42.0,
+            541.0,
+            376.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "helmet_gettyimages-175422772-612x612_jpg.rf.51ac0a05d959d74086bc697307c87947",
+      "image": "data/eval/images/helmet_gettyimages-175422772-612x612_jpg.rf.51ac0a05d959d74086bc697307c87947.jpg",
+      "width": 612,
+      "height": 324,
+      "vehicle": "motorcycle",
+      "violations": [],
+      "eval_kind": "helmet_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            290.0,
+            5.0,
+            485.0,
+            247.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1007_jpg.rf.df63966ac2e1a813e4bca96da9d8351d",
+      "image": "data/eval/images/plate_drop-car-front_1007_jpg.rf.df63966ac2e1a813e4bca96da9d8351d.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            233.0,
+            170.0,
+            442.0,
+            267.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            4.0,
+            0.0,
+            609.0,
+            273.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AC2E1"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1009_jpg.rf.74366671215f3ca50e74bfff894869d5",
+      "image": "data/eval/images/plate_drop-car-front_1009_jpg.rf.74366671215f3ca50e74bfff894869d5.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            196.0,
+            146.0,
+            418.0,
+            245.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CA50E74"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1032_jpg.rf.fbcd84c0397545eff4b3af316e122543",
+      "image": "data/eval/images/plate_drop-car-front_1032_jpg.rf.fbcd84c0397545eff4b3af316e122543.jpg",
+      "width": 612,
+      "height": 459,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            289.0,
+            299.0,
+            404.0,
+            338.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CD84C0397"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1085_jpg.rf.886d3d177bc6a8fb6927e09c176671fe",
+      "image": "data/eval/images/plate_drop-car-front_1085_jpg.rf.886d3d177bc6a8fb6927e09c176671fe.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            172.0,
+            198.0,
+            310.0,
+            232.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            0.0,
+            153.0,
+            43.0,
+            175.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            84.0,
+            0.0,
+            610.0,
+            256.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BC6A8"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1121_jpg.rf.0ab016e4b1609b73c58ce131900dbf1c",
+      "image": "data/eval/images/plate_drop-car-front_1121_jpg.rf.0ab016e4b1609b73c58ce131900dbf1c.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            195.0,
+            221.0,
+            378.0,
+            296.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4",
+      "image": "data/eval/images/plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            184.0,
+            360.0,
+            352.0,
+            428.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BB3A927"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1194_jpg.rf.cad70034a6602a62e5dc7a1b1a7a0288",
+      "image": "data/eval/images/plate_drop-car-front_1194_jpg.rf.cad70034a6602a62e5dc7a1b1a7a0288.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            70.0,
+            448.0,
+            262.0,
+            495.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DC7A1"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6",
+      "image": "data/eval/images/plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6.jpg",
+      "width": 459,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            160.0,
+            444.0,
+            295.0,
+            480.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE10F8"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc",
+      "image": "data/eval/images/plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            173.0,
+            163.0,
+            336.0,
+            216.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FB4E91"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1373_jpg.rf.9b1879ede75cc33c7e6893e62f1b6d06",
+      "image": "data/eval/images/plate_drop-car-front_1373_jpg.rf.9b1879ede75cc33c7e6893e62f1b6d06.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            41.0,
+            187.0,
+            144.0,
+            294.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            4.0,
+            40.0,
+            365.0,
+            528.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE75CC33"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1490_jpg.rf.913d5066f95ce01400ee562832bd0aa7",
+      "image": "data/eval/images/plate_drop-car-front_1490_jpg.rf.913d5066f95ce01400ee562832bd0aa7.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            179.0,
+            484.0,
+            458.0,
+            563.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BD0AA7"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1535_jpg.rf.a935ed2b5ac9ed00ad4b56e883241181",
+      "image": "data/eval/images/plate_drop-car-front_1535_jpg.rf.a935ed2b5ac9ed00ad4b56e883241181.jpg",
+      "width": 612,
+      "height": 458,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            224.0,
+            350.0,
+            367.0,
+            389.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED2B5"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1567_jpg.rf.940ed56084e561e8e3f4fd2cdfc05d08",
+      "image": "data/eval/images/plate_drop-car-front_1567_jpg.rf.940ed56084e561e8e3f4fd2cdfc05d08.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            115.0,
+            247.0,
+            366.0,
+            317.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FC05D08"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1573_jpg.rf.33824653c38a067bb69446c4eac604c1",
+      "image": "data/eval/images/plate_drop-car-front_1573_jpg.rf.33824653c38a067bb69446c4eac604c1.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            29.0,
+            478.0,
+            366.0,
+            593.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            1.0,
+            0.0,
+            365.0,
+            614.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1603_jpg.rf.15ae75cc54562c77b20b40dffd1e986a",
+      "image": "data/eval/images/plate_drop-car-front_1603_jpg.rf.15ae75cc54562c77b20b40dffd1e986a.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            340.0,
+            306.0,
+            454.0,
+            377.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AE75CC5456"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1653_jpg.rf.fdde0c00c2211a690274a0d8b780984b",
+      "image": "data/eval/images/plate_drop-car-front_1653_jpg.rf.fdde0c00c2211a690274a0d8b780984b.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            229.0,
+            361.0,
+            350.0,
+            399.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE0C00"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1661_jpg.rf.7f247a9bcd4920d045c494157d1586cc",
+      "image": "data/eval/images/plate_drop-car-front_1661_jpg.rf.7f247a9bcd4920d045c494157d1586cc.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            243.0,
+            502.0,
+            350.0,
+            531.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95",
+      "image": "data/eval/images/plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            154.0,
+            484.0,
+            253.0,
+            518.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED20AA5"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1813_jpg.rf.29eb68602f007aa8af7b47780b3b6029",
+      "image": "data/eval/images/plate_drop-car-front_1813_jpg.rf.29eb68602f007aa8af7b47780b3b6029.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            207.0,
+            114.0,
+            393.0,
+            223.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            7.0,
+            161.0,
+            69.0,
+            209.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AA8AF7"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1863_jpg.rf.dfee10173ffa4120794ad6654e18d795",
+      "image": "data/eval/images/plate_drop-car-front_1863_jpg.rf.dfee10173ffa4120794ad6654e18d795.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            214.0,
+            328.0,
+            366.0,
+            364.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1903_jpg.rf.c22c25474ccfec9c05f2aa35a3e5bbbf",
+      "image": "data/eval/images/plate_drop-car-front_1903_jpg.rf.c22c25474ccfec9c05f2aa35a3e5bbbf.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            165.0,
+            290.0,
+            307.0,
+            332.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "EC9C05"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1925_jpg.rf.f910e1112a528cd1f30728d17c0b821b",
+      "image": "data/eval/images/plate_drop-car-front_1925_jpg.rf.f910e1112a528cd1f30728d17c0b821b.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            214.0,
+            326.0,
+            376.0,
+            382.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CD1F3072"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1939_jpg.rf.f4d7fe993f6e3d2ccc75d52703258eb5",
+      "image": "data/eval/images/plate_drop-car-front_1939_jpg.rf.f4d7fe993f6e3d2ccc75d52703258eb5.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            135.0,
+            324.0,
+            239.0,
+            368.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CC75D5270"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_1959_jpg.rf.268d3a582642ab42db60802d464ed5a5",
+      "image": "data/eval/images/plate_drop-car-front_1959_jpg.rf.268d3a582642ab42db60802d464ed5a5.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            111.0,
+            443.0,
+            239.0,
+            489.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AB42DB6080"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2002_jpg.rf.aff6e0509ceddf7245437371814fbbab",
+      "image": "data/eval/images/plate_drop-car-front_2002_jpg.rf.aff6e0509ceddf7245437371814fbbab.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            247.0,
+            308.0,
+            418.0,
+            384.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FF6E0509"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2112_jpg.rf.2f0ff9a33c4ba6be58dc4584d762bcd9",
+      "image": "data/eval/images/plate_drop-car-front_2112_jpg.rf.2f0ff9a33c4ba6be58dc4584d762bcd9.jpg",
+      "width": 459,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            117.0,
+            347.0,
+            303.0,
+            405.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FF9A33"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2122_jpg.rf.f489e2c8dbdba563b73ee62f2c0188d3",
+      "image": "data/eval/images/plate_drop-car-front_2122_jpg.rf.f489e2c8dbdba563b73ee62f2c0188d3.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            255.0,
+            395.0,
+            423.0,
+            436.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "EE62F2"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2131_jpg.rf.964fadd9480f02ca462f0b3def917d5f",
+      "image": "data/eval/images/plate_drop-car-front_2131_jpg.rf.964fadd9480f02ca462f0b3def917d5f.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            179.0,
+            266.0,
+            286.0,
+            306.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2156_jpg.rf.8881acef5f986857c008e06ff061c23d",
+      "image": "data/eval/images/plate_drop-car-front_2156_jpg.rf.8881acef5f986857c008e06ff061c23d.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            212.0,
+            145.0,
+            389.0,
+            224.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "EF5F9868"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2158_jpg.rf.dcc1f060460cb1c41df453ad87f7c013",
+      "image": "data/eval/images/plate_drop-car-front_2158_jpg.rf.dcc1f060460cb1c41df453ad87f7c013.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            116.0,
+            413.0,
+            242.0,
+            450.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CC1F0604"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2207_jpg.rf.1d9226725607e5180e3a8d8c26b51b8b",
+      "image": "data/eval/images/plate_drop-car-front_2207_jpg.rf.1d9226725607e5180e3a8d8c26b51b8b.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            174.0,
+            235.0,
+            338.0,
+            317.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2242_jpg.rf.dfbe7646a7176dd15a8b225559530c81",
+      "image": "data/eval/images/plate_drop-car-front_2242_jpg.rf.dfbe7646a7176dd15a8b225559530c81.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            139.0,
+            508.0,
+            372.0,
+            578.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DD15A8"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2250_jpg.rf.1154f7e569b91eb8d33da93cc5dafd0c",
+      "image": "data/eval/images/plate_drop-car-front_2250_jpg.rf.1154f7e569b91eb8d33da93cc5dafd0c.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            110.0,
+            242.0,
+            329.0,
+            362.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "EB8D33"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            58.0,
+            387.0,
+            278.0,
+            505.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2396_jpg.rf.764311e6a071b1d94fa44f32936f8532",
+      "image": "data/eval/images/plate_drop-car-front_2396_jpg.rf.764311e6a071b1d94fa44f32936f8532.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            143.0,
+            390.0,
+            298.0,
+            477.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FA44F3293"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2404_jpg.rf.019f5e56cc7ecb42646f2755be4b595e",
+      "image": "data/eval/images/plate_drop-car-front_2404_jpg.rf.019f5e56cc7ecb42646f2755be4b595e.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            149.0,
+            222.0,
+            301.0,
+            320.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CC7ECB4264"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2436_jpg.rf.fe31e4ac5b24756b6b0f968593c5d0d0",
+      "image": "data/eval/images/plate_drop-car-front_2436_jpg.rf.fe31e4ac5b24756b6b0f968593c5d0d0.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            205.0,
+            290.0,
+            297.0,
+            382.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FE31E4"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2479_jpg.rf.6b73cfe483e6c225e68d4355c8d89b96",
+      "image": "data/eval/images/plate_drop-car-front_2479_jpg.rf.6b73cfe483e6c225e68d4355c8d89b96.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            174.0,
+            427.0,
+            404.0,
+            502.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2531_jpg.rf.4b713d7146a175a7b6ec6a7f90f5a12e",
+      "image": "data/eval/images/plate_drop-car-front_2531_jpg.rf.4b713d7146a175a7b6ec6a7f90f5a12e.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            79.0,
+            251.0,
+            222.0,
+            435.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            2.0,
+            20.0,
+            365.0,
+            803.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "EC6A7"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea",
+      "image": "data/eval/images/plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            135.0,
+            233.0,
+            324.0,
+            295.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED3D11"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2569_jpg.rf.a31b9b82280621a9eafcae29051a8035",
+      "image": "data/eval/images/plate_drop-car-front_2569_jpg.rf.a31b9b82280621a9eafcae29051a8035.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            31.0,
+            449.0,
+            306.0,
+            608.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2712_jpg.rf.cf9383ab4b047a70fbe5c293f7049300",
+      "image": "data/eval/images/plate_drop-car-front_2712_jpg.rf.cf9383ab4b047a70fbe5c293f7049300.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            167.0,
+            316.0,
+            343.0,
+            386.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AB4B047"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521",
+      "image": "data/eval/images/plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            176.0,
+            320.0,
+            369.0,
+            372.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BC83CF9"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2749_jpg.rf.68af14b67c25c5b5bc61202a46b049a3",
+      "image": "data/eval/images/plate_drop-car-front_2749_jpg.rf.68af14b67c25c5b5bc61202a46b049a3.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            44.0,
+            34.0,
+            610.0,
+            811.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            65.0,
+            391.0,
+            82.0,
+            433.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AF14B67"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2768_jpg.rf.9df1026d831a93fd67c9d3be76801041",
+      "image": "data/eval/images/plate_drop-car-front_2768_jpg.rf.9df1026d831a93fd67c9d3be76801041.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            538.0,
+            152.0,
+            604.0,
+            185.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            0.0,
+            201.0,
+            58.0,
+            226.0
+          ],
+          "confidence": 1.0
+        },
+        {
+          "cls": "license_plate",
+          "bbox": [
+            232.0,
+            308.0,
+            385.0,
+            353.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FD67C9"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2812_jpg.rf.96fa2245263d5a537cb51a9dda308f99",
+      "image": "data/eval/images/plate_drop-car-front_2812_jpg.rf.96fa2245263d5a537cb51a9dda308f99.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            53.0,
+            397.0,
+            362.0,
+            476.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CB51A9"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2816_jpg.rf.3700edd5fad5e7c549cbc9dd6bbc0437",
+      "image": "data/eval/images/plate_drop-car-front_2816_jpg.rf.3700edd5fad5e7c549cbc9dd6bbc0437.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            144.0,
+            313.0,
+            419.0,
+            391.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DD5FAD5"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2872_jpg.rf.6bf2e03d806b207f0445cb20abf84f47",
+      "image": "data/eval/images/plate_drop-car-front_2872_jpg.rf.6bf2e03d806b207f0445cb20abf84f47.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            219.0,
+            393.0,
+            417.0,
+            446.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BF2E03"
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2890_jpg.rf.1a27a27e3943fc976d44270a650c2f22",
+      "image": "data/eval/images/plate_drop-car-front_2890_jpg.rf.1a27a27e3943fc976d44270a650c2f22.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            204.0,
+            272.0,
+            350.0,
+            316.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null
+      }
+    },
+    {
+      "id": "plate_drop-car-front_2907_jpg.rf.ff3a9e721fe361c567ffaa707a10beb5",
+      "image": "data/eval/images/plate_drop-car-front_2907_jpg.rf.ff3a9e721fe361c567ffaa707a10beb5.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "unknown",
+      "violations": [],
+      "eval_kind": "plate_detection",
+      "detections_gt": [
+        {
+          "cls": "license_plate",
+          "bbox": [
+            234.0,
+            261.0,
+            423.0,
+            320.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "roboflow",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FF3A9"
+      }
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "samples": [
+    {
+      "image": "images/seatbelt/1625227980313_jpg.rf.7bf788eaffb20efaead2f8b665038d3d.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/1625227980985_jpg.rf.ee94412553bf65b6c220f726298242fc.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/1625227981183_jpg.rf.df20e269e864a4a8356b979b51484ac0.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/799f_png.rf.8f019ce8fa9935c1205de18ca8ec84d3.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/809_png.rf.a3d967c2cf9309abd63c3eae156c891b.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/891_png.rf.f0166a94e9d518540aa5001a5161adf4.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/999i_png.rf.159956c2064e1d4cba53c5407c0f91c4.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {}
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_14_jpg.rf.b8e606a2377aea36d43ff2299d8e05b0.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_24_jpg.rf.b1237395c6ca93296dd9ae49dd4ddf22.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_27_jpg.rf.77d8299b089750278e717d4a201cc87c.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_2_jpeg.rf.1fa748b6e477336af915150f177bc2a6.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_42_jpeg.rf.e04fcb117fc45b8e9d40830640120555.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_43_jpeg.rf.0bc4f40a2d8e3e2cae5f101296be1c3f.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_58_jpeg.rf.73aee43e6dbc07771ca999b305bde542.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_9_jpg.rf.824a2da6549970fe9e89f1d3d4232d77.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_gettyimages-1217689341-612x612_jpg.rf.4bbfb9075a141d4f5046916d30b19784.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_gettyimages-172702895-612x612_jpg.rf.da197f35d6ff7d256f049e24940e00ce.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_helmet_gettyimages-175422772-612x612_jpg.rf.51ac0a05d959d74086bc697307c87947.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1007_jpg.rf.df63966ac2e1a813e4bca96da9d8351d.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1009_jpg.rf.74366671215f3ca50e74bfff894869d5.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1032_jpg.rf.fbcd84c0397545eff4b3af316e122543.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1085_jpg.rf.886d3d177bc6a8fb6927e09c176671fe.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1121_jpg.rf.0ab016e4b1609b73c58ce131900dbf1c.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1194_jpg.rf.cad70034a6602a62e5dc7a1b1a7a0288.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1373_jpg.rf.9b1879ede75cc33c7e6893e62f1b6d06.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1490_jpg.rf.913d5066f95ce01400ee562832bd0aa7.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1535_jpg.rf.a935ed2b5ac9ed00ad4b56e883241181.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1567_jpg.rf.940ed56084e561e8e3f4fd2cdfc05d08.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1573_jpg.rf.33824653c38a067bb69446c4eac604c1.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1603_jpg.rf.15ae75cc54562c77b20b40dffd1e986a.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1653_jpg.rf.fdde0c00c2211a690274a0d8b780984b.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    },
+    {
+      "image": "images/seatbelt/neg_plate_drop-car-front_1661_jpg.rf.7f247a9bcd4920d045c494157d1586cc.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "note": "negative motorcycle/plate"
+      }
+    }
+  ]
+}
