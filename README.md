@@ -2,32 +2,27 @@
 
 **Traffic Regulation & Analytics for Continuous Enforcement**
 
-> Every day, traffic cameras capture thousands of frames. Manual review is slow, inconsistent, and expensive. **TRACE** turns that photographic evidence into searchable, annotated violation records — automatically.
+> A traffic camera sees everything. A human reviewer sees a fraction. **TRACE** closes that gap — turning raw frames into searchable, annotated, court-ready violation records in seconds, not hours.
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)]()
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)]()
+[![Tests](https://img.shields.io/badge/tests-41%20passing-brightgreen)]()
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)]()
 
 **Repository:** [github.com/masoomprakhar/TRACE](https://github.com/masoomprakhar/TRACE)
 
 ---
 
-## The problem
+## At a glance
 
-Cities deploy cameras faster than they can review footage. Officers spend hours scrolling through images to catch helmet violations, red-light jumps, and plate numbers — often reaching different conclusions on the same frame. Enforcement scales with headcount, not with data.
+Imagine a control room where every uploaded frame is preprocessed, scanned for seven violation types, linked to a license plate, and stored with annotated evidence — before an officer finishes their coffee. That is the workflow TRACE is built for.
 
-## What TRACE does
-
-TRACE is an end-to-end computer vision system that **ingests a traffic image** (or live frame), **understands the scene**, and **returns court-ready output**:
-
-1. **Preprocesses** for low light, blur, haze, and shadow  
-2. **Detects** vehicles, riders, plates, and signals  
-3. **Flags seven violation types** with confidence scores  
-4. **Reads Indian license plates** (OCR + format correction)  
-5. **Produces annotated evidence** with timestamps and searchable metadata  
-6. **Surfaces analytics** in a control-room dashboard and REST API  
-
-No violation is fabricated when a model is missing — the pipeline degrades honestly.
+| | |
+|---|---|
+| **Input** | Single image, batch upload, or CCTV frame |
+| **Output** | Violations + confidence, plate text, evidence image, analytics |
+| **Latency** | ~2.4 s/frame on CPU (full pipeline) |
+| **Trust model** | No fabricated violations when a model is unavailable |
 
 ```
 upload / CCTV frame  →  preprocess  →  detect + track  →  7 violation modules
@@ -36,19 +31,42 @@ upload / CCTV frame  →  preprocess  →  detect + track  →  7 violation modu
 
 ---
 
-## Why it matters
+## The problem we set out to solve
 
-| Challenge | TRACE response |
-|-----------|----------------|
-| Variable image quality | Adaptive preprocessing router (CLAHE, dehaze, deblur) |
-| Sequential violations (parking, red-light) | Multi-frame tracking + confirm-frames |
-| Indian plate formats | Domain OCR corrector (`0↔O`, `1↔I`, state codes) |
-| Model gaps in the field | Roboflow-hosted inference + local fine-tuning pipelines |
-| Judge / auditor trust | Confidence scores, evidence images, CSV export, eval harness |
+Indian cities are adding cameras faster than they can staff review desks. Officers scroll through thousands of frames to catch helmet violations, red-light jumps, and plate numbers — often reaching different conclusions on the same image. Enforcement scales with headcount, not with data.
+
+**Flipkart Grid** asked for a system that could automate photo identification and classification for traffic violations using computer vision. TRACE is our answer: an end-to-end pipeline that does not just detect objects, but **reasons about violations** and **produces evidence an auditor can trust**.
 
 ---
 
-## Measured results
+## What TRACE does
+
+TRACE ingests a traffic image, understands the scene, and returns actionable output:
+
+1. **Preprocesses** for low light, blur, haze, and shadow  
+2. **Detects** vehicles, riders, plates, and signals  
+3. **Flags seven violation types** with per-violation confidence  
+4. **Reads Indian license plates** (Roboflow char OCR, TrOCR, or EasyOCR + format correction)  
+5. **Produces annotated evidence** with timestamps and searchable metadata  
+6. **Surfaces analytics** in a control-room dashboard and REST API  
+
+When a model weight is missing in the field, the pipeline **degrades honestly** — it reports what it can verify instead of guessing.
+
+---
+
+## Why the design choices matter
+
+| Real-world friction | How TRACE handles it |
+|---------------------|----------------------|
+| Variable image quality | Adaptive preprocessing router (CLAHE, dehaze, deblur) |
+| Violations that need time (parking, red-light) | Multi-frame tracking with confirm-frames |
+| Indian plate formats | Domain OCR corrector (`0↔O`, `1↔I`, state codes) |
+| Models that drift or fail in production | Roboflow-hosted inference + local retraining pipelines |
+| Judges and auditors who need proof | Confidence scores, evidence images, CSV export, eval harness |
+
+---
+
+## Numbers that back the story
 
 Evaluated on **63 labeled traffic frames** (`scripts/run_full_eval.py`):
 
@@ -61,11 +79,11 @@ Evaluated on **63 labeled traffic frames** (`scripts/run_full_eval.py`):
 | Plate detection mAP (Roboflow) | **0.86** |
 | End-to-end latency (CPU) | ~2.4 s/frame |
 
-Full report: `data/eval/REPORT-quick-train.txt` · Dashboard: **Settings → Performance**
+Full report: `data/eval/REPORT-quick-train.txt` · Live in dashboard: **Settings → Performance**
 
 ---
 
-## Live demo (5 minutes)
+## See it in five minutes
 
 ```bash
 git clone https://github.com/masoomprakhar/TRACE.git
@@ -81,18 +99,18 @@ export TRACE_CONFIG=config/roboflow.yaml
 
 Open **http://127.0.0.1:8000/#overview**
 
-| Step | Where |
-|------|--------|
+| What to show | Where |
+|--------------|--------|
 | KPIs & live feed | Overview |
 | Upload & analyze | Evidence Center |
 | Violation queue + proof | Violations |
 | Plate lookup | ANPR Search |
 | mAP / F1 metrics | Settings → Performance |
-| Export | Reports → CSV |
+| Export for review | Reports → CSV |
 
 ---
 
-## Violation coverage
+## Full violation coverage
 
 All seven types from the problem statement:
 
@@ -108,7 +126,7 @@ Geometry-based rules use per-camera calibration (stop line, lane divider, signal
 
 ---
 
-## Stack
+## Under the hood
 
 | Layer | Technology |
 |-------|------------|
@@ -122,7 +140,7 @@ Geometry-based rules use per-camera calibration (stop line, lane divider, signal
 
 ---
 
-## Training & retraining
+## Retrain on your data
 
 ```bash
 export ROBOFLOW_API_KEY=...
@@ -135,7 +153,7 @@ Registry: `config/roboflow_models.yaml` · Quick iteration: `scripts/run_quick_t
 
 ---
 
-## API (excerpt)
+## API surface
 
 | Method | Path | Purpose |
 |--------|------|---------|
@@ -163,7 +181,7 @@ data/eval/         manifest, reports, eval-summary.json
 
 ---
 
-## Docker
+## Deploy
 
 ```bash
 docker compose up --build    # http://localhost:8000
@@ -173,7 +191,7 @@ For production demos with GPU weights, mount `models/weights/` or use Roboflow-o
 
 ---
 
-## Testing
+## Quality bar
 
 ```bash
 PYTHONPATH=$PWD pytest -q     # 41 tests
@@ -181,11 +199,13 @@ PYTHONPATH=$PWD pytest -q     # 41 tests
 
 ---
 
-## Team & submission
+## Closing thought
 
-Built for **Flipkart Grid** — *Automated Photo Identification and Classification for Traffic Violations Using Computer Vision*.
+TRACE was built for **Flipkart Grid** — *Automated Photo Identification and Classification for Traffic Violations Using Computer Vision*.
 
-TRACE reduces manual review from hours to seconds per frame, standardizes enforcement, and scales from a single upload to multi-camera analytics — **see the violation, trust the evidence, enforce at scale.**
+The goal is not to replace human judgment, but to **give enforcement teams their time back**: standardize decisions, scale from one upload to multi-camera analytics, and leave behind evidence that holds up under scrutiny.
+
+**See the violation. Trust the evidence. Enforce at scale.**
 
 ---
 
