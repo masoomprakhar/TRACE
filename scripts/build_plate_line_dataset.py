@@ -14,6 +14,7 @@ Usage:
   export ROBOFLOW_API_KEY=...
   python scripts/build_plate_line_dataset.py
   python scripts/build_plate_line_dataset.py --synthetic-only --n-synthetic 400
+  python scripts/build_plate_line_dataset.py --from-inference --merge
 """
 
 from __future__ import annotations
@@ -202,16 +203,21 @@ def main() -> int:
     p.add_argument("--skip-roboflow", action="store_true")
     p.add_argument("--synthetic-only", action="store_true")
     p.add_argument("--n-synthetic", type=int, default=300)
+    p.add_argument("--from-inference", action="store_true", help="Also label via Roboflow infer API")
+    p.add_argument("--merge", action="store_true", help="Keep existing manifest when using --from-inference")
     args = p.parse_args()
 
     global OUT, MANIFEST
     OUT = Path(args.out)
     MANIFEST = OUT / "manifest.json"
-    if OUT.exists():
+    if OUT.exists() and not args.merge:
         shutil.rmtree(OUT)
-    OUT.mkdir(parents=True)
+    OUT.mkdir(parents=True, exist_ok=True)
 
     entries: list[dict] = []
+    if args.merge and MANIFEST.exists():
+        data = json.loads(MANIFEST.read_text())
+        entries = list(data.get("samples") or [])
     total = 0
 
     if not args.synthetic_only and not args.skip_roboflow:
@@ -227,6 +233,23 @@ def main() -> int:
     if not entries or args.synthetic_only:
         n = args.n_synthetic
         total += build_synthetic(int(n * 0.7), int(n * 0.15), int(n * 0.15), entries)
+
+    if args.from_inference:
+        import subprocess
+
+        cmd = [
+            sys.executable,
+            str(ROOT / "scripts" / "build_ocr_from_roboflow_inference.py"),
+            "--out",
+            str(args.out),
+            "--backend",
+            "model",
+        ]
+        if args.merge:
+            cmd.append("--merge")
+        subprocess.check_call(cmd, cwd=str(ROOT))
+        if MANIFEST.exists():
+            entries = list(json.loads(MANIFEST.read_text()).get("samples") or [])
 
     if not entries:
         print("No plate line samples built.", file=sys.stderr)

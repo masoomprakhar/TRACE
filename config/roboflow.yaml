@@ -1,5 +1,5 @@
-# TRACE with Roboflow-hosted helmet + plate models.
-#   export ROBOFLOW_API_KEY=your_key
+# TRACE with Roboflow-hosted helmet + plate + OCR models.
+#   cp .env.example .env && set ROBOFLOW_API_KEY
 #   export TRACE_CONFIG=config/roboflow.yaml
 #   python -m trace_cv.cli serve
 
@@ -13,16 +13,19 @@ models:
   rider_cnn_weights: models/weights/rider_multilabel_cnn.pt
   helmet: null
   helmet_backend: roboflow
-  roboflow_helmet_workflow_id: general-segmentation-api
+  roboflow_helmet_workflow_id: general-segmentation-api-4
   roboflow_helmet_classes: "helmet, no_helmet"
   roboflow_helmet_model_id: null
   seatbelt: models/weights/seatbelt.pt
   plate: null
   plate_backend: roboflow
   roboflow_workspace: prakhar-parkar
-  roboflow_workflow_id: general-segmentation-api
+  roboflow_workflow_id: general-segmentation-api-4
   roboflow_plate_classes: license_plate
-  ocr_backend: trocr
+  ocr_backend: roboflow
+  roboflow_ocr_model_id: ocr-character-cgtzm/4
+  roboflow_ocr_workflow_id: null
+  roboflow_ocr_workflow_classes: "-, 0, 1"
   trocr_model_path: models/weights/trocr_plate
   ocr_langs: [en]
   detector_imgsz: 640

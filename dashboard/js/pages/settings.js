@@ -1,7 +1,8 @@
 import { api } from "../api.js";
-import { $, prettify, REVIEW_THRESHOLD } from "../formatters.js";
+import { $, prettify, REVIEW_THRESHOLD, pct, num } from "../formatters.js";
 import { VIOLATION_ORDER, vinfo } from "../formatters.js";
 import { toast } from "../components.js";
+import { getEvalSummary } from "../data-bridge.js";
 
 const MODEL_LABELS = { detector: "Vehicle Detector", ocr: "Plate OCR", helmet: "Helmet Model", seatbelt: "Seatbelt Model", plate: "Plate Detector" };
 const MODEL_ORDER = ["detector", "ocr", "helmet", "seatbelt", "plate"];
@@ -36,6 +37,23 @@ export async function initSettingsPage() {
   }
 
   $("#settings-threshold").textContent = `${Math.round(REVIEW_THRESHOLD * 100)}%`;
+
+  const perf = $("#settings-performance");
+  if (perf) {
+    const ev = await getEvalSummary();
+    const m = ev?.metrics || {};
+    const rows = [
+      ["Detection mAP@0.5", m.detection_map50],
+      ["Motorcycle AP@0.5", m.motorcycle_ap50],
+      ["Violation micro-F1", m.violation_micro_f1],
+      ["No-helmet F1", m.no_helmet_f1],
+      ["OCR exact match", m.ocr_exact_match],
+      ["Latency (ms/frame)", m.latency_ms],
+    ];
+    perf.innerHTML = rows.map(([label, val]) =>
+      `<div class="meta-row"><span>${label}</span><span>${val != null ? (typeof val === "number" ? (label.includes("F1") || label.includes("mAP") || label.includes("match") ? val.toFixed(4) : num(val)) : val) : "—"}</span></div>`
+    ).join("") + (ev?.note ? `<p class="text-sm text-muted mt-2">${ev.note}</p>` : "");
+  }
 
   const interval = localStorage.getItem("trace_live_interval") || "2000";
   const loc = localStorage.getItem("trace_default_location") || "Camera-01";

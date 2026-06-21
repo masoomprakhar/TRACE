@@ -3,7 +3,6 @@ import { MOCK } from "./mock-data.js";
 import { deriveSeverity, VIOLATION_ORDER, vinfo } from "./formatters.js";
 
 let _summaryCache = null;
-let _violationsCache = null;
 
 export async function getAnalyticsSummary(force = false) {
   if (_summaryCache && !force) return _summaryCache;
@@ -15,12 +14,20 @@ export async function getAnalyticsSummary(force = false) {
   }
 }
 
+export async function getEvalSummary() {
+  try {
+    return await api.get("/api/eval/summary");
+  } catch (_) {
+    return null;
+  }
+}
+
 export async function getViolationsTotal() {
   try {
     const d = await api.get("/api/violations?limit=1&offset=0");
     return d.total ?? 0;
   } catch (_) {
-    return MOCK.kpis.totalViolations;
+    return 0;
   }
 }
 
@@ -33,35 +40,82 @@ export async function getRecentViolations(limit = 5) {
 }
 
 export function deriveHighSeverity(byType) {
-  if (!byType) return MOCK.kpis.highSeverity;
+  if (!byType) return 0;
   const highTypes = ["red_light", "triple_riding", "wrong_side", "stop_line"];
   let sum = 0;
   for (const t of highTypes) sum += byType[t] || 0;
-  return sum || MOCK.kpis.highSeverity;
+  return sum;
+}
+
+function hourlyValues(byHour) {
+  if (!byHour) return [];
+  return Object.entries(byHour)
+    .sort((a, b) => Number(a[0]) - Number(b[0]))
+    .map(([, v]) => Number(v) || 0);
+}
+
+function cumulativeSpark(vals) {
+  if (!vals.length) return null;
+  let run = 0;
+  const out = vals.map((v) => {
+    run += v;
+    return run;
+  });
+  return out.length > 1 ? out : null;
+}
+
+function periodTrend(vals) {
+  if (!vals || vals.length < 2) return null;
+  const half = Math.max(1, Math.floor(vals.length / 2));
+  const first = vals.slice(0, half).reduce((a, b) => a + b, 0);
+  const second = vals.slice(half).reduce((a, b) => a + b, 0);
+  if (first === 0 && second === 0) return null;
+  if (first === 0) return { delta: 100, up: true };
+  const pct = Math.round(((second - first) / first) * 1000) / 10;
+  return { delta: Math.abs(pct), up: second >= first };
 }
 
 export async function getOverviewKpis() {
   const summary = await getAnalyticsSummary();
-  const mock = MOCK.kpis;
-  const hasReal = summary && summary.total > 0;
-  return {
-    totalViolations: hasReal ? summary.total : mock.totalViolations,
-    vehiclesScanned: hasReal ? Math.round(summary.total * 19.1) : mock.vehiclesScanned,
-    highSeverity: hasReal ? deriveHighSeverity(summary.by_type) : mock.highSeverity,
-    activeCameras: mock.activeCameras,
-    challansIssued: hasReal ? Math.round(summary.total * 0.78) : mock.challansIssued,
-    trends: mock.trends,
-    sparklines: mock.sparklines,
-    byType: hasReal ? summary.by_type : buildMockByType(),
-    byHour: hasReal ? summary.by_hour : null,
-    isReal: hasReal,
-  };
-}
+  const total = summary?.total ?? 0;
+  const hasReal = total > 0;
+  const byLocation = hasReal ? await getViolationsByLocation() : {};
+  const cameraCount = Object.keys(byLocation).length;
+  const hourVals = hourlyValues(summary?.by_hour);
+  const trend = periodTrend(hourVals);
+  const cumSpark = cumulativeSpark(hourVals);
+  const challans = summary?.challans_issued ?? 0;
+  const vehicles = summary?.vehicles_scanned ?? total;
 
-function buildMockByType() {
+  const sparklines = cumSpark
+    ? {
+        totalViolations: cumSpark,
+        vehiclesScanned: cumSpark.map((v, i) => Math.round(v * (vehicles / Math.max(total, 1)))),
+        highSeverity: cumSpark.map((v, i) => Math.round(v * (deriveHighSeverity(summary?.by_type) / Math.max(total, 1)))),
+        challansIssued: cumSpark.map((v, i) => Math.round(v * (challans / Math.max(total, 1)))),
+      }
+    : {};
+
   return {
-    no_helmet: 342, triple_riding: 198, no_seatbelt: 156,
-    red_light: 124, wrong_side: 98, stop_line: 87, illegal_parking: 243,
+    totalViolations: total,
+    vehiclesScanned: vehicles,
+    highSeverity: hasReal ? deriveHighSeverity(summary.by_type) : 0,
+    activeCameras: cameraCount,
+    challansIssued: challans,
+    avgConfidence: hasReal ? summary.avg_confidence : null,
+    processingFps: hasReal ? summary.processing_fps : null,
+    byType: hasReal ? summary.by_type : {},
+    byHour: hasReal ? summary.by_hour : null,
+    trends: trend
+      ? {
+          totalViolations: trend,
+          vehiclesScanned: trend,
+          highSeverity: trend,
+          challansIssued: trend,
+        }
+      : {},
+    sparklines,
+    isReal: hasReal,
   };
 }
 
@@ -75,27 +129,18 @@ export async function getViolationsByLocation() {
     }
     if (Object.keys(map).length) return map;
   } catch (_) {}
-  return {
-    "Camera-01": 18, "Camera-02": 14, "Camera-03": 22,
-    "Camera-04": 16, "Camera-05": 12, "Camera-06": 10,
-  };
+  return {};
 }
 
 export async function getTopPlates() {
   const summary = await getAnalyticsSummary();
-  const real = summary?.top_plates || [];
-  if (real.length >= 5) return real;
-  const merged = [...real];
-  for (const o of MOCK.offenders) {
-    if (!merged.find((p) => p.plate === o.plate)) {
-      merged.push({ plate: o.plate, count: o.count, last_seen: o.lastSeen, violations: o.types });
-    }
-  }
-  return merged.slice(0, 10);
+  return summary?.top_plates || [];
 }
 
 export function getSeverityBreakdown(summary) {
-  if (!summary?.by_type) return MOCK.severity;
+  if (!summary?.by_type) {
+    return { critical: { count: 0, pct: 0 }, high: { count: 0, pct: 0 }, medium: { count: 0, pct: 0 }, low: { count: 0, pct: 0 } };
+  }
   const buckets = { critical: 0, high: 0, medium: 0, low: 0 };
   for (const [type, count] of Object.entries(summary.by_type)) {
     const sev = deriveSeverity([type]);
@@ -110,20 +155,15 @@ export function getSeverityBreakdown(summary) {
   };
 }
 
-export function getMonthlyTrend(summary) {
-  if (summary?.by_hour) {
-    const days = MOCK.monthlyTrend.map((d, i) => ({
-      day: d.day,
-      count: Math.round((summary.total || 1248) * (0.5 + (i / MOCK.monthlyTrend.length) * 0.5)),
-    }));
-    if (days.length) days[days.length - 1].count = summary.total || 1248;
-    return days;
-  }
-  return MOCK.monthlyTrend;
+export function getHourlyTrend(summary) {
+  if (!summary?.by_hour) return [];
+  return Object.entries(summary.by_hour)
+    .sort((a, b) => Number(a[0]) - Number(b[0]))
+    .map(([hour, count]) => ({ day: `${hour}:00`, count: Number(count) || 0 }));
 }
 
 export function violationDistribution(summary) {
-  const byType = summary?.by_type || buildMockByType();
+  const byType = summary?.by_type || {};
   const entries = VIOLATION_ORDER
     .map((k) => [k, byType[k] || 0])
     .filter(([, v]) => v > 0);
@@ -136,5 +176,4 @@ export function violationDistribution(summary) {
 
 export function invalidateCache() {
   _summaryCache = null;
-  _violationsCache = null;
 }

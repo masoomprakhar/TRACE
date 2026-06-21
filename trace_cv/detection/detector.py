@@ -68,10 +68,26 @@ class Detector:
         if self._model is not None or self._tried:
             return
         self._tried = True
+        weights = self.weights
+        from pathlib import Path  # noqa: PLC0415
+
+        if not Path(weights).exists():
+            if self.backend == "viovision":
+                log.warning(
+                    "Custom detector weights missing (%s); falling back to yolov8n.pt (COCO).",
+                    weights,
+                )
+                self.weights = "yolov8n.pt"
+                self.backend = "coco"
+                self.keep = _KEEP
+                self.class_map = {}
+                weights = self.weights
+            else:
+                log.warning("Detector weights not found: %s", weights)
         try:
             from ultralytics import YOLO  # noqa: PLC0415
 
-            self._model = YOLO(self.weights)
+            self._model = YOLO(weights)
             log.info("YOLO loaded: %s (device=%s)", self.weights, self.device)
         except Exception as exc:  # pragma: no cover - depends on env
             log.warning("Ultralytics unavailable (%s); detection disabled.", exc)

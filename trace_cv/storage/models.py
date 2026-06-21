@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+from typing import Optional
 
 from sqlalchemy import JSON, DateTime, Float, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -22,10 +23,10 @@ class ViolationRow(Base):
     timestamp: Mapped[datetime] = mapped_column(DateTime, index=True)
     location: Mapped[str] = mapped_column(String, default="Camera-01")
     vehicle_type: Mapped[str] = mapped_column(String, default="unknown")
-    track_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    track_id: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     violation_types: Mapped[list] = mapped_column(JSON, default=list)
     confidence: Mapped[float] = mapped_column(Float, default=0.0)
-    plate_number: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
+    plate_number: Mapped[Optional[str]] = mapped_column(String, nullable=True, index=True)
     plate_confidence: Mapped[float] = mapped_column(Float, default=0.0)
     evidence_path: Mapped[str] = mapped_column(String, default="")
     processing_ms: Mapped[float] = mapped_column(Float, default=0.0)

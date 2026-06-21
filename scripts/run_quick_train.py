@@ -213,8 +213,12 @@ def main() -> int:
     if not args.skip_eval:
         run_eval()
 
-    # Update eval-summary for dashboard
     report = ROOT / "data" / "eval" / "REPORT-quick-train.txt"
+    results = ROOT / "data" / "eval" / "results.json"
+    if results.exists():
+        from trace_cv.evaluation.summary_export import write_eval_summary
+        import json
+        write_eval_summary(json.loads(results.read_text()), ROOT / "data" / "eval" / "eval-summary.json")
     if report.exists():
         print(f"\nReport: {report}")
 

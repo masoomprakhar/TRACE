@@ -1,4 +1,4 @@
-"""License-plate OCR: TrOCR (fine-tuned) or EasyOCR fallback."""
+"""License-plate OCR: TrOCR (fine-tuned), Roboflow char OCR, or EasyOCR fallback."""
 
 from __future__ import annotations
 
@@ -25,19 +25,47 @@ class PlateOCR:
         *,
         backend: str = "easyocr",
         trocr_path: str = "models/weights/trocr_plate",
+        roboflow_workspace: str = "prakhar-parkar",
+        roboflow_ocr_model_id: str | None = "ocr-character-cgtzm/4",
+        roboflow_ocr_workflow_id: str | None = None,
+        roboflow_ocr_workflow_classes: str = "-, 0, 1",
     ):
         self.langs = langs or ["en"]
         self.gpu = gpu
         self.backend = (backend or "easyocr").lower()
         self.trocr_path = trocr_path
+        self.roboflow_workspace = roboflow_workspace
+        self.roboflow_ocr_model_id = roboflow_ocr_model_id
+        self.roboflow_ocr_workflow_id = roboflow_ocr_workflow_id
+        self.roboflow_ocr_workflow_classes = roboflow_ocr_workflow_classes
         self._reader = None
         self._trocr = None
+        self._roboflow = None
         self._tried = False
 
     def _ensure_reader(self):
         if self._tried:
             return
         self._tried = True
+        if self.backend == "roboflow":
+            try:
+                from trace_cv.adapters.roboflow_ocr import RoboflowCharOCR
+
+                self._roboflow = RoboflowCharOCR(
+                    workspace=self.roboflow_workspace,
+                    model_id=self.roboflow_ocr_model_id,
+                    workflow_id=self.roboflow_ocr_workflow_id,
+                    workflow_classes=self.roboflow_ocr_workflow_classes,
+                )
+                if self._roboflow.available:
+                    log.info(
+                        "Roboflow OCR ready (model=%s workflow=%s)",
+                        self.roboflow_ocr_model_id,
+                        self.roboflow_ocr_workflow_id,
+                    )
+                    return
+            except Exception as exc:  # pragma: no cover
+                log.warning("Roboflow OCR unavailable (%s); falling back to EasyOCR.", exc)
         if self.backend == "trocr":
             try:
                 from trace_cv.ocr.trocr_backend import TrOCRPlateReader
@@ -63,7 +91,11 @@ class PlateOCR:
     @property
     def available(self) -> bool:
         self._ensure_reader()
-        return self._trocr_ready() or self._reader is not None
+        return (
+            self._trocr_ready()
+            or (self._roboflow is not None and self._roboflow.available)
+            or self._reader is not None
+        )
 
     @staticmethod
     def _prep(crop: np.ndarray) -> np.ndarray:
@@ -96,11 +128,17 @@ class PlateOCR:
         self._ensure_reader()
         if plate_crop is None or plate_crop.size == 0:
             return Plate(bbox=bbox)
-        if not self._trocr_ready() and self._reader is None:
+        if (
+            not self._trocr_ready()
+            and (self._roboflow is None or not self._roboflow.available)
+            and self._reader is None
+        ):
             return Plate(bbox=bbox)
 
         try:
-            if self._trocr_ready():
+            if self._roboflow is not None and self._roboflow.available:
+                raw, conf = self._roboflow.read(self._prep(plate_crop))
+            elif self._trocr_ready():
                 raw, conf = self._trocr.read(self._prep(plate_crop))
             else:
                 raw, conf = self._read_easyocr(plate_crop)

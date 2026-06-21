@@ -1,152 +1,194 @@
-# TRACE — Traffic Rule Analysis & Compliance Engine
+# TRACE
 
-Automated photo identification and classification of traffic violations using
-computer vision. TRACE ingests traffic images (or video frames), enhances them
-adaptively, detects road users, identifies and classifies **seven** violation
-types with calibrated confidence, reads license plates, and produces
-annotated, searchable, court-ready evidence — exposed through a REST API and a
-control-room dashboard.
+**Traffic Regulation & Analytics for Continuous Enforcement**
 
-> Built for the *Automated Photo Identification and Classification for Traffic
-> Violations* challenge. See the concept note in [`docs/`](docs/).
+> Every day, traffic cameras capture thousands of frames. Manual review is slow, inconsistent, and expensive. **TRACE** turns that photographic evidence into searchable, annotated violation records — automatically.
 
----
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)]()
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)]()
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)]()
 
-## Why TRACE stands out
-
-1. **Quality-adaptive preprocessing** — each frame is *diagnosed* (blur,
-   low-light, haze, contrast) and only the needed correction is applied, so the
-   average frame stays fast while hard frames get rescued.
-2. **Temporal reasoning** — a tracker gives persistent IDs, so inherently
-   sequential violations (triple riding, parking duration, red-light + stop-line)
-   are judged across frames, not guessed from one.
-3. **Honest, pluggable models** — helmet/seatbelt classifiers are optional; when
-   a model isn't loaded the module is skipped, never faked. Geometry-driven
-   violations work out of the box on COCO weights.
-4. **Domain-adapted Indian-plate OCR** — format + confusion-aware correction
-   (`0↔O`, `1↔I`, `8↔B`, …) recovers plates generic OCR returns malformed.
+**Repository:** [github.com/masoomprakhar/TRACE](https://github.com/masoomprakhar/TRACE)
 
 ---
 
-## Architecture
+## The problem
+
+Cities deploy cameras faster than they can review footage. Officers spend hours scrolling through images to catch helmet violations, red-light jumps, and plate numbers — often reaching different conclusions on the same frame. Enforcement scales with headcount, not with data.
+
+## What TRACE does
+
+TRACE is an end-to-end computer vision system that **ingests a traffic image** (or live frame), **understands the scene**, and **returns court-ready output**:
+
+1. **Preprocesses** for low light, blur, haze, and shadow  
+2. **Detects** vehicles, riders, plates, and signals  
+3. **Flags seven violation types** with confidence scores  
+4. **Reads Indian license plates** (OCR + format correction)  
+5. **Produces annotated evidence** with timestamps and searchable metadata  
+6. **Surfaces analytics** in a control-room dashboard and REST API  
+
+No violation is fabricated when a model is missing — the pipeline degrades honestly.
 
 ```
-image/frame
-   → adaptive preprocessing  (trace_cv/preprocessing)
-   → detection + tracking    (trace_cv/detection)      YOLO + IOU/ByteTrack
-   → violation engine        (trace_cv/violation)      7 modules
-   → license-plate OCR        (trace_cv/ocr)            EasyOCR + corrector
-   → evidence + metadata     (trace_cv/evidence)       annotated image + JSON
-   → storage + analytics      (trace_cv/storage)        SQLite/Postgres
-   → REST API + dashboard     (trace_cv/api, dashboard)
+upload / CCTV frame  →  preprocess  →  detect + track  →  7 violation modules
+                    →  plate OCR  →  evidence image  →  SQLite  →  dashboard
 ```
-
-The seven violations: **helmet non-compliance, seatbelt non-compliance, triple
-riding, wrong-side driving, stop-line, red-light, illegal parking**.
 
 ---
 
-## Quickstart (no ML models required)
+## Why it matters
+
+| Challenge | TRACE response |
+|-----------|----------------|
+| Variable image quality | Adaptive preprocessing router (CLAHE, dehaze, deblur) |
+| Sequential violations (parking, red-light) | Multi-frame tracking + confirm-frames |
+| Indian plate formats | Domain OCR corrector (`0↔O`, `1↔I`, state codes) |
+| Model gaps in the field | Roboflow-hosted inference + local fine-tuning pipelines |
+| Judge / auditor trust | Confidence scores, evidence images, CSV export, eval harness |
+
+---
+
+## Measured results
+
+Evaluated on **63 labeled traffic frames** (`scripts/run_full_eval.py`):
+
+| Metric | Score |
+|--------|------:|
+| Detection mAP@0.5 | **0.83** |
+| Motorcycle AP@0.5 | **1.00** |
+| No-helmet F1 | **1.00** |
+| Violation micro-F1 | **0.89** |
+| Plate detection mAP (Roboflow) | **0.86** |
+| End-to-end latency (CPU) | ~2.4 s/frame |
+
+Full report: `data/eval/REPORT-quick-train.txt` · Dashboard: **Settings → Performance**
+
+---
+
+## Live demo (5 minutes)
 
 ```bash
-pip install -r requirements.txt          # core, CPU-friendly
-export PYTHONPATH=$PWD                    # or: pip install -e .
+git clone https://github.com/masoomprakhar/TRACE.git
+cd TRACE
+pip install -r requirements.txt -r requirements-ml.txt
+pip install -e .
 
-python -m trace_cv.cli seed-demo -n 40   # populate DB + evidence images
-python -m trace_cv.cli serve             # http://localhost:8000  (dashboard + API)
-python -m trace_cv.cli eval              # evaluation showcase (mAP, P/R/F1, CER)
+cp .env.example .env          # add ROBOFLOW_API_KEY
+export TRACE_CONFIG=config/roboflow.yaml
+
+./scripts/judge_demo.sh         # seeds DB + starts server
 ```
 
-Open <http://localhost:8000> for the dashboard.
+Open **http://127.0.0.1:8000/#overview**
 
-### Enable real detection / OCR
-
-```bash
-pip install -r requirements-ml.txt       # ultralytics, torch, easyocr, ...
-python -m trace_cv.cli detect path/to/traffic.jpg
-```
-
-YOLO COCO weights auto-download on first use and already cover person, bicycle,
-car, motorcycle, bus, truck and traffic light — enough to drive triple-riding,
-red-light, stop-line, parking and wrong-side detection. Helmet/seatbelt need a
-checkpoint configured in `config/default.yaml`.
+| Step | Where |
+|------|--------|
+| KPIs & live feed | Overview |
+| Upload & analyze | Evidence Center |
+| Violation queue + proof | Violations |
+| Plate lookup | ANPR Search |
+| mAP / F1 metrics | Settings → Performance |
+| Export | Reports → CSV |
 
 ---
 
-## REST API
+## Violation coverage
+
+All seven types from the problem statement:
+
+- Helmet non-compliance  
+- Seatbelt non-compliance  
+- Triple riding  
+- Wrong-side driving  
+- Stop-line violation  
+- Red-light violation  
+- Illegal parking  
+
+Geometry-based rules use per-camera calibration (stop line, lane divider, signal ROI, no-parking zones) in `config/roboflow.yaml`.
+
+---
+
+## Stack
+
+| Layer | Technology |
+|-------|------------|
+| Detection | YOLO11 (VioVision fine-tune) |
+| Helmet / riders | Multi-label CNN + Roboflow workflows |
+| Seatbelt | 3-class classifier (belt / no_belt / occluded) |
+| Plates & OCR | Roboflow `general-segmentation-api-4` + `ocr-character-cgtzm/4`, TrOCR |
+| API | FastAPI + SQLite |
+| UI | Vanilla JS dashboard (Chart.js) |
+| Training | `scripts/prepare_all_datasets.py` → `scripts/train_all.py` |
+
+---
+
+## Training & retraining
+
+```bash
+export ROBOFLOW_API_KEY=...
+python scripts/prepare_all_datasets.py    # Roboflow downloads + OCR labels
+python scripts/train_all.py --device cuda --epochs 30
+python scripts/run_full_eval.py --config config/roboflow.yaml
+```
+
+Registry: `config/roboflow_models.yaml` · Quick iteration: `scripts/run_quick_train.py`
+
+---
+
+## API (excerpt)
 
 | Method | Path | Purpose |
-|---|---|---|
-| GET  | `/api/health` | status + which models are loaded |
-| POST | `/api/analyze` | analyze an uploaded image (`file`) |
-| GET  | `/api/violations` | list (`?type=&plate=&limit=&offset=`) |
-| GET  | `/api/violations/{id}` | one record |
-| GET  | `/api/violations/{id}/evidence` | annotated evidence image |
-| GET  | `/api/events/{event_id}/evidence` | evidence by event |
-| GET  | `/api/analytics/summary` | counts by type/hour/vehicle, top plates, FPS |
-| GET  | `/api/plates/search?q=` | fuzzy plate search |
+|--------|------|---------|
+| GET | `/api/health` | Model status |
+| POST | `/api/analyze` | Analyze uploaded image |
+| GET | `/api/violations` | Searchable violation list |
+| GET | `/api/analytics/summary` | Trends, top plates, FPS |
+| GET | `/api/eval/summary` | Offline mAP / F1 for dashboard |
+| GET | `/api/violations.csv` | Export report |
 
-Interactive docs at `/docs`.
-
----
-
-## Configuration
-
-`config/default.yaml` holds thresholds, model paths, and **per-camera scene
-geometry** — the stop-line row, lane divider + legal direction, signal ROI, and
-no-parking polygons. Scene geometry is what turns geometric detections into
-red-light / stop-line / wrong-side / parking violations. Point at a custom file
-with `--config` or the `TRACE_CONFIG` env var.
+Interactive docs: `/docs`
 
 ---
 
 ## Project layout
 
 ```
-trace_cv/
-  core/         types, geometry, config, logging
-  preprocessing/ adaptive quality pipeline (OpenCV)
-  detection/    YOLO detector, IOU tracker, ROI helpers
-  violation/    base + 7 modules + engine
-  ocr/          Indian-plate corrector + EasyOCR wrapper
-  evidence/     annotator + evidence builder
-  storage/      SQLAlchemy models + repository
-  evaluation/   P/R/F1, mAP, OCR CER/exact-match
-  api/          FastAPI app + routes
-  pipeline.py   end-to-end orchestrator
-  cli.py        command-line interface
-dashboard/      control-room web UI (served at /)
-scripts/        seed_demo, run_eval
-tests/          pytest suite
-docs/           concept note (md/html/pdf)
+trace_cv/          pipeline, violations, OCR, evidence, evaluation
+dashboard/         control-room UI
+training/          YOLO, rider CNN, seatbelt, TrOCR trainers
+scripts/           datasets, eval, judge_demo.sh, train_all.py
+config/            default.yaml, roboflow.yaml, roboflow_models.yaml
+data/eval/         manifest, reports, eval-summary.json
 ```
-
----
-
-## Testing & evaluation
-
-```bash
-PYTHONPATH=$PWD pytest -q          # 34 tests, no ML stack required
-python -m trace_cv.cli eval        # metric harness on synthetic data
-```
-
-`trace_cv/evaluation/metrics.py` provides Accuracy, Precision, Recall, F1,
-multi-label reports, detection **mAP@0.5** and **mAP@0.5:0.95**, and OCR CER /
-exact-match. Feed predictions + ground truth from your annotated test split
-directly into these functions.
 
 ---
 
 ## Docker
 
 ```bash
-docker compose up --build          # API + dashboard on :8000 (SQLite)
+docker compose up --build    # http://localhost:8000
+```
+
+For production demos with GPU weights, mount `models/weights/` or use Roboflow-only config.
+
+---
+
+## Testing
+
+```bash
+PYTHONPATH=$PWD pytest -q     # 41 tests
 ```
 
 ---
 
-## Notes
+## Team & submission
 
-- The system degrades gracefully: it imports and runs before the ML stack is
-  installed, and never emits a violation for a model that isn't loaded.
-- Runtime artifacts (`data/output/`, `*.db`, model weights) are git-ignored.
+Built for **Flipkart Grid** — *Automated Photo Identification and Classification for Traffic Violations Using Computer Vision*.
+
+TRACE reduces manual review from hours to seconds per frame, standardizes enforcement, and scales from a single upload to multi-camera analytics — **see the violation, trust the evidence, enforce at scale.**
+
+---
+
+## License
+
+MIT · Model weights and `.env` are not committed; see `.env.example`.

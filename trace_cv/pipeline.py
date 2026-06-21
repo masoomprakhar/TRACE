@@ -75,6 +75,10 @@ class TracePipeline:
             gpu=self.settings.device == "cuda",
             backend=self.settings.models.ocr_backend,
             trocr_path=self.settings.models.trocr_model_path,
+            roboflow_workspace=self.settings.models.roboflow_workspace,
+            roboflow_ocr_model_id=self.settings.models.roboflow_ocr_model_id,
+            roboflow_ocr_workflow_id=self.settings.models.roboflow_ocr_workflow_id,
+            roboflow_ocr_workflow_classes=self.settings.models.roboflow_ocr_workflow_classes,
         )
         self.builder = EvidenceBuilder(self.settings.storage_dir)
         self.repo = Repository(self.settings.db_url)

@@ -223,6 +223,12 @@ def main() -> int:
     report_path.write_text(report_text)
     print(f"\nReport saved to {report_path}")
     print(f"JSON saved to  {ROOT / args.out}")
+
+    from trace_cv.evaluation.summary_export import write_eval_summary
+
+    summary_path = ROOT / "data" / "eval" / "eval-summary.json"
+    write_eval_summary(results, summary_path)
+    print(f"Dashboard summary -> {summary_path}")
     return 0
 
 

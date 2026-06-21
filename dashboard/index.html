@@ -16,15 +16,15 @@
   <div class="app">
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-brand">
+      <a href="#overview" class="sidebar-brand" id="sidebar-home" aria-label="TRACE home — go to dashboard overview">
         <div class="brand-logo">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.5 3.5 9.5 8 11 4.5-1.5 8-5.5 8-11V6l-8-4z" fill="#0D6EFD"/></svg>
+          <img src="assets/brand-logo.png" alt="" class="brand-logo-img" width="28" height="53" />
         </div>
         <div>
           <div class="brand-name">TRACE</div>
           <div class="brand-tagline">Traffic Regulation &amp; Analytics for Continuous Enforcement</div>
         </div>
-      </div>
+      </a>
 
       <nav class="sidebar-nav" aria-label="Main navigation">
         <button class="nav-item active" data-view="overview">
@@ -38,7 +38,7 @@
         <button class="nav-item" data-view="violations">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
           Violations
-          <span class="nav-badge" id="nav-violations-count">128</span>
+          <span class="nav-badge hidden" id="nav-violations-count">0</span>
         </button>
         <button class="nav-item" data-view="anpr">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -63,7 +63,7 @@
         <button class="nav-item" data-view="alerts">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
           Alerts
-          <span class="nav-badge nav-badge-danger" id="nav-alerts-count">12</span>
+          <span class="nav-badge nav-badge-danger hidden" id="nav-alerts-count">0</span>
         </button>
         <button class="nav-item" data-view="settings">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -147,7 +147,7 @@
                 </div>
               </div>
             </div>
-            <div class="card">
+            <div class="card recent-violations-card">
               <div class="card-header"><h3>Recent Violations</h3></div>
               <div id="overview-recent" class="recent-list"></div>
             </div>
@@ -410,8 +410,7 @@
           <div class="alerts-toolbar">
             <div class="tabs">
               <button class="alerts-tab active" data-filter="all">All</button>
-              <button class="alerts-tab" data-filter="unread">Unread</button>
-              <button class="alerts-tab" data-filter="read">Read</button>
+              <button class="alerts-tab" data-filter="high">High severity</button>
             </div>
             <button class="btn btn-ghost" id="alerts-mark-read">Mark all read</button>
           </div>
@@ -443,6 +442,11 @@
                 <input type="text" id="settings-location" class="input" value="Camera-01" />
               </label>
               <button class="btn btn-primary mt-3" id="settings-save">Save</button>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3>Performance (offline eval)</h3></div>
+              <p class="text-sm text-muted mb-2">From <code>scripts/run_full_eval.py</code> on labeled holdout set.</p>
+              <div id="settings-performance"></div>
             </div>
             <div class="card">
               <div class="card-header"><h3>Demo &amp; Data</h3></div>

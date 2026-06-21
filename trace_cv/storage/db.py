@@ -123,6 +123,8 @@ class Repository:
 
         avg_ms = sum(proc) / len(proc) if proc else 0.0
         fps = (1000.0 / avg_ms) if avg_ms > 0 else 0.0
+        challan_threshold = 0.65
+        unique_plates = {r.plate_number for r in rows if r.plate_number}
         return {
             "total": len(rows),
             "by_type": dict(by_type),
@@ -133,6 +135,10 @@ class Repository:
             ],
             "avg_confidence": round(sum(confs) / len(confs), 4) if confs else 0.0,
             "processing_fps": round(fps, 2),
+            "vehicles_scanned": max(len(rows), len(unique_plates)),
+            "challans_issued": sum(
+                1 for r in rows if (r.confidence or 0.0) >= challan_threshold
+            ),
         }
 
     def plate_search(self, query: str, limit: int = 20) -> dict:

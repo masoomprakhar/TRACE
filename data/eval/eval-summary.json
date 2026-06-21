@@ -1,0 +1,28 @@
+{
+  "source": "config/roboflow.yaml",
+  "n_samples": 63,
+  "model_status": {
+    "detector": true,
+    "ocr": true,
+    "helmet": true,
+    "seatbelt": true,
+    "plate": false
+  },
+  "metrics": {
+    "detection_map50": 0.8333,
+    "detection_map5095": 0.805,
+    "motorcycle_ap50": 1.0,
+    "plate_ap50": 1.0,
+    "violation_micro_f1": 0.8889,
+    "violation_micro_precision": 0.8,
+    "violation_micro_recall": 1.0,
+    "violation_macro_f1": 0.1429,
+    "no_helmet_f1": 1.0,
+    "no_seatbelt_f1": 0.0,
+    "ocr_exact_match": null,
+    "ocr_mean_cer": null,
+    "latency_ms": 2440.89,
+    "throughput_fps": 0.41
+  },
+  "updated_at": null
+}

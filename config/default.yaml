@@ -29,13 +29,12 @@ scene:
   fps: 15.0
   # Stop line: horizontal pixel band. Vehicles crossing while red = violation.
   stop_line:
-    enabled: false
-    y: null                      # pixel row of the stop line
-  # Lane / wrong-side: vehicles left of divider_x moving against correct flow.
+    enabled: true
+    y: 380
   lane:
-    enabled: false
-    divider_x: null              # pixel column dividing the two carriageways
-    correct_direction: down      # legal motion on the RIGHT of divider: up|down|left|right
+    enabled: true
+    divider_x: 480
+    correct_direction: down
   # Traffic signal: fixed ROI, else auto-detected from COCO "traffic light".
   signal:
     enabled: true

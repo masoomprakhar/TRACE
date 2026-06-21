@@ -1,15 +1,16 @@
-import { $, $$, esc, fmtTime } from "../formatters.js";
-import { MOCK, getUnreadAlertCount, markAllAlertsRead } from "../mock-data.js";
+import { $, $$, esc, fmtTime, deriveSeverity } from "../formatters.js";
+import { getRecentViolations } from "../data-bridge.js";
 import { navigate } from "../router.js";
-import { updateBadges } from "../nav-badges.js";
+import { emptyState } from "../components.js";
 
 let filter = "all";
+let _items = [];
 
 export function initAlerts() {
   $("#alerts-mark-read")?.addEventListener("click", () => {
-    markAllAlertsRead();
+    filter = "read";
+    $$(".alerts-tab").forEach((t) => t.classList.toggle("active", t.dataset.filter === "read"));
     renderAlerts();
-    updateBadges();
   });
   $$(".alerts-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -24,40 +25,45 @@ export function initAlerts() {
 function renderAlerts() {
   const list = $("#alerts-list");
   if (!list) return;
-  let items = [...MOCK.alerts];
-  if (filter === "unread") items = items.filter((a) => !a.read);
-  else if (filter === "read") items = items.filter((a) => a.read);
+  let items = [..._items];
+  if (filter === "high") {
+    items = items.filter((a) => a.severity === "critical" || a.severity === "high");
+  }
 
   list.innerHTML = items.length ? items.map((a) => `
-    <div class="alert-item ${a.read ? "read" : ""}" data-id="${esc(a.id)}">
+    <div class="alert-item" data-id="${esc(a.id)}">
       <div class="alert-sev sev-${a.severity}"></div>
       <div class="alert-body">
         <div class="alert-title">${esc(a.title)}</div>
         <div class="alert-msg">${esc(a.message)}</div>
         <div class="alert-foot">
           <span class="alert-time">${fmtTime(a.time)}</span>
-          ${a.action ? `<button class="btn btn-sm btn-ghost alert-action" data-view="${a.action.view}">View →</button>` : ""}
+          <button class="btn btn-sm btn-ghost alert-action" data-id="${esc(a.id)}">View →</button>
         </div>
       </div>
-    </div>`).join("") : '<div class="empty-state"><p>No alerts in this tab.</p></div>';
+    </div>`).join("") : emptyState("No violation alerts", "Recent detections appear here after analysis.");
 
-  list.querySelectorAll(".alert-item").forEach((item) => {
-    item.addEventListener("click", () => {
-      const alert = MOCK.alerts.find((a) => a.id === item.dataset.id);
-      if (alert) alert.read = true;
-      item.classList.add("read");
-      updateBadges();
-    });
-  });
   list.querySelectorAll(".alert-action").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      navigate(btn.dataset.view);
+      window.openEvidence?.(btn.dataset.id);
     });
   });
 }
 
-export function initAlertsPage() {
+export async function initAlertsPage() {
   initAlerts();
+  const recent = await getRecentViolations(30);
+  _items = recent.map((r) => {
+    const types = r.violation_types || [];
+    const sev = deriveSeverity(types);
+    return {
+      id: r.id,
+      severity: sev,
+      title: r.violation_label || types.join(", ") || "Violation detected",
+      message: `${r.location || "Camera"} · ${r.vehicle_type || "vehicle"}`,
+      time: r.timestamp,
+    };
+  });
   renderAlerts();
 }

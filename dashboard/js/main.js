@@ -1,9 +1,9 @@
 import { api } from "./api.js";
 import { $, $$, esc, fmtTime, pct } from "./formatters.js";
 import { toast, imageFallback, badges, plateChip } from "./components.js";
-import { MOCK } from "./mock-data.js";
-import { parseHash, updatePageHeader, setSwitchHandler, VALID } from "./router.js";
+import { parseHash, updatePageHeader, setSwitchHandler, navigate, VALID } from "./router.js";
 import { updateBadges } from "./nav-badges.js";
+import { getRecentViolations } from "./data-bridge.js";
 import { initOverview } from "./pages/overview.js";
 import { initLive, initLivePage, onLeaveLive } from "./pages/live.js";
 import { initViolationsPage } from "./pages/violations.js";
@@ -57,6 +57,12 @@ function initShell() {
     document.body.classList.toggle("sidebar-open");
   });
 
+  $("#sidebar-home")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    navigate("overview");
+    document.body.classList.remove("sidebar-open");
+  });
+
   // Notifications dropdown
   $("#notif-btn")?.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -76,13 +82,16 @@ function initShell() {
   }
 }
 
-function renderNotifDropdown() {
+async function renderNotifDropdown() {
   const dd = $("#notif-dropdown");
   if (!dd) return;
-  const unread = MOCK.alerts.filter((a) => !a.read).slice(0, 5);
-  dd.innerHTML = unread.length
-    ? unread.map((a) => `<div class="notif-item"><strong>${esc(a.title)}</strong><span>${esc(a.message)}</span></div>`).join("")
-    : '<div class="notif-item muted">No new notifications</div>';
+  const recent = await getRecentViolations(5);
+  dd.innerHTML = recent.length
+    ? recent.map((r) => {
+      const types = (r.violation_types || []).join(", ") || "violation";
+      return `<div class="notif-item"><strong>${esc(types)}</strong><span>${esc(r.location || "")} · ${fmtTime(r.timestamp)}</span></div>`;
+    }).join("")
+    : '<div class="notif-item muted">No violations yet — seed demo data or analyze a frame.</div>';
 }
 
 async function switchView(view, params = {}) {

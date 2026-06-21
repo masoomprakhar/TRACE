@@ -75,8 +75,15 @@ class ViolationEngine:
                 models.rider_cnn_weights,
                 device=settings.device,
             )
-        else:
-            helmet_backend = (models.helmet_backend or "local").lower()
+            if not rider_cnn.available:
+                log.warning(
+                    "Rider CNN weights unavailable (%s); falling back to helmet workflow.",
+                    models.rider_cnn_weights,
+                )
+                rider_cnn = None
+
+        helmet_backend = (models.helmet_backend or "local").lower()
+        if rider_cnn is None or not rider_cnn.available:
             if helmet_backend == "roboflow":
                 from trace_cv.adapters.roboflow_helmet import RoboflowHelmetModel
 

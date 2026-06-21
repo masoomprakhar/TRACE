@@ -1,0 +1,41 @@
+# Roboflow model / workflow registry for TRACE training & inference.
+# API key: export ROBOFLOW_API_KEY=...  (see .env.example — never commit .env)
+
+api_url: https://serverless.roboflow.com
+workspace: prakhar-parkar
+
+# Hosted inference (InferenceHTTPClient.infer)
+models:
+  ocr_character: ocr-character-cgtzm/4
+  helmet: helmet-gj8do/2
+
+# Hosted workflows (InferenceHTTPClient.run_workflow)
+workflows:
+  segmentation:
+    id: general-segmentation-api-4
+    helmet_classes: "helmet, no_helmet"
+    plate_classes: license_plate
+    ocr_char_classes: "-, 0, 1"
+
+# Roboflow Universe datasets for download + local fine-tuning
+datasets:
+  plate_ocr_chars: plate-ocr-3clbn-b2ojn
+  plate_detect: indian-license-plate-detection-6tmbr-mwzdr-3cqpu
+  helmet: helmet-0z7wk-z6kjh
+  seatbelt_karan: seat-belt-detection-uhqwa
+  seatbelt_karan_workspace: karan-panja
+
+# Local training output paths (gitignored weights)
+outputs:
+  detector: viovision/runs/detect/runs/train/viovision_yolo11n/weights/best.pt
+  rider_cnn: models/weights/rider_multilabel_cnn.pt
+  seatbelt: models/weights/seatbelt.pt
+  trocr: models/weights/trocr_plate
+
+# Dataset pack paths produced by prepare_all_datasets.py
+packs:
+  yolo: data/datasets/quick_viovision/data.yaml
+  rider: data/datasets/rider_multilabel
+  seatbelt: data/datasets/seatbelt_cls
+  ocr_lines: data/ocr/lines
+  eval_manifest: data/eval/manifest.json

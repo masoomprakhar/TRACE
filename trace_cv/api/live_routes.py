@@ -5,7 +5,7 @@ from __future__ import annotations
 import base64
 import threading
 import time
-from typing import Iterator
+from typing import Iterator, Optional
 
 import cv2
 import numpy as np
@@ -89,7 +89,7 @@ def _mjpeg_frames(source: str | None, url: str | None) -> Iterator[bytes]:
 @router.get("/stream")
 def live_stream(
     source: str = Query(default="0", description="Local device index (0 = default webcam)"),
-    url: str | None = Query(default=None, description="RTSP or HTTP CCTV URL"),
+    url: Optional[str] = Query(default=None, description="RTSP or HTTP CCTV URL"),
 ):
     """MJPEG proxy for CCTV feeds browsers cannot play natively (RTSP, etc.)."""
     return StreamingResponse(

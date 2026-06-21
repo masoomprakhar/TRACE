@@ -18,8 +18,10 @@ from __future__ import annotations
 
 import csv
 import io
+import json
 import re
 from pathlib import Path
+from typing import Optional
 
 import cv2
 import numpy as np
@@ -52,8 +54,10 @@ async def analyze(file: UploadFile = File(...)) -> dict:
     if img is None:
         raise HTTPException(status_code=400, detail="could not decode image")
 
-    result = get_pipeline().process_image(img, location="Upload")
-    # Drop the in-memory image array and internal records from the response.
+    try:
+        result = get_pipeline().process_image(img, location="Upload")
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"analysis failed: {exc}") from exc
     result.pop("annotated", None)
     result.pop("records", None)
     result.pop("evidence_path", None)
@@ -62,8 +66,8 @@ async def analyze(file: UploadFile = File(...)) -> dict:
 
 @router.get("/violations")
 def list_violations(
-    type: str | None = Query(default=None),
-    plate: str | None = Query(default=None),
+    type: Optional[str] = Query(default=None),
+    plate: Optional[str] = Query(default=None),
     limit: int = Query(default=20, ge=1, le=200),
     offset: int = Query(default=0, ge=0),
 ) -> dict:
@@ -72,8 +76,8 @@ def list_violations(
 
 @router.get("/violations.csv")
 def violations_csv(
-    type: str | None = Query(default=None),
-    plate: str | None = Query(default=None),
+    type: Optional[str] = Query(default=None),
+    plate: Optional[str] = Query(default=None),
 ):
     """Export violation records as CSV (downloadable report). Honors the same
     type/plate filters as the table; exports everything when unfiltered."""
@@ -151,6 +155,21 @@ def event_evidence(event_id: str):
 @router.get("/analytics/summary")
 def analytics_summary() -> dict:
     return get_repo().summary()
+
+
+@router.get("/eval/summary")
+def eval_summary() -> dict:
+    """Latest offline evaluation metrics (mAP, F1, OCR) for the dashboard."""
+    path = Path(__file__).resolve().parents[2] / "data" / "eval" / "eval-summary.json"
+    if not path.exists():
+        # Fall back to full results.json if summary not generated yet.
+        full = path.parent / "results.json"
+        if full.exists():
+            from trace_cv.evaluation.summary_export import build_eval_summary
+
+            return build_eval_summary(json.loads(full.read_text()))
+        return {"metrics": {}, "note": "Run scripts/run_full_eval.py to generate metrics."}
+    return json.loads(path.read_text())
 
 
 @router.get("/plates/search")

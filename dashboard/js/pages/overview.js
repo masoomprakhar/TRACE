@@ -1,8 +1,7 @@
 import { $, num, VIOLATION_ORDER } from "../formatters.js";
-import { getOverviewKpis, getRecentViolations, getMonthlyTrend, getSeverityBreakdown, violationDistribution } from "../data-bridge.js";
-import { MOCK } from "../mock-data.js";
+import { getOverviewKpis, getRecentViolations, getHourlyTrend, getSeverityBreakdown, violationDistribution, getViolationsByLocation, getTopPlates } from "../data-bridge.js";
 import { kpiCard, recentViolationItem, emptyState, animateConfBars } from "../components.js";
-import { configureChartDefaults, doughnutChart, lineChart, severityDoughnut, renderSparklines, renderDistributionLegend } from "../charts.js";
+import { configureChartDefaults, doughnutChart, lineChart, severityDoughnut, renderDistributionLegend, renderSparklines } from "../charts.js";
 import { navigate } from "../router.js";
 
 const KPI_ICONS = {
@@ -20,60 +19,79 @@ export async function initOverview() {
   kpiGrid.innerHTML = '<div class="skeleton-card col-span-5"><div class="skel skel-line"></div></div>';
 
   const kpis = await getOverviewKpis();
-  const summary = { by_type: kpis.byType, total: kpis.totalViolations };
+  const summary = { by_type: kpis.byType, total: kpis.totalViolations, by_hour: kpis.byHour };
   const distribution = violationDistribution(summary);
   const total = distribution.reduce((s, d) => s + d.count, 0);
   const severity = getSeverityBreakdown(summary);
-  const trend = getMonthlyTrend(summary);
+  const trend = getHourlyTrend(summary);
   const recent = await getRecentViolations(5);
+  const byLocation = await getViolationsByLocation();
 
   const cards = [
-    { label: "Total Violations", value: num(kpis.totalViolations), trend: kpis.trends.totalViolations, spark: kpis.sparklines.totalViolations, color: "#0D6EFD" },
-    { label: "Vehicles Scanned", value: num(kpis.vehiclesScanned), trend: kpis.trends.vehiclesScanned, spark: kpis.sparklines.vehiclesScanned, color: "#8B5CF6" },
-    { label: "High Severity", value: num(kpis.highSeverity), trend: kpis.trends.highSeverity, spark: kpis.sparklines.highSeverity, color: "#EF4444" },
-    { label: "Active Cameras", value: num(kpis.activeCameras), status: "Online", spark: null, color: "#10B981" },
-    { label: "Challans Issued", value: num(kpis.challansIssued), trend: kpis.trends.challansIssued, spark: kpis.sparklines.challansIssued, color: "#F59E0B" },
+    {
+      label: "Total Violations",
+      value: num(kpis.totalViolations),
+      color: "#0D6EFD",
+      trend: kpis.trends?.totalViolations,
+      sparkData: kpis.sparklines?.totalViolations,
+    },
+    {
+      label: "Vehicles Scanned",
+      value: num(kpis.vehiclesScanned),
+      color: "#8B5CF6",
+      trend: kpis.trends?.vehiclesScanned,
+      sparkData: kpis.sparklines?.vehiclesScanned,
+    },
+    {
+      label: "High Severity",
+      value: num(kpis.highSeverity),
+      color: "#EF4444",
+      trend: kpis.trends?.highSeverity,
+      sparkData: kpis.sparklines?.highSeverity,
+    },
+    {
+      label: "Active Cameras",
+      value: num(kpis.activeCameras),
+      color: "#10B981",
+      status: kpis.activeCameras ? "Online" : "—",
+    },
+    {
+      label: "Challans Issued",
+      value: num(kpis.challansIssued),
+      color: "#F59E0B",
+      trend: kpis.trends?.challansIssued,
+      sparkData: kpis.sparklines?.challansIssued,
+    },
   ];
 
   kpiGrid.innerHTML = cards.map((c) => kpiCard({
     label: c.label,
     value: c.value,
-    trend: c.trend,
-    sparkData: c.spark,
-    icon: KPI_ICONS[c.label],
+    icon: KPI_ICONS[c.label] || "",
     color: c.color,
     status: c.status,
+    trend: c.trend,
+    sparkData: c.sparkData,
   })).join("");
   renderSparklines(kpiGrid);
 
-  // Live feed placeholder with overlays
-  const overlays = MOCK.liveOverlays.map((o) =>
-    `<div class="live-overlay-box" style="${o.style};border-color:${o.color}">
-      <span class="live-overlay-label" style="background:${o.color}">${o.label} ${o.pct}%</span>
-    </div>`
-  ).join("");
   const liveWrap = $("#overview-live-feed");
   if (liveWrap) {
     liveWrap.innerHTML = `
       <div class="live-feed-header">
-        <span>Camera: Ring Road — AI Cam 47</span>
+        <span>Camera: Ring Road — Junction Cam 01</span>
         <span class="live-badge">LIVE</span>
       </div>
       <div class="live-feed-body" id="overview-live-body">
         <img src="assets/live-placeholder.png" alt="Live traffic feed" class="live-feed-img" />
-        <div class="live-overlays">${overlays}</div>
       </div>
       <div class="live-feed-footer">
-        <span>FPS: 24</span><span>Res: 1080p</span>
-        <button class="btn btn-sm btn-primary" id="overview-go-live">Go Live →</button>
-      </div>
-      <div class="camera-strip">${MOCK.cameras.map((c) =>
-        `<button class="cam-thumb ${c.active ? "active" : ""}" data-cam="${c.id}">${c.name}</button>`
-      ).join("")}</div>`;
+        <span>${kpis.processingFps ? `~${Number(kpis.processingFps).toFixed(1)} FPS` : "1080p · Demo feed"}</span>
+        <button class="btn btn-sm btn-primary" id="overview-go-live">Open Live Monitor →</button>
+      </div>`;
     $("#overview-go-live")?.addEventListener("click", () => navigate("live"));
   }
 
-  // Distribution chart — chart only; legend is custom HTML (no duplicate Chart.js legend)
   const typeEntries = VIOLATION_ORDER.map((k) => [k, kpis.byType?.[k] || 0]);
   doughnutChart("chart-overview-type", typeEntries, { legend: false, cutout: "72%" });
   const totalEl = $("#overview-dist-total");
@@ -82,48 +100,50 @@ export async function initOverview() {
   if (footTotal) footTotal.textContent = num(total);
   renderDistributionLegend("overview-dist-legend", distribution);
 
-  // Recent violations
   const recentEl = $("#overview-recent");
   if (recentEl) {
     recentEl.innerHTML = recent.length
       ? recent.map(recentViolationItem).join("")
-      : emptyState("No recent violations", "Analyze a frame or seed demo data.");
+      : emptyState("No recent violations", "Run: python -m trace_cv.cli seed-demo -n 40");
     recentEl.querySelectorAll(".recent-item").forEach((item) => {
       item.addEventListener("click", () => window.openEvidence?.(item.dataset.id));
     });
   }
 
-  // Trend
-  lineChart("chart-overview-trend", trend.map((t) => t.day), trend.map((t) => t.count));
+  if (trend.length) {
+    lineChart("chart-overview-trend", trend.map((t) => t.day), trend.map((t) => t.count));
+  }
 
-  // Severity
   severityDoughnut("chart-overview-severity", severity);
   const sevCenter = $("#overview-severity-center");
   if (sevCenter) sevCenter.textContent = num(kpis.highSeverity);
 
-  // Hotspots mini
   const hotspotsEl = $("#overview-hotspots");
   if (hotspotsEl) {
-    hotspotsEl.innerHTML = MOCK.hotspots.map((h, i) =>
-      `<div class="hotspot-rank"><span class="hotspot-num">${i + 1}</span><span class="hotspot-name">${h.name}</span><span class="hotspot-count">${h.count}</span></div>`
-    ).join("");
+    const rows = Object.entries(byLocation).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    hotspotsEl.innerHTML = rows.length
+      ? rows.map(([name, count], i) =>
+        `<div class="hotspot-rank"><span class="hotspot-num">${i + 1}</span><span class="hotspot-name">${name}</span><span class="hotspot-count">${count}</span></div>`
+      ).join("")
+      : emptyState("No location data yet", "Violations will group by camera location.");
   }
 
-  // ANPR widget
   const anprInput = $("#overview-anpr-input");
   const anprBtn = $("#overview-anpr-btn");
   const runAnpr = () => {
     const q = anprInput?.value?.trim();
-    if (q) navigate("anpr", { q });
-    else navigate("anpr");
+    navigate("anpr", q ? { q } : {});
   };
   anprBtn?.addEventListener("click", runAnpr);
   anprInput?.addEventListener("keydown", (e) => { if (e.key === "Enter") runAnpr(); });
+
   const tags = $("#overview-anpr-tags");
   if (tags) {
-    tags.innerHTML = MOCK.recentSearches.map((p) =>
-      `<button class="tag-chip" data-plate="${p}">${p}</button>`
-    ).join("");
+    const plates = await getTopPlates();
+    const top = plates.slice(0, 6).map((p) => p.plate).filter(Boolean);
+    tags.innerHTML = top.length
+      ? top.map((p) => `<button class="tag-chip" data-plate="${p}">${p}</button>`).join("")
+      : '<span class="text-muted text-sm">No plates in database yet</span>';
     tags.querySelectorAll(".tag-chip").forEach((btn) => {
       btn.addEventListener("click", () => navigate("anpr", { q: btn.dataset.plate }));
     });

@@ -73,19 +73,22 @@ class ModelPaths:
     # Plate localization: "yolo" (local weights), "roboflow" (workflow API), or null ROI fallback.
     plate_backend: str = "yolo"
     roboflow_workspace: str = "prakhar-parkar"
-    roboflow_workflow_id: str = "general-segmentation-api"
+    roboflow_workflow_id: str = "general-segmentation-api-4"
     roboflow_plate_classes: str = "license_plate"
     # Helmet: "local" (pkl/pt), "roboflow" workflow, or legacy infer model_id.
     helmet_backend: str = "local"
-    roboflow_helmet_workflow_id: str = "general-segmentation-api"
+    roboflow_helmet_workflow_id: str = "general-segmentation-api-4"
     roboflow_helmet_classes: str = "helmet, no_helmet"
     roboflow_helmet_model_id: str | None = "helmet-gj8do/2"
     # Rider state: cnn (multi-label), svm/helmet path, or roboflow helmet workflow.
     rider_backend: str = "cnn"
     rider_cnn_weights: str = "models/weights/rider_multilabel_cnn.pt"
-    # OCR: trocr (fine-tuned) or easyocr.
+    # OCR: trocr (fine-tuned), roboflow (hosted char model/workflow), or easyocr.
     ocr_backend: str = "trocr"
     trocr_model_path: str = "models/weights/trocr_plate"
+    roboflow_ocr_model_id: str | None = "ocr-character-cgtzm/4"
+    roboflow_ocr_workflow_id: str | None = "general-segmentation-api-4"
+    roboflow_ocr_workflow_classes: str = "-, 0, 1"
     # VioVision integration: custom YOLO class remap + inference size.
     detector_imgsz: int = 640
     detector_backend: str = "coco"  # "coco" | "viovision"
