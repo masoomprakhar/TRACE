@@ -6,20 +6,20 @@
     "ocr": true,
     "helmet": true,
     "seatbelt": true,
-    "plate": false
+    "plate": true
   },
   "n_samples": 63,
-  "exact_match_accuracy": 0.9841,
+  "exact_match_accuracy": 0.873,
   "violation_classification": {
     "per_label": {
       "no_helmet": {
         "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0,
-        "accuracy": 1.0,
-        "tp": 4,
+        "recall": 0.25,
+        "f1": 0.4,
+        "accuracy": 0.9524,
+        "tp": 1,
         "fp": 0,
-        "fn": 0,
+        "fn": 3,
         "tn": 59
       },
       "no_seatbelt": {
@@ -36,11 +36,11 @@
         "precision": 0.0,
         "recall": 0.0,
         "f1": 0.0,
-        "accuracy": 1.0,
+        "accuracy": 0.9206,
         "tp": 0,
-        "fp": 0,
+        "fp": 5,
         "fn": 0,
-        "tn": 63
+        "tn": 58
       },
       "wrong_side": {
         "precision": 0.0,
@@ -85,17 +85,17 @@
     },
     "macro": {
       "precision": 0.1429,
-      "recall": 0.1429,
-      "f1": 0.1429
+      "recall": 0.0357,
+      "f1": 0.0571
     },
     "micro": {
-      "precision": 0.8,
-      "recall": 1.0,
-      "f1": 0.8889,
-      "accuracy": 0.8,
-      "tp": 4,
-      "fp": 1,
-      "fn": 0,
+      "precision": 0.1429,
+      "recall": 0.25,
+      "f1": 0.1818,
+      "accuracy": 0.1,
+      "tp": 1,
+      "fp": 6,
+      "fn": 3,
       "tn": 0
     }
   },
@@ -106,22 +106,22 @@
     "note": "Not validly measured: holdout lacks full per-image detection GT, and the previous 0.8333 was an artifact of the old metric scoring absent classes 1.0 (now fixed in evaluation/metrics.py). Regenerate with full GT via scripts/run_full_eval.py."
   },
   "plate_detection": {
-    "map50": 0.8578,
-    "map5095": 0.6364,
+    "map50": 0.8728,
+    "map5095": 0.6752,
     "per_class_ap50": {
-      "license_plate": 0.8578
+      "license_plate": 0.8728
     }
   },
   "ocr": {
-    "exact_match": null,
-    "mean_cer": null,
+    "exact_match": 0.0,
+    "mean_cer": 0.9731,
     "note": "OCR metrics require plate ground truth in manifest"
   },
   "efficiency": {
     "iterations": 20,
-    "mean_ms_per_frame": 2440.89,
-    "fps": 0.41,
-    "p95_ms": 5428.75
+    "mean_ms_per_frame": 1773.52,
+    "fps": 0.56,
+    "p95_ms": 2341.41
   },
   "samples": [
     {
@@ -130,17 +130,19 @@
         "no_helmet"
       ],
       "pred_violations": [
-        "no_helmet"
+        "triple_riding"
       ],
-      "match": true,
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
     {
       "id": "helmet_24_jpg.rf.b1237395c6ca93296dd9ae49dd4ddf22",
       "gt_violations": [],
-      "pred_violations": [],
-      "match": true,
+      "pred_violations": [
+        "triple_riding"
+      ],
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
@@ -157,18 +159,18 @@
       "gt_violations": [
         "no_helmet"
       ],
-      "pred_violations": [
-        "no_helmet"
-      ],
-      "match": true,
+      "pred_violations": [],
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
     {
       "id": "helmet_42_jpeg.rf.e04fcb117fc45b8e9d40830640120555",
       "gt_violations": [],
-      "pred_violations": [],
-      "match": true,
+      "pred_violations": [
+        "triple_riding"
+      ],
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
@@ -223,26 +225,28 @@
       "gt_violations": [
         "no_helmet"
       ],
-      "pred_violations": [
-        "no_helmet"
-      ],
-      "match": true,
+      "pred_violations": [],
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
     {
       "id": "helmet_gettyimages-172702895-612x612_jpg.rf.da197f35d6ff7d256f049e24940e00ce",
       "gt_violations": [],
-      "pred_violations": [],
-      "match": true,
+      "pred_violations": [
+        "triple_riding"
+      ],
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
     {
       "id": "helmet_gettyimages-175422772-612x612_jpg.rf.51ac0a05d959d74086bc697307c87947",
       "gt_violations": [],
-      "pred_violations": [],
-      "match": true,
+      "pred_violations": [
+        "triple_riding"
+      ],
+      "match": false,
       "processing_ms": 0.0,
       "n_detections": 1
     },
@@ -251,7 +255,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 4846.96,
+      "processing_ms": 56.52,
       "n_detections": 2
     },
     {
@@ -259,7 +263,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 43.52,
+      "processing_ms": 71.64,
       "n_detections": 2
     },
     {
@@ -267,7 +271,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 64.05,
+      "processing_ms": 75.58,
       "n_detections": 1
     },
     {
@@ -275,7 +279,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 69.65,
+      "processing_ms": 61.74,
       "n_detections": 2
     },
     {
@@ -283,7 +287,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 126.32,
+      "processing_ms": 93.36,
       "n_detections": 1
     },
     {
@@ -291,7 +295,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 157.54,
+      "processing_ms": 225.83,
       "n_detections": 1
     },
     {
@@ -299,7 +303,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 91.26,
+      "processing_ms": 66.63,
       "n_detections": 1
     },
     {
@@ -307,7 +311,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 122.13,
+      "processing_ms": 78.3,
       "n_detections": 1
     },
     {
@@ -315,7 +319,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 96.74,
+      "processing_ms": 52.64,
       "n_detections": 1
     },
     {
@@ -323,7 +327,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 72.99,
+      "processing_ms": 59.41,
       "n_detections": 2
     },
     {
@@ -331,7 +335,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 135.48,
+      "processing_ms": 80.15,
       "n_detections": 1
     },
     {
@@ -339,7 +343,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 103.9,
+      "processing_ms": 76.09,
       "n_detections": 1
     },
     {
@@ -347,7 +351,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 166.18,
+      "processing_ms": 81.55,
       "n_detections": 1
     },
     {
@@ -355,7 +359,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 83.08,
+      "processing_ms": 56.52,
       "n_detections": 3
     },
     {
@@ -363,7 +367,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 156.75,
+      "processing_ms": 94.47,
       "n_detections": 1
     },
     {
@@ -371,7 +375,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 124.87,
+      "processing_ms": 90.22,
       "n_detections": 1
     },
     {
@@ -379,7 +383,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 106.2,
+      "processing_ms": 84.47,
       "n_detections": 1
     },
     {
@@ -387,7 +391,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 135.52,
+      "processing_ms": 58.04,
       "n_detections": 1
     },
     {
@@ -395,7 +399,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 84.59,
+      "processing_ms": 54.63,
       "n_detections": 1
     },
     {
@@ -403,7 +407,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 124.88,
+      "processing_ms": 95.7,
       "n_detections": 1
     },
     {
@@ -411,7 +415,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 130.94,
+      "processing_ms": 94.68,
       "n_detections": 1
     },
     {
@@ -419,7 +423,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 129.29,
+      "processing_ms": 116.08,
       "n_detections": 1
     },
     {
@@ -427,7 +431,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 64.86,
+      "processing_ms": 52.62,
       "n_detections": 1
     },
     {
@@ -435,7 +439,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 122.75,
+      "processing_ms": 58.17,
       "n_detections": 1
     },
     {
@@ -443,7 +447,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 168.02,
+      "processing_ms": 92.42,
       "n_detections": 1
     },
     {
@@ -451,7 +455,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 102.24,
+      "processing_ms": 76.5,
       "n_detections": 2
     },
     {
@@ -459,7 +463,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 117.99,
+      "processing_ms": 97.86,
       "n_detections": 1
     },
     {
@@ -467,7 +471,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 111.55,
+      "processing_ms": 101.02,
       "n_detections": 1
     },
     {
@@ -475,7 +479,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 56.8,
+      "processing_ms": 62.68,
       "n_detections": 1
     },
     {
@@ -483,7 +487,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 61.19,
+      "processing_ms": 64.73,
       "n_detections": 1
     },
     {
@@ -491,7 +495,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 150.72,
+      "processing_ms": 102.36,
       "n_detections": 1
     },
     {
@@ -499,7 +503,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 103.85,
+      "processing_ms": 79.96,
       "n_detections": 1
     },
     {
@@ -507,7 +511,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 100.09,
+      "processing_ms": 84.88,
       "n_detections": 1
     },
     {
@@ -515,7 +519,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 59.06,
+      "processing_ms": 69.75,
       "n_detections": 2
     },
     {
@@ -523,7 +527,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 146.36,
+      "processing_ms": 104.62,
       "n_detections": 1
     },
     {
@@ -531,7 +535,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 164.75,
+      "processing_ms": 120.82,
       "n_detections": 1
     },
     {
@@ -539,7 +543,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 195.36,
+      "processing_ms": 94.38,
       "n_detections": 1
     },
     {
@@ -547,7 +551,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 131.17,
+      "processing_ms": 89.06,
       "n_detections": 1
     },
     {
@@ -555,7 +559,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 101.08,
+      "processing_ms": 87.13,
       "n_detections": 0
     },
     {
@@ -563,7 +567,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 174.91,
+      "processing_ms": 102.65,
       "n_detections": 1
     },
     {
@@ -571,7 +575,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 99.99,
+      "processing_ms": 68.01,
       "n_detections": 2
     },
     {
@@ -579,7 +583,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 163.61,
+      "processing_ms": 101.04,
       "n_detections": 1
     },
     {
@@ -587,7 +591,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 146.82,
+      "processing_ms": 88.86,
       "n_detections": 1
     },
     {
@@ -595,7 +599,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 240.16,
+      "processing_ms": 90.84,
       "n_detections": 0
     },
     {
@@ -603,7 +607,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 125.85,
+      "processing_ms": 99.87,
       "n_detections": 2
     },
     {
@@ -611,7 +615,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 117.2,
+      "processing_ms": 87.83,
       "n_detections": 1
     },
     {
@@ -619,7 +623,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 137.41,
+      "processing_ms": 99.34,
       "n_detections": 1
     },
     {
@@ -627,7 +631,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 105.45,
+      "processing_ms": 88.79,
       "n_detections": 1
     },
     {
@@ -635,7 +639,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 116.91,
+      "processing_ms": 97.54,
       "n_detections": 1
     },
     {
@@ -643,7 +647,7 @@
       "gt_violations": [],
       "pred_violations": [],
       "match": true,
-      "processing_ms": 120.35,
+      "processing_ms": 97.61,
       "n_detections": 1
     }
   ],

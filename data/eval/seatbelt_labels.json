@@ -1,0 +1,94 @@
+{
+  "samples": [
+    {
+      "file": "2024-02-seatbelt-camera-qld.jpg",
+      "cls": "no_belt",
+      "note": "driver, no strap"
+    },
+    {
+      "file": "image3525_png.jpg",
+      "cls": "belt",
+      "note": "strap visible across chest"
+    },
+    {
+      "file": "image3535_png.jpg",
+      "cls": "belt",
+      "note": "strap visible"
+    },
+    {
+      "file": "seatbelt.webp",
+      "cls": "belt",
+      "note": "buckling, strap across torso"
+    },
+    {
+      "file": "images (3).jpeg",
+      "cls": "belt",
+      "note": "black strap on red shirt"
+    },
+    {
+      "file": "images (5).jpeg",
+      "cls": "no_belt",
+      "note": "through windshield, no strap"
+    },
+    {
+      "file": "images (6).jpeg",
+      "cls": "belt",
+      "note": "both occupants fastening belts"
+    },
+    {
+      "file": "images (7).jpeg",
+      "cls": "belt",
+      "note": "buckling grey belt"
+    },
+    {
+      "file": "images (8).jpeg",
+      "cls": "belt",
+      "note": "woman buckling"
+    },
+    {
+      "file": "images (9).jpeg",
+      "cls": "belt",
+      "note": "buckling close-up"
+    },
+    {
+      "file": "xyzabc (24).jpeg",
+      "cls": "no_belt",
+      "note": "night, strap hanging unused"
+    },
+    {
+      "file": "xyzabc (150).jpeg",
+      "cls": "no_belt",
+      "note": "night interior"
+    },
+    {
+      "file": "xyzabc (170).jpeg",
+      "cls": "no_belt",
+      "note": "night, looking down"
+    },
+    {
+      "file": "xyzabc (215).jpeg",
+      "cls": "no_belt",
+      "note": "night, on phone, no strap"
+    },
+    {
+      "file": "xyzabc (242).jpeg",
+      "cls": "no_belt",
+      "note": "hoodie, no strap"
+    },
+    {
+      "file": "xyzabc (253).jpeg",
+      "cls": "no_belt",
+      "note": "strap retracted, not worn"
+    },
+    {
+      "file": "videonetics-ai-enabled-seat-belt-detection-technology-920x533.jpg",
+      "cls": "no_belt",
+      "note": "CCTV front view, driver no visible strap"
+    },
+    {
+      "file": "50556f60-82c0-44d5-9f1b-e651908c06dd_6f7b0e0a.webp",
+      "cls": "belt",
+      "note": "bus driver wearing belt"
+    }
+  ]
+}

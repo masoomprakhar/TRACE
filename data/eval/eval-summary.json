@@ -5,7 +5,7 @@
     "detector": true,
     "ocr": true,
     "helmet": true,
-    "seatbelt": false,
+    "seatbelt": true,
     "plate": true
   },
   "metrics": {

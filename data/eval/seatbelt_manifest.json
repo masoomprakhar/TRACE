@@ -1,54 +1,202 @@
 {
   "samples": [
     {
-      "image": "images/seatbelt/1625227980313_jpg.rf.7bf788eaffb20efaead2f8b665038d3d.jpg",
+      "image": "images/seatbelt/manual/manual_14_xyzabc_215.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "night, on phone, no strap"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_13_xyzabc_170.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "night, looking down"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_05_images_3.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "black strap on red shirt"
+      }
     },
     {
-      "image": "images/seatbelt/1625227980985_jpg.rf.ee94412553bf65b6c220f726298242fc.jpg",
+      "image": "images/seatbelt/manual/manual_10_images_9.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "buckling close-up"
+      }
     },
     {
-      "image": "images/seatbelt/1625227981183_jpg.rf.df20e269e864a4a8356b979b51484ac0.jpg",
+      "image": "images/seatbelt/manual/manual_06_images_5.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "through windshield, no strap"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_08_images_7.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "buckling grey belt"
+      }
     },
     {
-      "image": "images/seatbelt/799f_png.rf.8f019ce8fa9935c1205de18ca8ec84d3.jpg",
+      "image": "images/seatbelt/manual/manual_17_videonetics-ai-enabled-seat-belt-detection-technology-920x533.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [
         "no_seatbelt"
       ],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "CCTV front view, driver no visible strap"
+      }
     },
     {
-      "image": "images/seatbelt/809_png.rf.a3d967c2cf9309abd63c3eae156c891b.jpg",
+      "image": "images/seatbelt/manual/manual_07_images_6.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "both occupants fastening belts"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_11_xyzabc_24.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [
         "no_seatbelt"
       ],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "night, strap hanging unused"
+      }
     },
     {
-      "image": "images/seatbelt/891_png.rf.f0166a94e9d518540aa5001a5161adf4.jpg",
+      "image": "images/seatbelt/manual/manual_16_xyzabc_253.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [
         "no_seatbelt"
       ],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "strap retracted, not worn"
+      }
     },
     {
-      "image": "images/seatbelt/999i_png.rf.159956c2064e1d4cba53c5407c0f91c4.jpg",
+      "image": "images/seatbelt/manual/manual_02_image3525_png.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "strap visible across chest"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_12_xyzabc_150.jpg",
       "eval_kind": "seatbelt_violation",
       "violations": [
         "no_seatbelt"
       ],
-      "detail": {}
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "night interior"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_03_image3535_png.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "strap visible"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_15_xyzabc_242.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "hoodie, no strap"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_18_50556f60-82c0-44d5-9f1b-e651908c06dd_6f7b0e0a.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "bus driver wearing belt"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_09_images_8.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "woman buckling"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_01_2024-02-seatbelt-camera-qld.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "no_belt",
+        "note": "driver, no strap"
+      }
+    },
+    {
+      "image": "images/seatbelt/manual/manual_04_seatbelt.jpg",
+      "eval_kind": "seatbelt_violation",
+      "violations": [],
+      "detail": {
+        "source": "seatbelt_manual",
+        "cls": "belt",
+        "note": "buckling, strap across torso"
+      }
     },
     {
       "image": "images/seatbelt/neg_helmet_14_jpg.rf.b8e606a2377aea36d43ff2299d8e05b0.jpg",
