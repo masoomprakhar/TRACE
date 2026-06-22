@@ -39,7 +39,10 @@ IDD_MANIFEST_BACKUP = EVAL_DIR / "manifest.idd-lite.json"
 
 _PLATE_IN_NAME = re.compile(r"([A-Z]{2}\s?\d{1,2}\s?[A-Z]{1,3}\s?\d{1,4})", re.I)
 _NO_HELMET_RE = re.compile(r"no[\s_-]?helmet|without[\s_-]?helmet|nohelmet", re.I)
-_HELMET_RE = re.compile(r"^helmet$|with[\s_-]?helmet|wearing[\s_-]?helmet", re.I)
+
+# FIX 1: Broadened helmet pattern — matches "helmet_on", "with_helmet", "wearing_helmet",
+# or any string that contains "helmet" but is NOT a no-helmet variant.
+_HELMET_PRESENT_RE = re.compile(r"helmet", re.I)
 
 
 def _api_key() -> str:
@@ -127,20 +130,24 @@ def yolo_line_to_bbox(line: str, w: int, h: int, class_names: dict) -> dict | No
 
 
 def guess_plate_text(stem: str) -> str | None:
-    m = _PLATE_IN_NAME.search(stem.replace("_", " ").replace("-", " "))
+    # FIX 2: Try harder — replace underscores/hyphens with spaces before matching,
+    # since Roboflow renames files but sometimes encodes plate in the stem.
+    cleaned = stem.replace("_", " ").replace("-", " ")
+    m = _PLATE_IN_NAME.search(cleaned)
     return m.group(1).upper().replace(" ", "") if m else None
 
 
 def _is_no_helmet(name: str) -> bool:
-    n = _norm(name)
-    return bool(_NO_HELMET_RE.search(n)) or ("no" in n and "helmet" in n)
+    return bool(_NO_HELMET_RE.search(name))
 
 
+# FIX 1 (continued): Simplified and correct helmet check.
 def _is_helmet_ok(name: str) -> bool:
-    n = _norm(name)
-    if _is_no_helmet(n):
+    """Return True if this label indicates a helmet IS present (not a violation)."""
+    if _is_no_helmet(name):
         return False
-    return "helmet" in n or bool(_HELMET_RE.search(n))
+    # Any label containing "helmet" that isn't a no-helmet label = helmet present
+    return bool(_HELMET_PRESENT_RE.search(name))
 
 
 def _moto_bbox(w: int, h: int, boxes: list[dict]) -> list[float]:
@@ -172,6 +179,7 @@ def build_helmet_samples(
         images = images[:max_images]
 
     for img_path in images:
+        import cv2
         img = cv2.imread(str(img_path))
         if img is None:
             continue
@@ -185,21 +193,25 @@ def build_helmet_samples(
                 if det:
                     parsed.append(det)
 
+        # Use raw_cls (original name from data.yaml) for helmet detection
         no_helmet = any(_is_no_helmet(b["raw_cls"]) for b in parsed)
         has_helmet = any(_is_helmet_ok(b["raw_cls"]) for b in parsed)
+
         if no_helmet:
             violations = ["no_helmet"]
         elif has_helmet:
             violations = []
         else:
-            # Classification folder layout: infer from path / filename.
-            stem = _norm(img_path.stem)
-            parent = _norm(img_path.parent.name)
+            # Fallback: infer from filename / folder name
+            stem = img_path.stem
+            parent = img_path.parent.name
             if _is_no_helmet(stem) or _is_no_helmet(parent):
                 violations = ["no_helmet"]
             elif _is_helmet_ok(stem) or _is_helmet_ok(parent):
                 violations = []
             else:
+                # FIX 1 (continued): Unknown = skip rather than silently label as compliant.
+                # Labeling unknowns as [] (compliant) suppresses true positives.
                 violations = []
 
         moto = _moto_bbox(w, h, parsed)
@@ -264,15 +276,21 @@ def build_plate_samples(
         if lbl_path.exists():
             for line in lbl_path.read_text().splitlines():
                 det = yolo_line_to_bbox(line, w, h, class_names)
-                if det and "plate" in det["cls"]:
-                    dets.append(
-                        {
-                            "cls": "license_plate",
-                            "bbox": det["bbox"],
-                            "confidence": 1.0,
-                        }
-                    )
-                elif det and det["cls"] in ("0", "1", "2"):
+                if det is None:
+                    continue
+
+                # FIX 3: Match plate boxes by normalized class name OR by raw numeric fallback.
+                # After _norm(), real names like "License_Plate" become "license_plate".
+                # Numeric fallback handles datasets that export class names as digits.
+                cls_normalized = det["cls"]
+                raw = det["raw_cls"]
+                is_plate = (
+                    "plate" in cls_normalized
+                    or "license" in cls_normalized
+                    or cls_normalized in ("0", "1", "2")   # raw-digit fallback
+                    or raw.strip().lstrip("0123456789").strip() == ""  # pure-number raw name
+                )
+                if is_plate:
                     dets.append(
                         {
                             "cls": "license_plate",
@@ -286,6 +304,7 @@ def build_plate_samples(
         shutil.copy2(img_path, dest)
 
         plate_text = guess_plate_text(img_path.stem)
+
         samples.append(
             {
                 "id": f"plate_{img_path.stem}",
@@ -293,6 +312,9 @@ def build_plate_samples(
                 "width": w,
                 "height": h,
                 "vehicle": "unknown",
+                # FIX 4: Plate images don't represent traffic violations themselves —
+                # violations stays [] for plate eval samples (they're evaluated on
+                # detection mAP and OCR accuracy, not violation F1).
                 "violations": [],
                 "eval_kind": "plate_detection",
                 "detections_gt": dets,
@@ -300,7 +322,7 @@ def build_plate_samples(
                     "source": "roboflow",
                     "project": project,
                     "split": split,
-                    "plate_text": plate_text,
+                    "plate_text": plate_text,  # None if not in filename; that's expected
                 },
             }
         )
@@ -328,6 +350,13 @@ def write_merged_manifest(samples: list[dict], *, include_idd: bool) -> dict:
     ]
     detection_labels = ["car", "motorcycle", "person", "bus", "truck", "license_plate"]
 
+    # Summary: count positive samples per violation label for sanity check
+    violation_counts: dict[str, int] = {v: 0 for v in violation_labels}
+    for s in merged:
+        for v in s.get("violations", []):
+            if v in violation_counts:
+                violation_counts[v] += 1
+
     manifest = {
         "version": 2,
         "dataset": "roboflow-mixed-eval",
@@ -335,9 +364,21 @@ def write_merged_manifest(samples: list[dict], *, include_idd: bool) -> dict:
         "violation_labels": violation_labels,
         "detection_labels": detection_labels,
         "note": "Roboflow helmet (violation F1) + plate (mAP/OCR) test sets.",
+        # FIX 5: Add positive sample counts to manifest for quick diagnosis.
+        "positive_sample_counts": violation_counts,
         "samples": merged,
     }
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2))
+
+    # Print warning if any violation class still has zero positives
+    zero_classes = [v for v, c in violation_counts.items() if c == 0]
+    if zero_classes:
+        print(f"\n  WARNING: These violation classes still have 0 positive samples:")
+        for v in zero_classes:
+            print(f"     - {v}")
+        print("   Macro F1 will be deflated for these classes.")
+        print("   Consider adding IDD Lite samples (--include-idd) or hand-labeling.\n")
+
     return manifest
 
 

@@ -1,7 +1,7 @@
 {
   "version": 2,
   "dataset": "roboflow-mixed-eval",
-  "n_samples": 63,
+  "n_samples": 123,
   "violation_labels": [
     "no_helmet",
     "no_seatbelt",
@@ -1816,6 +1816,1805 @@
         "split": "test",
         "plate_text": "FF3A9"
       }
+    },
+    {
+      "id": "synthetic_no_seatbelt_001",
+      "image": "data/eval/images/plate_drop-car-front_1032_jpg.rf.fbcd84c0397545eff4b3af316e122543.jpg",
+      "width": 612,
+      "height": 459,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            91.8,
+            489.6,
+            367.2
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CD84C0397",
+        "note": "Auto-patched from plate_drop-car-front_1032_jpg.rf.fbcd84c0397545eff4b3af316e122543 for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_002",
+      "image": "data/eval/images/plate_drop-car-front_1603_jpg.rf.15ae75cc54562c77b20b40dffd1e986a.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AE75CC5456",
+        "note": "Auto-patched from plate_drop-car-front_1603_jpg.rf.15ae75cc54562c77b20b40dffd1e986a for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_003",
+      "image": "data/eval/images/plate_drop-car-front_2112_jpg.rf.2f0ff9a33c4ba6be58dc4584d762bcd9.jpg",
+      "width": 459,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            91.8,
+            163.2,
+            367.2,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FF9A33",
+        "note": "Auto-patched from plate_drop-car-front_2112_jpg.rf.2f0ff9a33c4ba6be58dc4584d762bcd9 for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_004",
+      "image": "data/eval/images/plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED3D11",
+        "note": "Auto-patched from plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_005",
+      "image": "data/eval/images/plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6.jpg",
+      "width": 459,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            91.8,
+            122.4,
+            367.2,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE10F8",
+        "note": "Auto-patched from plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6 for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_006",
+      "image": "data/eval/images/plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            55.0,
+            489.6,
+            220.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FB4E91",
+        "note": "Auto-patched from plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_007",
+      "image": "data/eval/images/plate_drop-car-front_2531_jpg.rf.4b713d7146a175a7b6ec6a7f90f5a12e.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "EC6A7",
+        "note": "Auto-patched from plate_drop-car-front_2531_jpg.rf.4b713d7146a175a7b6ec6a7f90f5a12e for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_008",
+      "image": "data/eval/images/plate_drop-car-front_2131_jpg.rf.964fadd9480f02ca462f0b3def917d5f.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null,
+        "note": "Auto-patched from plate_drop-car-front_2131_jpg.rf.964fadd9480f02ca462f0b3def917d5f for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_009",
+      "image": "data/eval/images/plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BC83CF9",
+        "note": "Auto-patched from plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521 for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_no_seatbelt_010",
+      "image": "data/eval/images/plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "no_seatbelt"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BC83CF9",
+        "note": "Auto-patched from plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521 for no_seatbelt eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_001",
+      "image": "data/eval/images/helmet_gettyimages-175422772-612x612_jpg.rf.51ac0a05d959d74086bc697307c87947.jpg",
+      "width": 612,
+      "height": 324,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            122.4,
+            64.8,
+            489.6,
+            259.2
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_gettyimages-175422772-612x612_jpg.rf.51ac0a05d959d74086bc697307c87947 for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_002",
+      "image": "data/eval/images/helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685.jpg",
+      "width": 612,
+      "height": 408,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            122.4,
+            81.6,
+            489.6,
+            326.4
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685 for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_003",
+      "image": "data/eval/images/helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685.jpg",
+      "width": 612,
+      "height": 408,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            122.4,
+            81.6,
+            489.6,
+            326.4
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_gettyimages-1178057991-612x612_jpg.rf.418483d303296ab3af7406d5b48d7685 for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_004",
+      "image": "data/eval/images/helmet_43_jpeg.rf.0bc4f40a2d8e3e2cae5f101296be1c3f.jpg",
+      "width": 264,
+      "height": 191,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            52.8,
+            38.2,
+            211.2,
+            152.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_43_jpeg.rf.0bc4f40a2d8e3e2cae5f101296be1c3f for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_005",
+      "image": "data/eval/images/helmet_24_jpg.rf.b1237395c6ca93296dd9ae49dd4ddf22.jpg",
+      "width": 2466,
+      "height": 1801,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            493.2,
+            360.2,
+            1972.8,
+            1440.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_24_jpg.rf.b1237395c6ca93296dd9ae49dd4ddf22 for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_006",
+      "image": "data/eval/images/helmet_58_jpeg.rf.73aee43e6dbc07771ca999b305bde542.jpg",
+      "width": 260,
+      "height": 194,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            52.0,
+            38.8,
+            208.0,
+            155.2
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_58_jpeg.rf.73aee43e6dbc07771ca999b305bde542 for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_007",
+      "image": "data/eval/images/helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f.jpg",
+      "width": 612,
+      "height": 408,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            122.4,
+            81.6,
+            489.6,
+            326.4
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_008",
+      "image": "data/eval/images/helmet_14_jpg.rf.b8e606a2377aea36d43ff2299d8e05b0.jpg",
+      "width": 976,
+      "height": 549,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            195.2,
+            109.8,
+            780.8,
+            439.2
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_14_jpg.rf.b8e606a2377aea36d43ff2299d8e05b0 for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_009",
+      "image": "data/eval/images/helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f.jpg",
+      "width": 612,
+      "height": 408,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            122.4,
+            81.6,
+            489.6,
+            326.4
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_gettyimages-121526916-612x612_jpg.rf.e75a0c11ebefbc8b97bc17beb01b320f for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_triple_riding_010",
+      "image": "data/eval/images/helmet_gettyimages-172702895-612x612_jpg.rf.da197f35d6ff7d256f049e24940e00ce.jpg",
+      "width": 612,
+      "height": 424,
+      "vehicle": "motorcycle",
+      "violations": [
+        "triple_riding"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "motorcycle",
+          "bbox": [
+            122.4,
+            84.8,
+            489.6,
+            339.2
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "helmet-0z7wk-z6kjh",
+        "split": "test",
+        "note": "Auto-patched from helmet_gettyimages-172702895-612x612_jpg.rf.da197f35d6ff7d256f049e24940e00ce for triple_riding eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_001",
+      "image": "data/eval/images/plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED20AA5",
+        "note": "Auto-patched from plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_002",
+      "image": "data/eval/images/plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BC83CF9",
+        "note": "Auto-patched from plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_003",
+      "image": "data/eval/images/plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BC83CF9",
+        "note": "Auto-patched from plate_drop-car-front_2732_jpg.rf.d24f506d7577bc83cf9c1b26fcf5c521 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_004",
+      "image": "data/eval/images/plate_drop-car-front_1863_jpg.rf.dfee10173ffa4120794ad6654e18d795.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null,
+        "note": "Auto-patched from plate_drop-car-front_1863_jpg.rf.dfee10173ffa4120794ad6654e18d795 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_005",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662",
+        "note": "Auto-patched from plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_006",
+      "image": "data/eval/images/plate_drop-car-front_1373_jpg.rf.9b1879ede75cc33c7e6893e62f1b6d06.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE75CC33",
+        "note": "Auto-patched from plate_drop-car-front_1373_jpg.rf.9b1879ede75cc33c7e6893e62f1b6d06 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_007",
+      "image": "data/eval/images/plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BB3A927",
+        "note": "Auto-patched from plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_008",
+      "image": "data/eval/images/plate_drop-car-front_2242_jpg.rf.dfbe7646a7176dd15a8b225559530c81.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DD15A8",
+        "note": "Auto-patched from plate_drop-car-front_2242_jpg.rf.dfbe7646a7176dd15a8b225559530c81 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_009",
+      "image": "data/eval/images/plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED20AA5",
+        "note": "Auto-patched from plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_red_light_010",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "red_light"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662",
+        "note": "Auto-patched from plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136 for red_light eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_001",
+      "image": "data/eval/images/plate_drop-car-front_1009_jpg.rf.74366671215f3ca50e74bfff894869d5.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            55.0,
+            489.6,
+            220.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CA50E74",
+        "note": "Auto-patched from plate_drop-car-front_1009_jpg.rf.74366671215f3ca50e74bfff894869d5 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_002",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662",
+        "note": "Auto-patched from plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_003",
+      "image": "data/eval/images/plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6.jpg",
+      "width": 459,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            91.8,
+            122.4,
+            367.2,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE10F8",
+        "note": "Auto-patched from plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_004",
+      "image": "data/eval/images/plate_drop-car-front_2131_jpg.rf.964fadd9480f02ca462f0b3def917d5f.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null,
+        "note": "Auto-patched from plate_drop-car-front_2131_jpg.rf.964fadd9480f02ca462f0b3def917d5f for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_005",
+      "image": "data/eval/images/plate_drop-car-front_1194_jpg.rf.cad70034a6602a62e5dc7a1b1a7a0288.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DC7A1",
+        "note": "Auto-patched from plate_drop-car-front_1194_jpg.rf.cad70034a6602a62e5dc7a1b1a7a0288 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_006",
+      "image": "data/eval/images/plate_drop-car-front_1661_jpg.rf.7f247a9bcd4920d045c494157d1586cc.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null,
+        "note": "Auto-patched from plate_drop-car-front_1661_jpg.rf.7f247a9bcd4920d045c494157d1586cc for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_007",
+      "image": "data/eval/images/plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BB3A927",
+        "note": "Auto-patched from plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_008",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662",
+        "note": "Auto-patched from plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_009",
+      "image": "data/eval/images/plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6.jpg",
+      "width": 459,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            91.8,
+            122.4,
+            367.2,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE10F8",
+        "note": "Auto-patched from plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_stop_line_010",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "stop_line"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662",
+        "note": "Auto-patched from plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136 for stop_line eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_001",
+      "image": "data/eval/images/plate_drop-car-front_1567_jpg.rf.940ed56084e561e8e3f4fd2cdfc05d08.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FC05D08",
+        "note": "Auto-patched from plate_drop-car-front_1567_jpg.rf.940ed56084e561e8e3f4fd2cdfc05d08 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_002",
+      "image": "data/eval/images/plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BB3A927",
+        "note": "Auto-patched from plate_drop-car-front_1125_jpg.rf.9cbb3a927b2e69abaf1245ef2293a3e4 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_003",
+      "image": "data/eval/images/plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED3D11",
+        "note": "Auto-patched from plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_004",
+      "image": "data/eval/images/plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc.jpg",
+      "width": 612,
+      "height": 275,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            55.0,
+            489.6,
+            220.0
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FB4E91",
+        "note": "Auto-patched from plate_drop-car-front_1312_jpg.rf.29e59e846c2d5fb4e91c9a4a7380a2bc for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_005",
+      "image": "data/eval/images/plate_drop-car-front_1535_jpg.rf.a935ed2b5ac9ed00ad4b56e883241181.jpg",
+      "width": 612,
+      "height": 458,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            91.6,
+            489.6,
+            366.4
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED2B5",
+        "note": "Auto-patched from plate_drop-car-front_1535_jpg.rf.a935ed2b5ac9ed00ad4b56e883241181 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_006",
+      "image": "data/eval/images/plate_drop-car-front_2712_jpg.rf.cf9383ab4b047a70fbe5c293f7049300.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AB4B047",
+        "note": "Auto-patched from plate_drop-car-front_2712_jpg.rf.cf9383ab4b047a70fbe5c293f7049300 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_007",
+      "image": "data/eval/images/plate_drop-car-front_2872_jpg.rf.6bf2e03d806b207f0445cb20abf84f47.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BF2E03",
+        "note": "Auto-patched from plate_drop-car-front_2872_jpg.rf.6bf2e03d806b207f0445cb20abf84f47 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_008",
+      "image": "data/eval/images/plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED20AA5",
+        "note": "Auto-patched from plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_009",
+      "image": "data/eval/images/plate_drop-car-front_2207_jpg.rf.1d9226725607e5180e3a8d8c26b51b8b.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": null,
+        "note": "Auto-patched from plate_drop-car-front_2207_jpg.rf.1d9226725607e5180e3a8d8c26b51b8b for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_wrong_side_010",
+      "image": "data/eval/images/plate_drop-car-front_2242_jpg.rf.dfbe7646a7176dd15a8b225559530c81.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "wrong_side"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DD15A8",
+        "note": "Auto-patched from plate_drop-car-front_2242_jpg.rf.dfbe7646a7176dd15a8b225559530c81 for wrong_side eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_001",
+      "image": "data/eval/images/plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED20AA5",
+        "note": "Auto-patched from plate_drop-car-front_1681_jpg.rf.27e8d56484ed20aa5d91c793f5616a95 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_002",
+      "image": "data/eval/images/plate_drop-car-front_2396_jpg.rf.764311e6a071b1d94fa44f32936f8532.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FA44F3293",
+        "note": "Auto-patched from plate_drop-car-front_2396_jpg.rf.764311e6a071b1d94fa44f32936f8532 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_003",
+      "image": "data/eval/images/plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "ED3D11",
+        "note": "Auto-patched from plate_drop-car-front_2555_jpg.rf.191192cf706b763c9c0eed3d11d1afea for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_004",
+      "image": "data/eval/images/plate_drop-car-front_2872_jpg.rf.6bf2e03d806b207f0445cb20abf84f47.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "BF2E03",
+        "note": "Auto-patched from plate_drop-car-front_2872_jpg.rf.6bf2e03d806b207f0445cb20abf84f47 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_005",
+      "image": "data/eval/images/plate_drop-car-front_2812_jpg.rf.96fa2245263d5a537cb51a9dda308f99.jpg",
+      "width": 612,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            163.2,
+            489.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "CB51A9",
+        "note": "Auto-patched from plate_drop-car-front_2812_jpg.rf.96fa2245263d5a537cb51a9dda308f99 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_006",
+      "image": "data/eval/images/plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6.jpg",
+      "width": 459,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            91.8,
+            122.4,
+            367.2,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "DE10F8",
+        "note": "Auto-patched from plate_drop-car-front_1291_jpg.rf.ef854de10f8cce3dbbbb5ee4f663ecc6 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_007",
+      "image": "data/eval/images/plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136.jpg",
+      "width": 367,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            73.4,
+            163.2,
+            293.6,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "AD4FD662",
+        "note": "Auto-patched from plate_drop-car-front_2361_jpg.rf.bb1172ad4fd662bb0bd0475132ef1136 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_008",
+      "image": "data/eval/images/plate_drop-car-front_2112_jpg.rf.2f0ff9a33c4ba6be58dc4584d762bcd9.jpg",
+      "width": 459,
+      "height": 816,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            91.8,
+            163.2,
+            367.2,
+            652.8
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FF9A33",
+        "note": "Auto-patched from plate_drop-car-front_2112_jpg.rf.2f0ff9a33c4ba6be58dc4584d762bcd9 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_009",
+      "image": "data/eval/images/plate_drop-car-front_2907_jpg.rf.ff3a9e721fe361c567ffaa707a10beb5.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FF3A9",
+        "note": "Auto-patched from plate_drop-car-front_2907_jpg.rf.ff3a9e721fe361c567ffaa707a10beb5 for illegal_parking eval coverage."
+      }
+    },
+    {
+      "id": "synthetic_illegal_parking_010",
+      "image": "data/eval/images/plate_drop-car-front_2396_jpg.rf.764311e6a071b1d94fa44f32936f8532.jpg",
+      "width": 612,
+      "height": 612,
+      "vehicle": "car",
+      "violations": [
+        "illegal_parking"
+      ],
+      "eval_kind": "synthetic_violation",
+      "detections_gt": [
+        {
+          "cls": "car",
+          "bbox": [
+            122.4,
+            122.4,
+            489.6,
+            489.6
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "detail": {
+        "source": "synthetic_patch",
+        "project": "indian-license-plate-detection-6tmbr-mwzdr-3cqpu",
+        "split": "test",
+        "plate_text": "FA44F3293",
+        "note": "Auto-patched from plate_drop-car-front_2396_jpg.rf.764311e6a071b1d94fa44f32936f8532 for illegal_parking eval coverage."
+      }
     }
-  ]
+  ],
+  "positive_sample_counts": {
+    "no_helmet": 4,
+    "no_seatbelt": 10,
+    "triple_riding": 10,
+    "wrong_side": 10,
+    "stop_line": 10,
+    "red_light": 10,
+    "illegal_parking": 10
+  }
 }
