@@ -1,0 +1,11 @@
+# Railway — https://railway.app/new
+# Connect GitHub repo masoomprakhar/TRACE, set env vars, allocate 2 GB RAM.
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

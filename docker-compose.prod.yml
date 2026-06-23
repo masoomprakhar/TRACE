@@ -1,0 +1,27 @@
+# Production-style compose for VPS (2 GB+ RAM recommended).
+# Usage:
+#   cp .env.example .env   # fill ROBOFLOW_API_KEY
+#   docker compose -f docker-compose.prod.yml up -d --build
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - TRACE_CONFIG=${TRACE_CONFIG:-config/roboflow-fast.yaml}
+      - TRACE_LOG_LEVEL=INFO
+      - PORT=8000
+    volumes:
+      - trace_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+
+volumes:
+  trace_data:
