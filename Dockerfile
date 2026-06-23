@@ -2,18 +2,24 @@
 # Set env vars in Render (see render.yaml / docs/DEPLOY_RENDER.md).
 FROM python:3.11-slim
 
-# OpenCV + common numeric runtime libs.
+WORKDIR /app
+
+COPY requirements.txt requirements-ml.txt ./
+
+# build-essential/gcc: required to compile stringzilla (transitive ML dep).
+# Purged after pip install to keep the runtime image slim.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libgl1 \
         libglib2.0-0 \
         libgomp1 \
+        build-essential \
+        gcc \
+        g++ \
+    && pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt -r requirements-ml.txt \
+    && apt-get purge -y --auto-remove build-essential gcc g++ \
+    && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-
-# Core + ML deps so /api/analyze works (YOLO, EasyOCR, Roboflow SDK).
-COPY requirements.txt requirements-ml.txt ./
-RUN pip install --no-cache-dir -r requirements.txt -r requirements-ml.txt
 
 COPY . .
 RUN pip install --no-cache-dir -e . \
