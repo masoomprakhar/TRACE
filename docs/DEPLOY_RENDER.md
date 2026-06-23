@@ -40,6 +40,28 @@ python -m trace_cv.cli seed-demo -n 40
 
 Visit `https://<your-service>.onrender.com/#overview`.
 
+## Troubleshooting
+
+### "No open ports detected, continuing to scan…"
+
+This is a **transient Render message** while the container boots. If you then see:
+
+```
+Uvicorn running on http://0.0.0.0:10000
+```
+
+the deploy succeeded. Render uses `PORT=10000` by default; `scripts/render_start.sh` binds to it automatically.
+
+If deploy **fails** after 15 minutes:
+
+1. Set **Health Check Path** to `/api/health` (fast liveness — does not load ML models).
+2. Use **Starter** plan or higher (512 MB+ RAM).
+3. **Clear build cache & deploy** after pulling the latest `main`.
+
+### Site loads but analyze is slow / OOM
+
+First image analysis loads YOLO + EasyOCR into memory. Upgrade to a plan with more RAM if the service restarts on upload.
+
 ## Notes
 
 - **SQLite** (`data/trace.db`) is ephemeral on free/starter unless you add a [Render Disk](https://render.com/docs/disks) mounted at `/app/data`.

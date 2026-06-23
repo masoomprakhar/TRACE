@@ -37,12 +37,15 @@ _ID_RE = re.compile(r"^[A-Za-z0-9_\-]+$")
 
 
 @router.get("/health")
-def health() -> dict:
-    return {
-        "status": "ok",
-        "version": __version__,
-        "models": get_pipeline().model_status(),
-    }
+def health(full: bool = Query(False)) -> dict:
+    """Liveness probe — fast by default for Render/load balancers.
+
+    Pass ``?full=1`` (Settings page) to include lazy-loaded model status.
+    """
+    out = {"status": "ok", "version": __version__}
+    if full:
+        out["models"] = get_pipeline().model_status()
+    return out
 
 
 @router.post("/analyze")

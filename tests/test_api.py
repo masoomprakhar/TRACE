@@ -28,7 +28,7 @@ def _client(tmp_path):
 
 def test_health(tmp_path):
     client, _ = _client(tmp_path)
-    r = client.get("/api/health")
+    r = client.get("/api/health?full=1")
     assert r.status_code == 200
     body = r.json()
     assert body["status"] == "ok"

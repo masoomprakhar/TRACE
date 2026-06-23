@@ -9,7 +9,7 @@ const MODEL_ORDER = ["detector", "ocr", "helmet", "seatbelt", "plate"];
 
 export async function initSettingsPage() {
   try {
-    const h = await api.get("/api/health");
+    const h = await api.get("/api/health?full=1");
     $("#settings-status").textContent = h.status === "ok" ? "Operational" : "Degraded";
     $("#settings-status").className = `status-pill ${h.status === "ok" ? "ok" : "warn"}`;
     $("#settings-version").textContent = h.version ? `v${h.version}` : "—";

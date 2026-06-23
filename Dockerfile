@@ -30,7 +30,4 @@ RUN pip install --no-cache-dir -e . \
 ENV PORT=8000
 EXPOSE 8000
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:' + __import__('os').environ.get('PORT','8000') + '/api/health')" || exit 1
-
 CMD ["scripts/render_start.sh"]
