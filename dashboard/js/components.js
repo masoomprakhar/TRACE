@@ -65,45 +65,73 @@ export function severityBadge(types, confidence) {
   return `<span class="sev-badge" style="--sev-color:${colors[sev]}">${prettify(sev)}</span>`;
 }
 
-export function kpiCard({ label, value, trend, sparkData, icon, color = "#0D6EFD", status }) {
+const KPI_META_ICONS = {
+  target: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
+  clock: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+};
+
+function kpiTrendMeta(trend, status) {
+  if (trend) {
+    const dir = trend.up ? "Up" : "Down";
+    return `${dir} ${trend.delta}% this period`;
+  }
+  if (status) return status;
+  return "Last 24 hours";
+}
+
+export function kpiCard({
+  label,
+  value,
+  trend,
+  sparkData,
+  icon,
+  color = "#0D6EFD",
+  status,
+  meta1 = "TRACE Enforcement",
+  meta2,
+  footerLeftLabel = "Trend",
+  footerRightLabel = "Total",
+}) {
   const sparkId = `spark-${label.replace(/\s/g, "-").toLowerCase()}`;
   const hasSpark = Array.isArray(sparkData) && sparkData.length > 1;
-
-  const trendHtml = trend
-    ? `<span class="kpi-trend-pill ${trend.up ? "up" : "down"}">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-          ${trend.up
-            ? '<path d="M18 15l-6-6-6 6"/>'
-            : '<path d="M6 9l6 6 6-6"/>'}
-        </svg>
-        ${trend.delta}%
-      </span>`
-    : status
-      ? `<span class="kpi-status-pill"><span class="status-dot-inline online"></span>${esc(status)}</span>`
-      : "";
+  const meta2Text = meta2 ?? kpiTrendMeta(trend, status);
+  const showProgress = Boolean(trend);
+  const footerRightCaption = showProgress ? "Progress" : footerRightLabel;
+  const footerRightValue = showProgress ? `${trend.delta}%` : String(value);
 
   const sparkHtml = hasSpark
-    ? `<div class="kpi-spark-wrap">
-        <canvas class="kpi-sparkline" id="${sparkId}"
-          data-spark='${JSON.stringify(sparkData)}'
-          data-color="${esc(color)}"></canvas>
-      </div>`
-    : `<div class="kpi-spark-wrap kpi-spark-placeholder" aria-hidden="true">
-        <div class="kpi-spark-bars"></div>
+    ? `<canvas class="kpi-sparkline" id="${sparkId}"
+        data-spark='${JSON.stringify(sparkData)}'
+        data-color="${esc(color)}"></canvas>`
+    : `<div class="kpi-trend-dots" aria-hidden="true">
+        <span style="background:${color}"></span>
+        <span style="background:${color}99"></span>
+        <span style="background:${color}55"></span>
+        <span class="kpi-trend-dots-plus">+</span>
       </div>`;
 
-  return `<article class="kpi-card" style="--kpi-accent:${esc(color)};--kpi-accent-soft:${esc(color)}14">
-    <div class="kpi-card-accent" aria-hidden="true"></div>
-    <div class="kpi-card-inner">
-      <div class="kpi-card-header">
-        <div class="kpi-icon" style="background:${color}18;color:${color}">${icon}</div>
-        ${trendHtml}
+  return `<article class="kpi-card" style="--kpi-accent:${esc(color)}">
+    <div class="kpi-float-icon" style="background:${esc(color)};box-shadow:0 10px 28px ${esc(color)}55">
+      ${icon}
+    </div>
+    <div class="kpi-card-body">
+      <h3 class="kpi-title">${esc(label)}</h3>
+      ${showProgress ? `<div class="kpi-stat">${esc(String(value))}</div>` : ""}
+      <div class="kpi-meta">
+        <div class="kpi-meta-row">${KPI_META_ICONS.target}<span>${esc(meta1)}</span></div>
+        <div class="kpi-meta-row">${KPI_META_ICONS.clock}<span>${esc(meta2Text)}</span></div>
       </div>
-      <div class="kpi-body">
-        <div class="kpi-label">${esc(label)}</div>
-        <div class="kpi-value">${esc(String(value))}</div>
+      <div class="kpi-divider" aria-hidden="true"></div>
+      <div class="kpi-footer">
+        <div class="kpi-footer-col">
+          <span class="kpi-footer-label">${esc(footerLeftLabel)}</span>
+          <div class="kpi-trend-viz">${sparkHtml}</div>
+        </div>
+        <div class="kpi-footer-col kpi-footer-col-right">
+          <span class="kpi-footer-label">${esc(footerRightCaption)}</span>
+          <span class="kpi-footer-value">${esc(footerRightValue)}</span>
+        </div>
       </div>
-      ${sparkHtml}
     </div>
   </article>`;
 }
